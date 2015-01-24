@@ -6,37 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/custom/custom.css" rel="stylesheet">
     <!-- font-awesome -->
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    
+
     <!-- prism -->
     <link href="assets/prism/prism.css" rel="stylesheet">
     <link href="assets/prism/prism.r.css" rel="stylesheet">
     <script type='text/javascript' src='assets/prism/prism.js'></script>
     <script type='text/javascript' src='assets/prism/prism.r.js'></script>
-    
-    
-    
+
+
+
     <script type="text/javascript" src="assets/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-   MathJax.Hub.Config({    
-     extensions: ["tex2jax.js"],    
-     "HTML-CSS": { scale: 100}    
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     "HTML-CSS": { scale: 100}
    });
    </script>
-    
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
     <![endif]-->
-    
+
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <!-- <link href='http://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'> -->
     <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
-    
+
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
@@ -52,9 +52,9 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-           
+
         </ul>
-        
+
         <p class="myHeader">Exploration of NYC Taxi Data</p>
       </div>
 
@@ -62,11 +62,11 @@
 
 <div class="container-fluid">
    <div class="row-fluid">
-   
+
    <div class="col-md-3 well">
    <ul class = "nav nav-list" id="toc">
    <li class='nav-header unselectable' data-edit-href='0resources.Rmd'>Contents</li>
-      
+
       <li class='active'>
          <a target='_self' class='nav-not-header' href='#background'>Background</a>
       </li>
@@ -123,7 +123,8 @@
 
 <p>In a bash shell, you can download and unzip the data with the following:</p>
 
-<pre><code class="bash">  echo &quot;$i&quot;
+<pre><code class="bash">for i in {1..12}; do
+  echo &quot;$i&quot;
   wget &quot;https://nyctaxitrips.blob.core.windows.net/data/trip_data_$i.csv.zip&quot;
   wget &quot;https://nyctaxitrips.blob.core.windows.net/data/trip_fare_$i.csv.zip&quot;
 done
@@ -279,86 +280,86 @@ Distributed data frame backed by &#39;kvLocalDisk&#39; connection
 <pre><code class="r">summary(raw)
 </code></pre>
 
-<pre><code>                medallion                
- --------------------------------------- 
-       levels : 10000+                   
-      missing : 0                        
-           &gt; freqTable head &lt;            
- 7E1346F23960CC18D7D129FA28B63A75 : 2137 
- 6FFCF7A4F34BA44239636028E680E438 : 2112 
- A979CDA04CFB8BA3D3ACBA7E8D7F0661 : 2039 
- D5C7CD37EA4D372D00F0A681CDC93F11 : 1959 
- --------------------------------------- 
-              hack_license                    vendor_id      
- ---------------------------------------  ------------------ 
-       levels : 10000+                          levels : 2   
-      missing : 0                              missing : 0   
-           &gt; freqTable head &lt;             &gt; freqTable head &lt; 
- 00B7691D86D96AEBD21DD9E138F90840 : 1933  CMT : 7450899      
- F49FD0D84449AE7F72F3BC492CD6C754 : 1616  VTS : 7325716      
- 51C1BE97280A80EBFA8DAD34E1956CF6 : 1603                     
- 847349F8845A667D9AC7CDEDD1C873CB : 1570                     
- ---------------------------------------  ------------------ 
-      rate_code        store_and_fwd_flag      pickup_datetime      
- --------------------  ------------------  ------------------------ 
-  missing :         0        levels : 3    missing :              0 
-      min :         0       missing : 0        min : 12-12-31 16:00 
-      max :       210  &gt; freqTable head &lt;      max : 13-01-31 15:59 
-     mean :  1.034273    : 7326207                                  
-  std dev : 0.3387715  N : 7285231                                  
- skewness :  195.5337  Y :  165177                                  
- kurtosis :  113263.8                                               
- --------------------  ------------------  ------------------------ 
-     dropoff_datetime        passenger_count     trip_time_in_secs  
- ------------------------  -------------------  ------------------- 
- missing :              0   missing :        0   missing :        0 
-     min : 12-12-31 16:00       min :        0       min :        0 
-     max : 13-02-01 02:33       max :      255       max :    10800 
-                               mean : 1.697372      mean : 683.4236 
-                            std dev : 1.365396   std dev : 494.4063 
-                           skewness : 2.681262  skewness :  2.27493 
-                           kurtosis : 121.2664  kurtosis : 13.97751 
- ------------------------  -------------------  ------------------- 
-    trip_distance       pickup_longitude        pickup_latitude    
- -------------------  ---------------------  --------------------- 
-  missing :        0   missing :     271114   missing :     267926 
-      min :        0       min :  -74.25858       min :   40.47757 
-      max :      100       max :  -73.70029       max :   40.91757 
-     mean : 2.770976      mean :  -73.97533      mean :   40.75106 
-  std dev : 3.305923   std dev : 0.03428528   std dev : 0.02674132 
- skewness : 3.836538  skewness :   3.407925  skewness : -0.9979193 
- kurtosis : 32.05707  kurtosis :   18.54463  kurtosis :   6.431953 
- -------------------  ---------------------  --------------------- 
-   dropoff_longitude      dropoff_latitude        payment_type    
- ---------------------  ---------------------  ------------------ 
-  missing :     282583   missing :     278369        levels : 5   
-      min :   -74.2589       min :   40.47763       missing : 0   
-      max :  -73.70029       max :   40.91752  &gt; freqTable head &lt; 
-     mean :  -73.97497      mean :   40.75154  CRD : 7743844      
-  std dev : 0.03235445   std dev : 0.03000986  CSH : 6982383      
- skewness :   2.510542  skewness : -0.5599866  NOC :   32783      
- kurtosis :   18.01025  kurtosis :   6.503353  DIS :   11171      
- ---------------------  ---------------------  ------------------ 
-     fare_amount           surcharge               mta_tax        
- -------------------  --------------------  --------------------- 
-  missing :        0   missing :         0   missing :          0 
-      min :      2.5       min :         0       min :          0 
-      max :      500       max :      12.5       max :        0.5 
-     mean : 11.66472      mean : 0.3204904      mean :   0.498397 
-  std dev : 9.639219   std dev : 0.3675741   std dev : 0.02826541 
- skewness : 4.072831  skewness : 0.6875023  skewness :  -17.57604 
- kurtosis : 51.30727  kurtosis :   2.39267  kurtosis :   309.9172 
- -------------------  --------------------  --------------------- 
-     tip_amount          tolls_amount         total_amount     
- -------------------  -------------------  ------------------- 
-  missing :        0   missing :        0   missing :        0 
-      min :        0       min :        0       min :      2.5 
-      max :      200       max :       20       max :      650 
-     mean : 1.267509      mean : 0.201867      mean : 13.95298 
-  std dev : 2.046084   std dev : 1.035481   std dev : 11.46469 
- skewness : 6.081281  skewness : 5.859475  skewness : 3.887555 
- kurtosis : 180.7268  kurtosis : 46.02757  kurtosis : 39.25815 
- -------------------  -------------------  ------------------- 
+<pre><code>                medallion
+ ---------------------------------------
+       levels : 10000+
+      missing : 0
+           &gt; freqTable head &lt;
+ 7E1346F23960CC18D7D129FA28B63A75 : 2137
+ 6FFCF7A4F34BA44239636028E680E438 : 2112
+ A979CDA04CFB8BA3D3ACBA7E8D7F0661 : 2039
+ D5C7CD37EA4D372D00F0A681CDC93F11 : 1959
+ ---------------------------------------
+              hack_license                    vendor_id
+ ---------------------------------------  ------------------
+       levels : 10000+                          levels : 2
+      missing : 0                              missing : 0
+           &gt; freqTable head &lt;             &gt; freqTable head &lt;
+ 00B7691D86D96AEBD21DD9E138F90840 : 1933  CMT : 7450899
+ F49FD0D84449AE7F72F3BC492CD6C754 : 1616  VTS : 7325716
+ 51C1BE97280A80EBFA8DAD34E1956CF6 : 1603
+ 847349F8845A667D9AC7CDEDD1C873CB : 1570
+ ---------------------------------------  ------------------
+      rate_code        store_and_fwd_flag      pickup_datetime
+ --------------------  ------------------  ------------------------
+  missing :         0        levels : 3    missing :              0
+      min :         0       missing : 0        min : 12-12-31 16:00
+      max :       210  &gt; freqTable head &lt;      max : 13-01-31 15:59
+     mean :  1.034273    : 7326207
+  std dev : 0.3387715  N : 7285231
+ skewness :  195.5337  Y :  165177
+ kurtosis :  113263.8
+ --------------------  ------------------  ------------------------
+     dropoff_datetime        passenger_count     trip_time_in_secs
+ ------------------------  -------------------  -------------------
+ missing :              0   missing :        0   missing :        0
+     min : 12-12-31 16:00       min :        0       min :        0
+     max : 13-02-01 02:33       max :      255       max :    10800
+                               mean : 1.697372      mean : 683.4236
+                            std dev : 1.365396   std dev : 494.4063
+                           skewness : 2.681262  skewness :  2.27493
+                           kurtosis : 121.2664  kurtosis : 13.97751
+ ------------------------  -------------------  -------------------
+    trip_distance       pickup_longitude        pickup_latitude
+ -------------------  ---------------------  ---------------------
+  missing :        0   missing :     271114   missing :     267926
+      min :        0       min :  -74.25858       min :   40.47757
+      max :      100       max :  -73.70029       max :   40.91757
+     mean : 2.770976      mean :  -73.97533      mean :   40.75106
+  std dev : 3.305923   std dev : 0.03428528   std dev : 0.02674132
+ skewness : 3.836538  skewness :   3.407925  skewness : -0.9979193
+ kurtosis : 32.05707  kurtosis :   18.54463  kurtosis :   6.431953
+ -------------------  ---------------------  ---------------------
+   dropoff_longitude      dropoff_latitude        payment_type
+ ---------------------  ---------------------  ------------------
+  missing :     282583   missing :     278369        levels : 5
+      min :   -74.2589       min :   40.47763       missing : 0
+      max :  -73.70029       max :   40.91752  &gt; freqTable head &lt;
+     mean :  -73.97497      mean :   40.75154  CRD : 7743844
+  std dev : 0.03235445   std dev : 0.03000986  CSH : 6982383
+ skewness :   2.510542  skewness : -0.5599866  NOC :   32783
+ kurtosis :   18.01025  kurtosis :   6.503353  DIS :   11171
+ ---------------------  ---------------------  ------------------
+     fare_amount           surcharge               mta_tax
+ -------------------  --------------------  ---------------------
+  missing :        0   missing :         0   missing :          0
+      min :      2.5       min :         0       min :          0
+      max :      500       max :      12.5       max :        0.5
+     mean : 11.66472      mean : 0.3204904      mean :   0.498397
+  std dev : 9.639219   std dev : 0.3675741   std dev : 0.02826541
+ skewness : 4.072831  skewness : 0.6875023  skewness :  -17.57604
+ kurtosis : 51.30727  kurtosis :   2.39267  kurtosis :   309.9172
+ -------------------  --------------------  ---------------------
+     tip_amount          tolls_amount         total_amount
+ -------------------  -------------------  -------------------
+  missing :        0   missing :        0   missing :        0
+      min :        0       min :        0       min :      2.5
+      max :      200       max :       20       max :      650
+     mean : 1.267509      mean : 0.201867      mean : 13.95298
+  std dev : 2.046084   std dev : 1.035481   std dev : 11.46469
+ skewness : 6.081281  skewness : 5.859475  skewness : 3.887555
+ kurtosis : 180.7268  kurtosis : 46.02757  kurtosis : 39.25815
+ -------------------  -------------------  -------------------
 </code></pre>
 
 <p>This gives us some initial interesting insight.  This data pretty much spans January 2013, credit card and cash are used nearly in equal proportion, the average total fare is $13.95, etc.</p>
@@ -460,7 +461,7 @@ c(p1, p2)
 
 <p>The median cab fare is about $10.</p>
 
-<p>Now for tips.  We calculated tip quantiles by <code>payment_type</code> since we were under the suspicion that tips are zero for</p>
+<p>Now for tips.  We calculated tip quantiles by <code>payment_type</code> since we were under the suspicion that tips are zero for cash payments.</p>
 
 <pre><code class="r">p1 &lt;- xyplot(q ~ fval, tip_quant, groups = payment_type,
   xlab = &quot;Proportion&quot;, ylab = &quot;Tip Amount (dollars)&quot;,
@@ -546,10 +547,10 @@ time_vs_dist &lt;- drHexbin(&quot;trip_distance&quot;, &quot;trip_time_in_secs&q
 
 </div>
 
-   
+
    <ul class="pager">
-      <li><a href="#" id="previous">&larr; Previous</a></li> 
-      <li><a href="#" id="next">Next &rarr;</a></li> 
+      <li><a href="#" id="previous">&larr; Previous</a></li>
+      <li><a href="#" id="next">Next &rarr;</a></li>
    </ul>
 </div>
 
