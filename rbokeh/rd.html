@@ -1,0 +1,6341 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+
+    <meta name="author" content="Ryan Hafen" />
+
+
+  <title>rbokeh</title>
+
+    <script src="assets/jquery-1.11.0/jquery.min.js"></script>
+  <link href="assets/bootstrap-3.3.2/css/custom.css" rel="stylesheet" />
+  <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/respond.min.js"></script>
+  <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
+  <script src="assets/highlight-8.4/highlight.pack.js"></script>
+  <link href="assets/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+
+    <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">rbokeh - Function Reference</a>
+      </div>
+      <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav nav-pills pull-right">
+<li>
+<a href='index.html'>Docs</a>
+</li>
+<li class="active">
+<a href='rd.html'>Function Ref</a>
+</li>
+<li>
+<a href='#'>Github <i class='fa fa-github'></i></a>
+</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+    <div class="row">
+            <div class="col-md-3" id="leftCol">
+        <ul>
+        <li><a href="#bokeh_render_json">bokeh_render_json</a></li>
+        <li><a href="#elements">elements</a></li>
+        <li><a href="#figure">figure</a></li>
+        <li><a href="#flightfreq">flightfreq</a></li>
+        <li><a href="#grid_plot">grid_plot</a></li>
+        <li><a href="#ly_abline">ly_abline</a></li>
+        <li><a href="#ly_annular_wedge">ly_annular_wedge</a></li>
+        <li><a href="#ly_annulus">ly_annulus</a></li>
+        <li><a href="#ly_arc">ly_arc</a></li>
+        <li><a href="#ly_bezier">ly_bezier</a></li>
+        <li><a href="#ly_boxplot">ly_boxplot</a></li>
+        <li><a href="#ly_contour">ly_contour</a></li>
+        <li><a href="#ly_crect">ly_crect</a></li>
+        <li><a href="#ly_curve">ly_curve</a></li>
+        <li><a href="#ly_density">ly_density</a></li>
+        <li><a href="#ly_hexbin">ly_hexbin</a></li>
+        <li><a href="#ly_hist">ly_hist</a></li>
+        <li><a href="#ly_image">ly_image</a></li>
+        <li><a href="#ly_image_url">ly_image_url</a></li>
+        <li><a href="#ly_lines">ly_lines</a></li>
+        <li><a href="#ly_map">ly_map</a></li>
+        <li><a href="#ly_multi_line">ly_multi_line</a></li>
+        <li><a href="#ly_oval">ly_oval</a></li>
+        <li><a href="#ly_patch">ly_patch</a></li>
+        <li><a href="#ly_points">ly_points</a></li>
+        <li><a href="#ly_polygons">ly_polygons</a></li>
+        <li><a href="#ly_quadratic">ly_quadratic</a></li>
+        <li><a href="#ly_quantile">ly_quantile</a></li>
+        <li><a href="#ly_ray">ly_ray</a></li>
+        <li><a href="#ly_rect">ly_rect</a></li>
+        <li><a href="#ly_segments">ly_segments</a></li>
+        <li><a href="#ly_text">ly_text</a></li>
+        <li><a href="#ly_wedge">ly_wedge</a></li>
+        <li><a href="#point_types">point_types</a></li>
+        <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
+        <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
+        <li><a href="#print_model_json">print_model_json</a></li>
+        <li><a href="#rbokeh-package">rbokeh-package</a></li>
+        <li><a href="#tool_box_select">tool_box_select</a></li>
+        <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
+        <li><a href="#tool_crosshair">tool_crosshair</a></li>
+        <li><a href="#tool_lasso_select">tool_lasso_select</a></li>
+        <li><a href="#tool_pan">tool_pan</a></li>
+        <li><a href="#tool_reset">tool_reset</a></li>
+        <li><a href="#tool_resize">tool_resize</a></li>
+        <li><a href="#tool_save">tool_save</a></li>
+        <li><a href="#tool_tap">tool_tap</a></li>
+        <li><a href="#tool_wheel_zoom">tool_wheel_zoom</a></li>
+        <li><a href="#x_axis">x_axis</a></li>
+        <li><a href="#x_range">x_range</a></li>
+        <li><a href="#y_axis">y_axis</a></li>
+        <li><a href="#y_range">y_range</a></li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+
+<h1>
+R Interface for Bokeh
+</h1>
+<p>
+<strong>Author:</strong> Ryan Hafen <a href="mailto:&lt;rhafen@gmail.com&amp;gt">&lt;rhafen@gmail.com&amp;gt</a>; [aut, cre]
+</p>
+<p>
+<strong>Version:</strong> 0.2
+</p>
+<p>
+<strong>Date:</strong>
+</p>
+<p>
+<strong>License:</strong> MIT + file LICENSE
+</p>
+<h4>
+Description
+</h4>
+<p>
+R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, &lt;a href = ‘<a href="http://bokeh.pydata.org/en/latest/" class="uri">http://bokeh.pydata.org/en/latest/</a>’&gt;<a href="http://bokeh.pydata.org/en/latest/&lt;/a&gt;" class="uri">http://bokeh.pydata.org/en/latest/&lt;/a&gt;</a>
+</p>
+<h4>
+Depends
+</h4>
+<p>
+R (&gt;= 3.1.1)
+</p>
+<h4>
+Suggests
+</h4>
+<p>
+testthat
+</p>
+<div id="bokeh_render_json" class="section level1">
+<h1>bokeh_render_json</h1>
+<h3>
+Plot a Bokeh JSON specification
+</h3>
+<p>Take a path to a Bokeh JSON plot specification file and render it in the browser.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>bokeh_render_json(json_file)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+json_file
+</dt>
+<dd class="rd-dd">
+path to json file
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+This is mainly useful for development / debugging purposes for reading in json created from another platform like Python, or to be used with tweaking json output from <code><a href='#print_model_json'>print_model_json</a></code>.
+</p>
+<h4>
+See also
+</h4>
+<p><code><a href='#print_model_json'>print_model_json</a></code></p>
+</div>
+<div id="elements" class="section level1">
+<h1>elements</h1>
+<h3>
+“Periodic Table” dataset
+</h3>
+<p>Data for periodic table of the elements</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>elements</code></pre>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# prepare data
+elements <- subset(elements, !is.na(group))
+elements$group <- as.character(elements$group)
+elements$period <- as.character(elements$period)
+
+# add colors for groups
+metals <- c("alkali metal", "alkaline earth metal", "halogen",
+  "metal", "metalloid", "noble gas", "nonmetal", "transition metal")
+colors <- c("#a6cee3", "#1f78b4", "#fdbf6f", "#b2df8a", "#33a02c",
+  "#bbbb88", "#baa2a6", "#e08e79")
+elements$color <- colors[match(elements$metal, metals)]
+elements$type <- elements$metal
+
+# make coordinates for labels
+elements$symx <- paste(elements$group, ":0.1", sep = "")
+elements$numbery <- paste(elements$period, ":0.8", sep = "")
+elements$massy <- paste(elements$period, ":0.15", sep = "")
+elements$namey <- paste(elements$period, ":0.3", sep = "")
+
+# create figure
+p <- figure(title = "Periodic Table", tools = c("resize", "hover"),
+  ylim = as.character(c(7:1)), xlim = as.character(1:18),
+  xgrid = FALSE, ygrid = FALSE, xlab = "", ylab = "",
+  height = 600, width = 1200) %>%
+
+# plot rectangles
+ly_crect(group, period, data = elements, 0.9, 0.9,
+  fill_color = color, line_color = color, fill_alpha = 0.6,
+  hover = list(name, atomic.number, type, atomic.mass,
+    electronic.configuration)) %>%
+
+# add symbol text
+ly_text(symx, period, text = symbol, data = elements,
+  font_style = "bold", font_size = "15pt",
+  align = "left", baseline = "middle") %>%
+
+# add atomic number text
+ly_text(symx, numbery, text = atomic.number, data = elements,
+  font_size = "9pt", align = "left", baseline = "middle") %>%
+
+# add name text
+ly_text(symx, namey, text = name, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle") %>%
+
+# add atomic mass text
+ly_text(symx, massy, text = atomic.mass, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle")
+
+p
+</code></pre>
+</div>
+<div id="figure" class="section level1">
+<h1>figure</h1>
+<h3>
+Initialize a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>figure(width = 480, height = 480, title = NULL, xlab =
+  NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+  padding_factor = 0.07, plot_width = NULL, plot_height =
+  NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes
+  = "left", tools = c("pan", "wheel_zoom", "box_zoom",
+  "resize", "reset", "save"), theme =
+  getOption("bokeh_theme"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+figure width in pixels
+</dd>
+<dt>
+height
+</dt>
+<dd class="rd-dd">
+figure width in pixels
+</dd>
+<dt>
+title
+</dt>
+<dd class="rd-dd">
+a title to display above the plot. - “title” is also the prefix for a set of Text Properties, so you can set the font for the title with the parameter text_font.
+</dd>
+<dt>
+xlab
+</dt>
+<dd class="rd-dd">
+label for x axis
+</dd>
+<dt>
+ylab
+</dt>
+<dd class="rd-dd">
+label for y axis
+</dd>
+<dt>
+xlim
+</dt>
+<dd class="rd-dd">
+the extent of the plotting area in the x-dimension (will be computed automatically if not specified).
+</dd>
+<dt>
+ylim
+</dt>
+<dd class="rd-dd">
+the extent of the plotting area in the y-dimension (will be computed automatically if not specified).
+</dd>
+<dt>
+padding_factor
+</dt>
+<dd class="rd-dd">
+if limits are not specified, by what factor should the extents of the data be padded
+</dd>
+<dt>
+plot_width,plot_height
+</dt>
+<dd class="rd-dd">
+width and height of the entire plot in pixels, including border space
+</dd>
+<dt>
+xgrid
+</dt>
+<dd class="rd-dd">
+whether to draw x axis grid lines
+</dd>
+<dt>
+ygrid
+</dt>
+<dd class="rd-dd">
+whether to draw y axis grid lines
+</dd>
+<dt>
+xaxes
+</dt>
+<dd class="rd-dd">
+where to put x axis labels
+</dd>
+<dt>
+yaxes
+</dt>
+<dd class="rd-dd">
+where to put y axis labels
+</dd>
+<dt>
+tools
+</dt>
+<dd class="rd-dd">
+interactivity tools options
+</dd>
+<dt>
+theme
+</dt>
+<dd class="rd-dd">
+an rbokeh theme to use (tableau by default)
+</dd>
+</dl>
+</div>
+<div id="flightfreq" class="section level1">
+<h1>flightfreq</h1>
+<h3>
+Flight frequency dataset
+</h3>
+<p>Daily counts of domestic flights in the U.S. from 1999 to mid-2008</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>flightfreq</code></pre>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+p <- figure(width = 1000) %>%
+  ly_points(date, Freq, data = flightfreq,
+    hover = list(date, Freq, dow), size = 5) %>%
+  ly_abline(v = as.Date("2001-09-11"))
+p
+</code></pre>
+</div>
+<div id="grid_plot" class="section level1">
+<h1>grid_plot</h1>
+<h3>
+Create a Bokeh grid plot from a list of Bokeh figures
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>grid_plot(figs, nrow = 1, ncol = 1, byrow = TRUE, same_axes
+  = FALSE, link_data = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+figs
+</dt>
+<dd class="rd-dd">
+list of Bokeh figures - see details for what is acceptable
+</dd>
+<dt>
+nrow
+</dt>
+<dd class="rd-dd">
+number of rows in the grid
+</dd>
+<dt>
+ncol
+</dt>
+<dd class="rd-dd">
+number of columns in the grid
+</dd>
+<dt>
+byrow
+</dt>
+<dd class="rd-dd">
+populate the grid by row according to the order of figure elements supplied in <code>params</code>
+</dd>
+<dt>
+same_axes
+</dt>
+<dd class="rd-dd">
+logical or vector of two logicals specifying whether the x and/or y axis limits should be the same for each plot in the grid
+</dd>
+<dt>
+link_data
+</dt>
+<dd class="rd-dd">
+logical - should an attempt be made to join the data sources of each plot for linked brushing? (see details)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The <code>figs</code> parameter can either be a list of figures or a list of lists of figures. If the latter, the list structure will determine the layout, with each super-list of figures defining a single row of the grid. If the former, the parameters <code>nrow</code> and <code>ncol</code> and <code>byrow</code> are used to determine the layout. The grid is from top to bottom left to right.
+</p>
+<p class="rd-p">
+If <code>link_data</code> is <code>TRUE</code>, then an effort will be made to link all data sources that are common among the different figures in the plot. Note that at this point, only data sources that are specified in the <code>data</code> argument to the different layer functions are checked.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+
+p1 <- figure(tools = tools) %>%
+  ly_points(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, hover = list(Sepal.Length, Sepal.Width))
+
+p2 <- figure(tools = tools) %>%
+  ly_points(Petal.Length, Petal.Width, data = iris,
+    color = Species, hover = list(Sepal.Length, Sepal.Width))
+
+# 1 row, 2 columns
+grid_plot(list(p1, p2))
+# x and y axis with same (and linked) limits
+grid_plot(list(p1, p2), same_axes = TRUE)
+# x axis has same (and linked) limits
+grid_plot(list(p1, p2), same_axes = c(TRUE, FALSE))
+# same axes and data is linked (try box_select tool)
+grid_plot(list(p1, p2), same_axes = TRUE, link_data = TRUE)
+# 1 column, 2 rows
+grid_plot(list(p1, p2), ncol = 1)
+# send lists instead of specifying nrow and ncol
+grid_plot(list(c(list(p1), list(p2))))
+grid_plot(list(list(p1), list(p2)))
+</code></pre>
+</div>
+<div id="ly_abline" class="section level1">
+<h1>ly_abline</h1>
+<h3>
+Add an “abline” layer to a Bokeh figure
+</h3>
+<p>Draws one or more straight lines.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_abline(fig, a = NULL, b = NULL, v = NULL, h = NULL, coef
+  = NULL, color = "black", alpha = NULL, width = 1, type =
+  1, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+a,b
+</dt>
+<dd class="rd-dd">
+the intercept and slope of the line(s) to draw
+</dd>
+<dt>
+v
+</dt>
+<dd class="rd-dd">
+the x value(s) for vertical lines
+</dd>
+<dt>
+h
+</dt>
+<dd class="rd-dd">
+the y value(s) for horizontal lines
+</dd>
+<dt>
+coef
+</dt>
+<dd class="rd-dd">
+a vector of length two giving the intercept and slope
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
+p <- figure() %>%
+  ly_points(cars, hover = cars) %>%
+  ly_lines(lowess(cars), legend = "lowess") %>%
+  ly_abline(z, type = 2, legend = "lm", width = 2)
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_annular_wedge" class="section level1">
+<h1>ly_annular_wedge</h1>
+<h3>
+Add an “annular_wedge” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = NULL,
+  inner_radius = 0.1, outer_radius = 0.3, start_angle = 0,
+  end_angle = 2 * pi, direction = "anticlock", color =
+  NULL, alpha = 1, hover = NULL, legend = NULL, lname =
+  NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+inner_radius
+</dt>
+<dd class="rd-dd">
+values or field name of inner radii
+</dd>
+<dt>
+outer_radius
+</dt>
+<dd class="rd-dd">
+values or field name of outer radii
+</dd>
+<dt>
+start_angle
+</dt>
+<dd class="rd-dd">
+the angles to start the annular wedges, in radians, as measured from the horizontal
+</dd>
+<dt>
+end_angle
+</dt>
+<dd class="rd-dd">
+the angles to end the annular wedges, in radians, as measured from the horizontal
+</dd>
+<dt>
+direction
+</dt>
+<dd class="rd-dd">
+direction to turn between starting and ending angles (“anticlock”, “clock”)
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+rescale <- function(x)
+  (x - min(x)) / diff(range(x))
+
+figure() %>%
+  ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    inner_radius = 0.1, outer_radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_arc(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    alpha = 0.5)
+
+figure() %>%
+  ly_annulus(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, hover = Species,
+    outer_radius = rescale(Petal.Length) * 0.3,
+    inner_radius = rescale(Petal.Length) * 0.1)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_annulus" class="section level1">
+<h1>ly_annulus</h1>
+<h3>
+Add an “annulus” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_annulus(fig, x, y = NULL, data = NULL, inner_radius =
+  0.1, outer_radius = 0.2, color = NULL, alpha = 1, hover =
+  NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+inner_radius
+</dt>
+<dd class="rd-dd">
+values or field name of inner radii
+</dd>
+<dt>
+outer_radius
+</dt>
+<dd class="rd-dd">
+values or field name of outer radii
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+rescale <- function(x)
+  (x - min(x)) / diff(range(x))
+
+figure() %>%
+  ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    inner_radius = 0.1, outer_radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_arc(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    alpha = 0.5)
+
+figure() %>%
+  ly_annulus(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, hover = Species,
+    outer_radius = rescale(Petal.Length) * 0.3,
+    inner_radius = rescale(Petal.Length) * 0.1)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_arc" class="section level1">
+<h1>ly_arc</h1>
+<h3>
+Add an “arc” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_arc(fig, x, y = NULL, data = NULL, color = NULL, alpha =
+  1, width = 2, type = 1, radius = 0.2, start_angle = 0,
+  end_angle = 2 * pi, direction = "anticlock", legend =
+  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+radius
+</dt>
+<dd class="rd-dd">
+values or field name of arc radii
+</dd>
+<dt>
+start_angle
+</dt>
+<dd class="rd-dd">
+values or field name of starting angles
+</dd>
+<dt>
+end_angle
+</dt>
+<dd class="rd-dd">
+values or field name of ending angles
+</dd>
+<dt>
+direction
+</dt>
+<dd class="rd-dd">
+direction to turn between starting and ending angles (“anticlock”, “clock”)
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+rescale <- function(x)
+  (x - min(x)) / diff(range(x))
+
+figure() %>%
+  ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    inner_radius = 0.1, outer_radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_arc(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    alpha = 0.5)
+
+figure() %>%
+  ly_annulus(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, hover = Species,
+    outer_radius = rescale(Petal.Length) * 0.3,
+    inner_radius = rescale(Petal.Length) * 0.1)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_bezier" class="section level1">
+<h1>ly_bezier</h1>
+<h3>
+Add a “bezier” layer to a Bokeh figure
+</h3>
+<p>Draws Bezier curves with the given starting, ending, and control points.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_bezier(fig, x0, y0, x1, y1, cx0, cy0, cx1, cy1, data =
+  NULL, color = "black", alpha = 1, width = 1, type = 1,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x0
+</dt>
+<dd class="rd-dd">
+values or field name of starting x coordinates
+</dd>
+<dt>
+y0
+</dt>
+<dd class="rd-dd">
+values or field name of starting y coordinates
+</dd>
+<dt>
+x1
+</dt>
+<dd class="rd-dd">
+values or field name of ending x coordinates
+</dd>
+<dt>
+y1
+</dt>
+<dd class="rd-dd">
+values or field name of ending y coordinates
+</dd>
+<dt>
+cx0
+</dt>
+<dd class="rd-dd">
+values or field name of first control point x coordinates
+</dd>
+<dt>
+cy0
+</dt>
+<dd class="rd-dd">
+values or field name of first control point y coordinates
+</dd>
+<dt>
+cx1
+</dt>
+<dd class="rd-dd">
+values or field name of second control point x coordinates
+</dd>
+<dt>
+cy1
+</dt>
+<dd class="rd-dd">
+values or field name of second control point y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for start, end, and control point intputs, as well as other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_boxplot" class="section level1">
+<h1>ly_boxplot</h1>
+<h3>
+Add a “boxplot” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_boxplot(fig, x, y = NULL, data = NULL, coef = 1.5, color
+  = "blue", alpha = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+either a numeric vector or a factor
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+either a numeric vector or a factor
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for x and y
+</dd>
+<dt>
+coef
+</dt>
+<dd class="rd-dd">
+see <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/boxplot.stats'>boxplot.stats</a></code>
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_contour" class="section level1">
+<h1>ly_contour</h1>
+<h3>
+Add a “contour” layer to a Bokeh figure
+</h3>
+<p>Computes and draws contour lines.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_contour(fig, z, x = seq(0, 1, length.out = nrow(z)), y =
+  seq(0, 1, length.out = ncol(z)), nlevels = 10, levels =
+  pretty(range(z, na.rm = TRUE), nlevels), color = "black",
+  alpha = 1, width = 1, type = 1, lname = NULL, lgroup =
+  NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+z
+</dt>
+<dd class="rd-dd">
+a matrix containing the values to compute contour lines for
+</dd>
+<dt>
+x,y
+</dt>
+<dd class="rd-dd">
+locations of grid lines at which the values in <code>image</code> are measured (see <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/contourLines'>contourLines</a></code>)
+</dd>
+<dt>
+nlevels,levels
+</dt>
+<dd class="rd-dd">
+parameters sent to <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/contourLines'>contourLines</a></code>)
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+  ly_image(volcano) %>%
+  ly_contour(volcano)
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_crect" class="section level1">
+<h1>ly_crect</h1>
+<h3>
+Add a “crect” (centered rectangle) layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_crect(fig, x, y = NULL, data = NULL, width = 1, height =
+  1, angle = 0, dilate = FALSE, color = NULL, alpha = 1,
+  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
+  ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs xleft, ybottom, xright, ytop, and other glyph properties
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+values or field name of widths
+</dd>
+<dt>
+height
+</dt>
+<dd class="rd-dd">
+values or field name of heights
+</dd>
+<dt>
+angle
+</dt>
+<dd class="rd-dd">
+values or field name of rotation angles
+</dd>
+<dt>
+dilate
+</dt>
+<dd class="rd-dd">
+logical - whether to dilate pixel distance computations when drawing
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# prepare data
+elements <- subset(elements, !is.na(group))
+elements$group <- as.character(elements$group)
+elements$period <- as.character(elements$period)
+
+# add colors for groups
+metals <- c("alkali metal", "alkaline earth metal", "halogen",
+  "metal", "metalloid", "noble gas", "nonmetal", "transition metal")
+colors <- c("#a6cee3", "#1f78b4", "#fdbf6f", "#b2df8a", "#33a02c",
+  "#bbbb88", "#baa2a6", "#e08e79")
+elements$color <- colors[match(elements$metal, metals)]
+elements$type <- elements$metal
+
+# make coordinates for labels
+elements$symx <- paste(elements$group, ":0.1", sep = "")
+elements$numbery <- paste(elements$period, ":0.8", sep = "")
+elements$massy <- paste(elements$period, ":0.15", sep = "")
+elements$namey <- paste(elements$period, ":0.3", sep = "")
+
+# create figure
+p <- figure(title = "Periodic Table", tools = c("resize", "hover"),
+  ylim = as.character(c(7:1)), xlim = as.character(1:18),
+  xgrid = FALSE, ygrid = FALSE, xlab = "", ylab = "",
+  height = 600, width = 1200) %>%
+
+# plot rectangles
+ly_crect(group, period, data = elements, 0.9, 0.9,
+  fill_color = color, line_color = color, fill_alpha = 0.6,
+  hover = list(name, atomic.number, type, atomic.mass,
+    electronic.configuration)) %>%
+
+# add symbol text
+ly_text(symx, period, text = symbol, data = elements,
+  font_style = "bold", font_size = "15pt",
+  align = "left", baseline = "middle") %>%
+
+# add atomic number text
+ly_text(symx, numbery, text = atomic.number, data = elements,
+  font_size = "9pt", align = "left", baseline = "middle") %>%
+
+# add name text
+ly_text(symx, namey, text = name, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle") %>%
+
+# add atomic mass text
+ly_text(symx, massy, text = atomic.mass, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle")
+
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_curve" class="section level1">
+<h1>ly_curve</h1>
+<h3>
+Add a “curve” layer to a Bokeh figure
+</h3>
+<p>Draws a curve corresponding to a function over the interval <code>[from, to]</code>.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_curve(fig, expr, from = NULL, to = NULL, n = 101, color
+  = "black", alpha = 1, width = 1, type = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+expr,from,to,n
+</dt>
+<dd class="rd-dd">
+parameters sent to <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/curve'>curve</a></code>
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+chippy <- function(x) sin(cos(x)*exp(-x/2))
+figure(width = 800) %>%
+  ly_curve(chippy, -8, 7, n = 2001)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_density" class="section level1">
+<h1>ly_density</h1>
+<h3>
+Add a “density” layer to a Bokeh figure
+</h3>
+<p>Draws a kernel density estimate</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_density(fig, x, data = NULL, bw = "nrd0", adjust = 1,
+  kernel = c("gaussian", "epanechnikov", "rectangular",
+  "triangular", "biweight", "cosine", "optcosine"), weights
+  = NULL, window = kernel, n = 512, cut = 3, na.rm = FALSE,
+  color = "black", alpha = 1, width = 1, type = 1, legend =
+  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x,bw,adjust,kernel,weights,window,n,cut,na.rm
+</dt>
+<dd class="rd-dd">
+parameters passed to <code><a href='http://www.inside-r.org/packages/cran/stats/docs/density'>density</a></code>
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for x
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+text to display in the legend entry for the density line
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_hexbin" class="section level1">
+<h1>ly_hexbin</h1>
+<h3>
+Add a “hexbin” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_hexbin(fig, x, y = NULL, data = NULL, xbins = 30, shape
+  = 1, style = "colorscale", trans = NULL, inv = NULL,
+  palette = "RdYlGn11", line = FALSE, alpha = 1, hover =
+  TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates to be binned
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates to be binned
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for x and y
+</dd>
+<dt>
+xbins,shape
+</dt>
+<dd class="rd-dd">
+parameters passed to <code><a href='http://www.inside-r.org/packages/cran/hexbin/docs/hexbin'>hexbin</a></code>
+</dd>
+<dt>
+style
+</dt>
+<dd class="rd-dd">
+type of plotting for hexbins (see <code><a href='http://www.inside-r.org/packages/cran/hexbin/docs/grid.hexagons'>grid.hexagons</a></code>) - “colorramp” and “lattice” are currently supported
+</dd>
+<dt>
+trans,inv
+</dt>
+<dd class="rd-dd">
+transformation and inverse transformation function for the bin counts
+</dd>
+<dt>
+palette
+</dt>
+<dd class="rd-dd">
+name of color palette to use for color ramp (see <a href = 'http://bokeh.pydata.org/en/latest/docs/reference/#palettes'>here</a> for acceptable values)
+</dd>
+<dt>
+line
+</dt>
+<dd class="rd-dd">
+logical - should hexagons have an outline?
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the hexagons between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+logical - should a hover tool be added to show the count in each hexagon?
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+</code></pre>
+</div>
+<div id="ly_hist" class="section level1">
+<h1>ly_hist</h1>
+<h3>
+Add a “hist” layer to a Bokeh figure
+</h3>
+<p>Draws a histogram</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_hist(fig, x, data = NULL, breaks = "Sturges", freq =
+  TRUE, include.lowest = TRUE, right = TRUE, color = NULL,
+  alpha = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x,breaks,freq,include.lowest,right
+</dt>
+<dd class="rd-dd">
+parameters passed to <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/hist'>hist</a></code>
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for x
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_image" class="section level1">
+<h1>ly_image</h1>
+<h3>
+Add an “image” layer to a Bokeh figure
+</h3>
+<p>Draws a grid of rectangles with colors corresponding to the values in <code>z</code></p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_image(fig, z, rows, cols, x = 0, y = 0, dw = 1, dh = 1,
+  palette = "Spectral-10", dilate = FALSE, lname = NULL,
+  lgroup = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+z
+</dt>
+<dd class="rd-dd">
+matrix or vector of image values
+</dd>
+<dt>
+rows
+</dt>
+<dd class="rd-dd">
+if <code>z</code> is a vector, how many rows should be used in treating it as a matrix
+</dd>
+<dt>
+cols
+</dt>
+<dd class="rd-dd">
+if <code>z</code> is a vector, how many columns should be used in treating it as a matrix
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+lower left x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+lower left y coordinates
+</dd>
+<dt>
+dw
+</dt>
+<dd class="rd-dd">
+image width distances
+</dd>
+<dt>
+dh
+</dt>
+<dd class="rd-dd">
+image height distances
+</dd>
+<dt>
+palette
+</dt>
+<dd class="rd-dd">
+palette to use for color-mapping
+</dd>
+<dt>
+dilate
+</dt>
+<dd class="rd-dd">
+logical - whether to dilate pixel distance computations when drawing
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+  ly_image(volcano) %>%
+  ly_contour(volcano)
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_image_url" class="section level1">
+<h1>ly_image_url</h1>
+<h3>
+Add an “image_url” layer to a Bokeh figure
+</h3>
+<p>Renders raster images from URLs at provided coordinates</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_image_url(fig, x = 0, y = 0, data = NULL, w = 10, h =
+  10, url, dilate = TRUE, anchor = "top_left", angle = 0,
+  lname = NULL, lgroup = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other properties
+</dd>
+<dt>
+w,h
+</dt>
+<dd class="rd-dd">
+values or field names of width and height of image
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+values or field name of image URLs
+</dd>
+<dt>
+dilate
+</dt>
+<dd class="rd-dd">
+logical - whether to dilate pixel distance computations when drawing
+</dd>
+<dt>
+anchor
+</dt>
+<dd class="rd-dd">
+where the image is anchored to with respect to <code>x</code> and <code>y</code>
+</dd>
+<dt>
+angle
+</dt>
+<dd class="rd-dd">
+values or field name of the angle to rotate the image, in radians
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+  "http://developer.r-project.org/Logo/Rlogo-4.png")
+
+ss <- seq(0, 2*pi, length = 13)[-1]
+ws <- runif(12, 2.5, 5) * rep(c(1, 0.8), 6)
+
+imgdat <- data.frame(
+  x = sin(ss) * 10, y = cos(ss) * 10,
+  w = ws, h = ws * rep(c(1, 0.76), 6),
+  url = rep(url, 6)
+)
+
+p <- figure(xlab = "x", ylab = "y") %>%
+  ly_image_url(x, y, w = w, h = h, url = url, data = imgdat,
+    anchor = "center") %>%
+  ly_lines(sin(c(ss, ss[1])) * 10, cos(c(ss, ss[1])) * 10,
+    width = 15, alpha = 0.1)
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_lines" class="section level1">
+<h1>ly_lines</h1>
+<h3>
+Add a “lines” layer to a Bokeh figure Draws lines with the given coordinates.
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_lines(fig, x, y = NULL, data = NULL, group = NULL, color
+  = "black", type = 1, width = 1, alpha = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of line x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of line y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+group
+</dt>
+<dd class="rd-dd">
+values or field name of a grouping variable to break lines up by
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
+p <- figure() %>%
+  ly_points(cars, hover = cars) %>%
+  ly_lines(lowess(cars), legend = "lowess") %>%
+  ly_abline(z, type = 2, legend = "lm", width = 2)
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_map" class="section level1">
+<h1>ly_map</h1>
+<h3>
+Add a “map” layer to a Bokeh figure
+</h3>
+<p>Draws lines and polygons as specified by a map database</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_map(fig, database = "world", regions = ".", color =
+  NULL, alpha = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+database,regions
+</dt>
+<dd class="rd-dd">
+parameters passed to <code><a href='http://www.inside-r.org/packages/cran/maps/docs/map'>map</a></code>
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_multi_line" class="section level1">
+<h1>ly_multi_line</h1>
+<h3>
+Add a “multi_line” layer to a Bokeh figure
+</h3>
+<p>Draws multiple lines with the given lists of coordinates.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_multi_line(fig, xs, ys, color = "black", alpha = 1,
+  width = 1, type = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+xs
+</dt>
+<dd class="rd-dd">
+list of vectors of x coordinates
+</dd>
+<dt>
+ys
+</dt>
+<dd class="rd-dd">
+list of vectors of y coordinates
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_oval" class="section level1">
+<h1>ly_oval</h1>
+<h3>
+Add an “oval” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_oval(fig, x, y = NULL, data = NULL, width = 0.1, height
+  = 0.1, angle = 0, color = NULL, alpha = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+values or field name of widths
+</dd>
+<dt>
+height
+</dt>
+<dd class="rd-dd">
+values or field name of heights
+</dd>
+<dt>
+angle
+</dt>
+<dd class="rd-dd">
+values or field name of rotation angles
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_patch" class="section level1">
+<h1>ly_patch</h1>
+<h3>
+Add a “patch” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_patch(fig, x, y, data = NULL, color = NULL, alpha = 1,
+  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
+  ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of patch x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of patch y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+This function is included for completeness as it maps to Bokeh’s <code>patch</code> glyph, but the same and more functionality can be obtained with <code><a href='#ly_polygons'>ly_polygons</a></code>.
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_points" class="section level1">
+<h1>ly_points</h1>
+<h3>
+Add a “points” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_points(fig, x, y = NULL, data = NULL, glyph = 21, color
+  = NULL, alpha = 1, size = 10, hover = NULL, legend =
+  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+glyph
+</dt>
+<dd class="rd-dd">
+value(s) or field name of the glyph to use (see <code><a href='#point_types'>point_types</a></code>)
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+size
+</dt>
+<dd class="rd-dd">
+size of the glyph in screen units
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+p <- figure() %>%
+  ly_points(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, glyph = Species,
+    hover = list(Sepal.Length, Sepal.Width))
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_polygons" class="section level1">
+<h1>ly_polygons</h1>
+<h3>
+Add a “polygons” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_polygons(fig, xs, ys, group = NULL, data = NULL, color =
+  NULL, alpha = 1, hover = NULL, lname = NULL, lgroup =
+  NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+xs
+</dt>
+<dd class="rd-dd">
+vector or list of values or field name of polygon x coordinates - see details
+</dd>
+<dt>
+ys
+</dt>
+<dd class="rd-dd">
+vector or list of values or field name of polygon y coordinates - see details
+</dd>
+<dt>
+group
+</dt>
+<dd class="rd-dd">
+vector or field name of grouping variable - see details
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs xs, ys, group, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>xs</code> and <code>ys</code> can be a list of vectors, each element for one polygon to be drawn, or can be vectors with the <code>group</code> argument specifying how to break them up into individual polygons.
+</p>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_quadratic" class="section level1">
+<h1>ly_quadratic</h1>
+<h3>
+Add a “quadratic” layer to a Bokeh figure
+</h3>
+<p>Draws quadratic curves with the given starting, ending, and control points.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_quadratic(fig, x0, y0, x1, y1, cx, cy, data = NULL,
+  color = "black", alpha = 1, width = 1, type = 1, legend =
+  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x0
+</dt>
+<dd class="rd-dd">
+values or field name of starting x coordinates
+</dd>
+<dt>
+y0
+</dt>
+<dd class="rd-dd">
+values or field name of starting y coordinates
+</dd>
+<dt>
+x1
+</dt>
+<dd class="rd-dd">
+values or field name of ending x coordinates
+</dd>
+<dt>
+y1
+</dt>
+<dd class="rd-dd">
+values or field name of ending y coordinates
+</dd>
+<dt>
+cx
+</dt>
+<dd class="rd-dd">
+values or field name of control point x coordinates
+</dd>
+<dt>
+cy
+</dt>
+<dd class="rd-dd">
+values or field name of control point y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for start, end, and control point intputs, as well as other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_quantile" class="section level1">
+<h1>ly_quantile</h1>
+<h3>
+Add a “quantile” layer to a Bokeh figure
+</h3>
+<p>Draws quantiles</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_quantile(fig, x, group = NULL, data = NULL, probs =
+  NULL, distn = qunif, ncutoff = 200, color = NULL, alpha =
+  1, legend = TRUE, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+numeric vector or field name of variable to compute sample quantiles for
+</dd>
+<dt>
+group
+</dt>
+<dd class="rd-dd">
+values or field name of a grouping variable to break quantile computations up by
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for x
+</dd>
+<dt>
+probs
+</dt>
+<dd class="rd-dd">
+numeric vector of probabilities with values in <code>[0,1]</code> at which to compute quantiles - if <code>NULL</code>, every point of <code>x</code> is a quantile
+</dd>
+<dt>
+distn
+</dt>
+<dd class="rd-dd">
+quantile function to use on the x-axis (e.g. <code><a href='http://www.inside-r.org/packages/cran/stats/docs/Normal'>qnorm</a></code>) - default is <code><a href='http://www.inside-r.org/packages/cran/stats/docs/Uniform'>qunif</a></code>,
+</dd>
+<dt>
+ncutoff
+</dt>
+<dd class="rd-dd">
+if the length of <code>x</code> exceeds this value and <code>probs</code> is not specified, compute quantiles at <code>ncutoff</code> points
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_ray" class="section level1">
+<h1>ly_ray</h1>
+<h3>
+Add a “ray” layer to a Bokeh figure
+</h3>
+<p>Draws line segments starting at the given coordinate and extending the given length at the given angle.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_ray(fig, x, y = NULL, data = NULL, length = NULL, angle
+  = 0, color = "black", type = 1, width = 1, alpha = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+length
+</dt>
+<dd class="rd-dd">
+values or field name of ray lengths in screen units
+</dd>
+<dt>
+angle
+</dt>
+<dd class="rd-dd">
+values or field name of ray angles
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_rect" class="section level1">
+<h1>ly_rect</h1>
+<h3>
+Add a “rect” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_rect(fig, xleft, ybottom, xright, ytop, data = NULL,
+  color = NULL, alpha = 1, hover = NULL, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+xleft
+</dt>
+<dd class="rd-dd">
+values or field name of left edges
+</dd>
+<dt>
+ybottom
+</dt>
+<dd class="rd-dd">
+values or field name of bottom edges
+</dd>
+<dt>
+xright
+</dt>
+<dd class="rd-dd">
+values or field name of right edges
+</dd>
+<dt>
+ytop
+</dt>
+<dd class="rd-dd">
+values or field name of top edges
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs xleft, ybottom, xright, ytop, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_segments" class="section level1">
+<h1>ly_segments</h1>
+<h3>
+Add a “segments” layer to a Bokeh figure
+</h3>
+<p>Draws line segments with the given starting and ending coordinates.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_segments(fig, x0, y0, x1, y1, data = NULL, color =
+  "black", alpha = 1, width = 1, type = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x0
+</dt>
+<dd class="rd-dd">
+values or field name of starting x coordinates
+</dd>
+<dt>
+y0
+</dt>
+<dd class="rd-dd">
+values or field name of starting y coordinates
+</dd>
+<dt>
+x1
+</dt>
+<dd class="rd-dd">
+values or field name of ending x coordinates
+</dd>
+<dt>
+y1
+</dt>
+<dd class="rd-dd">
+values or field name of ending y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+transparency value for the line between 0 (transparent) and 1 (opaque)
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+stroke width in units of pixels
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+an integer between 1 and 6 matching the <code>lty</code> property in <code><a href='http://www.inside-r.org/packages/cran/graphics/docs/par'>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_text" class="section level1">
+<h1>ly_text</h1>
+<h3>
+Add a “text” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_text(fig, x, y = NULL, text = NULL, data = NULL, color =
+  "black", alpha = 1, angle = 0, align = NULL, baseline =
+  NULL, font = NULL, font_size = NULL, font_style = NULL,
+  x_offset = NULL, y_offset = NULL, legend = NULL, lname =
+  NULL, lgroup = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+x coordinates of text anchors
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+y coordinates of text anchors
+</dd>
+<dt>
+text
+</dt>
+<dd class="rd-dd">
+text values to render
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, text, and other glyph properties
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+text color values for the text
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+text alpha values for the text
+</dd>
+<dt>
+angle
+</dt>
+<dd class="rd-dd">
+angle to rotate the text in radians
+</dd>
+<dt>
+align
+</dt>
+<dd class="rd-dd">
+text align values for the text (“left”, “right”, “center”)
+</dd>
+<dt>
+baseline
+</dt>
+<dd class="rd-dd">
+text baseline values for the text (“top”, “middle”, “bottom”, “alphabetic”, “hanging”)
+</dd>
+<dt>
+font
+</dt>
+<dd class="rd-dd">
+text font values for the text
+</dd>
+<dt>
+font_size
+</dt>
+<dd class="rd-dd">
+text font size values for the text
+</dd>
+<dt>
+font_style
+</dt>
+<dd class="rd-dd">
+text font style values for the text (“normal”, “italic”, “bold”)
+</dd>
+<dt>
+x_offset
+</dt>
+<dd class="rd-dd">
+offset values to apply to the x-coordinates
+</dd>
+<dt>
+y_offset
+</dt>
+<dd class="rd-dd">
+offset values to apply to the y-coordinates
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+</dl>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# prepare data
+elements <- subset(elements, !is.na(group))
+elements$group <- as.character(elements$group)
+elements$period <- as.character(elements$period)
+
+# add colors for groups
+metals <- c("alkali metal", "alkaline earth metal", "halogen",
+  "metal", "metalloid", "noble gas", "nonmetal", "transition metal")
+colors <- c("#a6cee3", "#1f78b4", "#fdbf6f", "#b2df8a", "#33a02c",
+  "#bbbb88", "#baa2a6", "#e08e79")
+elements$color <- colors[match(elements$metal, metals)]
+elements$type <- elements$metal
+
+# make coordinates for labels
+elements$symx <- paste(elements$group, ":0.1", sep = "")
+elements$numbery <- paste(elements$period, ":0.8", sep = "")
+elements$massy <- paste(elements$period, ":0.15", sep = "")
+elements$namey <- paste(elements$period, ":0.3", sep = "")
+
+# create figure
+p <- figure(title = "Periodic Table", tools = c("resize", "hover"),
+  ylim = as.character(c(7:1)), xlim = as.character(1:18),
+  xgrid = FALSE, ygrid = FALSE, xlab = "", ylab = "",
+  height = 600, width = 1200) %>%
+
+# plot rectangles
+ly_crect(group, period, data = elements, 0.9, 0.9,
+  fill_color = color, line_color = color, fill_alpha = 0.6,
+  hover = list(name, atomic.number, type, atomic.mass,
+    electronic.configuration)) %>%
+
+# add symbol text
+ly_text(symx, period, text = symbol, data = elements,
+  font_style = "bold", font_size = "15pt",
+  align = "left", baseline = "middle") %>%
+
+# add atomic number text
+ly_text(symx, numbery, text = atomic.number, data = elements,
+  font_size = "9pt", align = "left", baseline = "middle") %>%
+
+# add name text
+ly_text(symx, namey, text = name, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle") %>%
+
+# add atomic mass text
+ly_text(symx, massy, text = atomic.mass, data = elements,
+  font_size = "6pt", align = "left", baseline = "middle")
+
+p
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code></p>
+</div>
+<div id="ly_wedge" class="section level1">
+<h1>ly_wedge</h1>
+<h3>
+Add a “wedge” layer to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>ly_wedge(fig, x, y = NULL, data = NULL, radius = 0.3,
+  start_angle = 0, end_angle = 2 * pi, direction =
+  "anticlock", color = NULL, alpha = 1, hover = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+values or field name of center x coordinates
+</dd>
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+values or field name of center y coordinates
+</dd>
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+an optional data frame, providing the source for inputs x, y, and other glyph properties
+</dd>
+<dt>
+radius
+</dt>
+<dd class="rd-dd">
+values or field name of wedge radii
+</dd>
+<dt>
+start_angle
+</dt>
+<dd class="rd-dd">
+the angles to start the wedges, in radians, as measured from the horizontal
+</dd>
+<dt>
+end_angle
+</dt>
+<dd class="rd-dd">
+the angles to end the wedges, in radians, as measured from the horizontal
+</dd>
+<dt>
+direction
+</dt>
+<dd class="rd-dd">
+direction to turn between starting and ending angles (“anticlock”, “clock”)
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’ - for glyphs with both fill and line properties, see “Handling color” below
+</dd>
+<dt>
+alpha
+</dt>
+<dd class="rd-dd">
+the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see “Handling alpha” below
+</dd>
+<dt>
+hover
+</dt>
+<dd class="rd-dd">
+a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
+</dd>
+<dt>
+lgroup
+</dt>
+<dd class="rd-dd">
+layer group
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over fill and line properties (see “Additional parameters” below)
+</dd>
+</dl>
+<h4>
+Handling color
+</h4>
+<p class="rd-p">
+The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the color of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+</li>
+<li>
+If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.
+</p>
+<h4>
+Handling alpha
+</h4>
+<p class="rd-p">
+The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li>
+When using a glyph that only has line properties, this will be the alpha of the line.
+</li>
+<li>
+When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+</li>
+<li>
+Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul>
+</p>
+<p class="rd-p">
+</p>
+<h4>
+Mapped plot attributes and legends
+</h4>
+<p class="rd-p">
+When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
+</p>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>fill_color</code>
+</td>
+<td>
+color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>fill_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_color</code>
+</td>
+<td>
+color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g ‘green’, ‘indigo’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_width</code>
+</td>
+<td>
+stroke width in units of pixels
+</td>
+</tr>
+<tr>
+<td>
+<code>line_alpha</code>
+</td>
+<td>
+transparency value between 0 (transparent) and 1 (opaque)
+</td>
+</tr>
+<tr>
+<td>
+<code>line_join</code>
+</td>
+<td>
+how path segments should be joined together ‘miter’ ‘round’ ‘bevel’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_cap</code>
+</td>
+<td>
+how path segments should be terminated ‘butt’ ‘round’ ‘square’
+</td>
+</tr>
+<tr>
+<td>
+<code>line_dash</code>
+</td>
+<td>
+array of integer pixel distances that describe the on-off pattern of dashing to use
+</td>
+</tr>
+</table>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+rescale <- function(x)
+  (x - min(x)) / diff(range(x))
+
+figure() %>%
+  ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    inner_radius = 0.1, outer_radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_wedge(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    radius = 0.15, alpha = 0.5,
+    hover = Species)
+
+figure() %>%
+  ly_arc(Sepal.Length, Sepal.Width, data = iris,
+    end_angle = rescale(Petal.Length)*2*pi, color = Species,
+    alpha = 0.5)
+
+figure() %>%
+  ly_annulus(Sepal.Length, Sepal.Width, data = iris,
+    color = Species, hover = Species,
+    outer_radius = rescale(Petal.Length) * 0.3,
+    inner_radius = rescale(Petal.Length) * 0.1)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code></p>
+</div>
+<div id="point_types" class="section level1">
+<h1>point_types</h1>
+<h3>
+Display glyph types available for ly_points()
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>point_types(size = 25, color = "blue")</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+size
+</dt>
+<dd class="rd-dd">
+size of the glyph
+</dd>
+<dt>
+color
+</dt>
+<dd class="rd-dd">
+color to use for line and fill properties
+</dd>
+</dl>
+</div>
+<div id="print.bokehfigure" class="section level1">
+<h1>print.BokehFigure</h1>
+<h3>
+Print a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>"print"(x, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+BokehFigure object
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+further arguments - most importantly <code>debug = TRUE</code> will print information about the figure in the javascript console in the web browser
+</dd>
+</dl>
+</div>
+<div id="print.bokehgridplot" class="section level1">
+<h1>print.BokehGridPlot</h1>
+<h3>
+Print a Bokeh grid plot
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>"print"(x, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+BokehGridPlot object
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+further arguments - most importantly <code>debug = TRUE</code> will print information about the figure in the javascript console in the web browser
+</dd>
+</dl>
+</div>
+<div id="print_model_json" class="section level1">
+<h1>print_model_json</h1>
+<h3>
+Print the JSON of a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>print_model_json(fig, prepare = TRUE, pretty = TRUE, pbcopy
+  = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to print
+</dd>
+<dt>
+prepare
+</dt>
+<dd class="rd-dd">
+logical - should the figure be sent through preparations that need to be done prior to plotting (TRUE), or printed as-is (FALSE)
+</dd>
+<dt>
+pretty
+</dt>
+<dd class="rd-dd">
+parameter passed on to <code><a href='http://www.inside-r.org/packages/cran/RJSONIO/docs/toJSON'>toJSON</a></code>
+</dd>
+<dt>
+pbcopy
+</dt>
+<dd class="rd-dd">
+logical - if on OSX, should the results be passed to the clipboard (TRUE) instead of printed to the screen (FALSE)?
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+p <- figure() %>% ly_points(1:10) %>%
+ tool_pan(dimensions = "height")
+print_model_json(p)
+</code></pre>
+</div>
+<div id="rbokeh-package" class="section level1">
+<h1>rbokeh-package</h1>
+<h3>
+rbokeh: R interface for Bokeh
+</h3>
+<p>R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a></p>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+For full documentation on the package, visit <a href = 'http://hafen.github.io/rbokeh'>http://hafen.github.io/rbokeh</a>
+</p>
+</div>
+<div id="tool_box_select" class="section level1">
+<h1>tool_box_select</h1>
+<h3>
+Add “box_select” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_box_select(fig, select_every_mousemove = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+select_every_mousemove
+</dt>
+<dd class="rd-dd">
+logical - should the tool’s callback be triggered on every mouse move?
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_box_select()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_box_zoom" class="section level1">
+<h1>tool_box_zoom</h1>
+<h3>
+Add “box_zoom” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_box_zoom(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_box_zoom()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_crosshair" class="section level1">
+<h1>tool_crosshair</h1>
+<h3>
+Add “crosshair” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_crosshair(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_crosshair()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_lasso_select" class="section level1">
+<h1>tool_lasso_select</h1>
+<h3>
+Add “lasso_select” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_lasso_select(fig, select_every_mousemove = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+select_every_mousemove
+</dt>
+<dd class="rd-dd">
+logical - should the tool’s callback be triggered on every mouse move?
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_lasso_select()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_pan" class="section level1">
+<h1>tool_pan</h1>
+<h3>
+Add “pan” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_pan(fig, dimensions = c("width", "height"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+dimensions
+</dt>
+<dd class="rd-dd">
+a vector specifying whether the pan tool should pan with respect to the x axis (“width”) and the y axis (“height”) or both (c(“width”, “height”))
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# only pan on x axis
+figure() %>% ly_points(1:10) %>%
+ tool_pan(dimensions = "height")
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_reset" class="section level1">
+<h1>tool_reset</h1>
+<h3>
+Add “reset” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_reset(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_reset()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_resize" class="section level1">
+<h1>tool_resize</h1>
+<h3>
+Add “resize” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_resize(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_resize()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_save" class="section level1">
+<h1>tool_save</h1>
+<h3>
+Add “save” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_save(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_save()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_tap" class="section level1">
+<h1>tool_tap</h1>
+<h3>
+Add “tap” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_tap(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
+ tool_tap()
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_wheel_zoom" class="section level1">
+<h1>tool_wheel_zoom</h1>
+<h3>
+Add “wheel_zoom” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_wheel_zoom(fig, dimensions = c("width", "height"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+dimensions
+</dt>
+<dd class="rd-dd">
+a vector specifying whether the wheel_zoom tool should zoom with respect to the x axis (“width”) and the y axis (“height”) or both (c(“width”, “height”))
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# only zoom on x axis
+figure() %>% ly_points(1:10) %>%
+ tool_wheel_zoom(dimensions = "height")
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code></p>
+</div>
+<div id="x_axis" class="section level1">
+<h1>x_axis</h1>
+<h3>
+Add x axis to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid =
+  TRUE, num_minor_ticks = 5)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+label
+</dt>
+<dd class="rd-dd">
+axis label
+</dd>
+<dt>
+position
+</dt>
+<dd class="rd-dd">
+where to place the axis (either “above” or “below”)
+</dd>
+<dt>
+log
+</dt>
+<dd class="rd-dd">
+logical - should a log axis be used?
+</dd>
+<dt>
+grid
+</dt>
+<dd class="rd-dd">
+logical - should a reference grid be shown for this axis?
+</dd>
+<dt>
+num_minor_ticks
+</dt>
+<dd class="rd-dd">
+number of minor ticks
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>%
+  ly_points(rexp(1000), rexp(1000)) %>%
+  x_axis(label = "x", log = TRUE) %>%
+  y_axis(label = "y", log = TRUE)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other axes: <code><a href='#y_axis'>y_axis</a></code></p>
+</div>
+<div id="x_range" class="section level1">
+<h1>x_range</h1>
+<h3>
+Update x axis range in a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>x_range(fig, dat)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+dat
+</dt>
+<dd class="rd-dd">
+either a vector (min, max) if the axis is numeric, or a vector of values if the axis is categorical. In the latter case, the order in which the values are supplied is how they will be arranged on the axis.
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
+du <- subset(lattice::barley, site == "Duluth")
+
+# plot with default ranges
+p <- figure(width = 600) %>%
+  ly_points(yield, variety, color = year, data = du)
+p
+# y axis is alphabetical
+
+# manually set x and y axis (y in order of 1932 yield)
+p %>%
+  x_range(c(20, 40)) %>%
+  y_range(du$variety[order(subset(du, year == 1932)$yield)])
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other ranges: <code><a href='#y_range'>y_range</a></code></p>
+</div>
+<div id="y_axis" class="section level1">
+<h1>y_axis</h1>
+<h3>
+Add y axis to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid =
+  TRUE, num_minor_ticks = 5)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+label
+</dt>
+<dd class="rd-dd">
+axis label
+</dd>
+<dt>
+position
+</dt>
+<dd class="rd-dd">
+where to place the axis (either “left” or “right”)
+</dd>
+<dt>
+log
+</dt>
+<dd class="rd-dd">
+logical - should a log axis be used?
+</dd>
+<dt>
+grid
+</dt>
+<dd class="rd-dd">
+logical - should a reference grid be shown for this axis?
+</dd>
+<dt>
+num_minor_ticks
+</dt>
+<dd class="rd-dd">
+number of minor ticks
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+figure() %>%
+  ly_points(rexp(1000), rexp(1000)) %>%
+  x_axis(label = "x", log = TRUE) %>%
+  y_axis(label = "y", log = TRUE)
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other axes: <code><a href='#x_axis'>x_axis</a></code></p>
+</div>
+<div id="y_range" class="section level1">
+<h1>y_range</h1>
+<h3>
+Update y axis range in a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>y_range(fig, dat)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+dat
+</dt>
+<dd class="rd-dd">
+either a vector (min, max) if the axis is numeric, or a vector of values if the axis is categorical. In the latter case, the order in which the values are supplied is how they will be arranged on the axis.
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
+du <- subset(lattice::barley, site == "Duluth")
+
+# plot with default ranges
+p <- figure(width = 600) %>%
+  ly_points(yield, variety, color = year, data = du)
+p
+# y axis is alphabetical
+
+# manually set x and y axis (y in order of 1932 yield)
+p %>%
+  x_range(c(20, 40)) %>%
+  y_range(du$variety[order(subset(du, year == 1932)$yield)])
+</code></pre>
+<h4>
+See also
+</h4>
+<p>Other ranges: <code><a href='#x_range'>x_range</a></code></p>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="col-md-6">
+                <p>&copy; Ryan Hafen, 2015</p>
+              </div>
+      <div class="col-md-6">
+        <p class="pull-right">created with <a href="">packagedocs</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#leftCol ul:first').addClass('nav nav-stacked affix-top')
+      $('#leftCol ul:first').attr("id", "sidebar");
+
+      // add class to toc sub-elements
+      $('#leftCol ul:first ul').addClass("nav nav-stacked")
+
+      $('#leftCol ul:first').affix({
+        offset: { top: 0 }
+      });
+
+      $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+      var $body    = $(document.body);
+      var navHeight = $('.navbar').outerHeight(true) + 10;
+
+      $body.scrollspy({
+        target: '#leftCol',
+        offset: navHeight
+      });
+
+      hljs.initHighlightingOnLoad();
+    });
+  </script>
+
+
+</body>
+</html>
