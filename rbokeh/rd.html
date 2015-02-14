@@ -22,6 +22,12 @@
   
   
   
+    <style type="text/css">
+  .section h1 {
+    padding-top: 75px;
+  }
+  </style>
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
@@ -123,7 +129,7 @@
 R Interface for Bokeh
 </h1>
 <p>
-<strong>Author:</strong> Ryan Hafen <a href="mailto:&lt;rhafen@gmail.com&amp;gt">&lt;rhafen@gmail.com&amp;gt</a>; [aut, cre]
+<strong>Author:</strong> Ryan Hafen <a href="mailto:rhafen@gmail.com">rhafen@gmail.com</a> [aut, cre]
 </p>
 <p>
 <strong>Version:</strong> 0.2
@@ -138,7 +144,7 @@ R Interface for Bokeh
 Description
 </h4>
 <p>
-R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, &lt;a href = ‘<a href="http://bokeh.pydata.org/en/latest/" class="uri">http://bokeh.pydata.org/en/latest/</a>’&gt;<a href="http://bokeh.pydata.org/en/latest/&lt;/a&gt;" class="uri">http://bokeh.pydata.org/en/latest/&lt;/a&gt;</a>
+R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a>
 </p>
 <h4>
 Depends
@@ -197,8 +203,7 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -373,8 +378,7 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(width = 1000) %>%
+<pre class="r"><code>p <- figure(width = 1000) %>%
   ly_points(date, Freq, data = flightfreq,
     hover = list(date, Freq, dow), size = 5) %>%
   ly_abline(v = as.Date("2001-09-11"))
@@ -444,8 +448,7 @@ If <code>link_data</code> is <code>TRUE</code>, then an effort will be made to l
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 
 p1 <- figure(tools = tools) %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
@@ -607,8 +610,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -855,8 +857,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1102,8 +1103,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1289,8 +1289,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1803,8 +1802,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -2042,8 +2040,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -2217,8 +2214,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-chippy <- function(x) sin(cos(x)*exp(-x/2))
+<pre class="r"><code>chippy <- function(x) sin(cos(x)*exp(-x/2))
 figure(width = 800) %>%
   ly_curve(chippy, -8, 7, n = 2001)
 </code></pre>
@@ -2437,8 +2433,7 @@ logical - should a hover tool be added to show the count in each hexagon?
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+<pre class="r"><code>figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 </code></pre>
 </div>
 <div id="ly_hist" class="section level1">
@@ -2715,8 +2710,7 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -2812,8 +2806,7 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+<pre class="r"><code>url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -2973,8 +2966,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -3231,24 +3223,12 @@ lgroup
 layer group
 </dd>
 <dt>
-legend
-</dt>
-<dd class="rd-dd">
-either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
-</dd>
-<dt>
 …
 </dt>
 <dd class="rd-dd">
 additional parameters for fine control over line properties (see “Additional parameters” below)
 </dd>
 </dl>
-<h4>
-Mapped plot attributes and legends
-</h4>
-<p class="rd-p">
-When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(…, data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points. Here, <code>Species</code> is “mapped” to the <code>color</code> attribute. Both continuous and categorical variables can be mapped. In the case of continuous variables, the range is cut into slices and attributes are applied to each interval. The mapping from the values of the variable to the actual plot attributes is determined based on the theme.
-</p>
 <h4>
 Additional parameters
 </h4>
@@ -3930,8 +3910,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure() %>%
+<pre class="r"><code>p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
@@ -5204,8 +5183,7 @@ When specifying an input data frame for a layer through the <code>data</code> ar
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -5488,8 +5466,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -5528,7 +5505,8 @@ Display glyph types available for ly_points()
 <h4>
 Usage
 </h4>
-<pre class="r"><code>point_types(size = 25, color = "blue")</code></pre>
+<pre class="r"><code>point_types(size = 25, color = "blue", width = 800, height
+  = 450)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5544,6 +5522,12 @@ color
 </dt>
 <dd class="rd-dd">
 color to use for line and fill properties
+</dd>
+<dt>
+width,height
+</dt>
+<dd class="rd-dd">
+dimensions of output plot
 </dd>
 </dl>
 </div>
@@ -5609,8 +5593,8 @@ Print the JSON of a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>print_model_json(fig, prepare = TRUE, pretty = TRUE, pbcopy
-  = FALSE)</code></pre>
+<pre class="r"><code>print_model_json(fig, prepare = TRUE, pretty = TRUE, file =
+  "", pbcopy = FALSE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5634,6 +5618,12 @@ pretty
 parameter passed on to <code><a href='http://www.inside-r.org/packages/cran/RJSONIO/docs/toJSON'>toJSON</a></code>
 </dd>
 <dt>
+file
+</dt>
+<dd class="rd-dd">
+parameter passed on to <code><a href='http://www.inside-r.org/packages/cran/base/docs/cat'>cat</a></code>
+</dd>
+<dt>
 pbcopy
 </dt>
 <dd class="rd-dd">
@@ -5643,8 +5633,7 @@ logical - if on OSX, should the results be passed to the clipboard (TRUE) instea
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>p <- figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
@@ -5697,8 +5686,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_select()
 </code></pre>
 <h4>
@@ -5735,8 +5723,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_zoom()
 </code></pre>
 <h4>
@@ -5773,8 +5760,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_crosshair()
 </code></pre>
 <h4>
@@ -5817,8 +5803,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_lasso_select()
 </code></pre>
 <h4>
@@ -5861,8 +5846,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# only pan on x axis
+<pre class="r"><code># only pan on x axis
 figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 </code></pre>
@@ -5900,8 +5884,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_reset()
 </code></pre>
 <h4>
@@ -5938,8 +5921,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_resize()
 </code></pre>
 <h4>
@@ -5976,8 +5958,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_save()
 </code></pre>
 <h4>
@@ -6014,8 +5995,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_tap()
 </code></pre>
 <h4>
@@ -6058,8 +6038,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# only zoom on x axis
+<pre class="r"><code># only zoom on x axis
 figure() %>% ly_points(1:10) %>%
  tool_wheel_zoom(dimensions = "height")
 </code></pre>
@@ -6122,8 +6101,7 @@ number of minor ticks
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
@@ -6162,8 +6140,7 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -6236,8 +6213,7 @@ number of minor ticks
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
@@ -6276,8 +6252,7 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -6314,14 +6289,25 @@ See also
   </div>
 
   <script type="text/javascript">
+    function handleSticky() {
+      if($(window).width() > 979) {
+        var stickBottom = true;
+        if($(window).height() > $("#sidebar-col").height())
+          stickBottom = false;
+        $("#sidebar-col").stick_in_parent({offset_top: 60, bottoming: stickBottom});
+      } else {
+        $("#sidebar-col").trigger("sticky_kit:detach");
+      }
+    }
+
     $(document).ready(function() {
-      $('#toc ul:first').addClass('nav nav-stacked')
-      $('#toc ul:first').attr("id", "sidebar");
+      $('#toc ul:first').addClass('nav nav-stacked');
+      $('#toc ul:first').attr('id', 'sidebar');
 
       // add class to toc sub-elements
       $('#toc ul:first ul').addClass("nav nav-stacked")
 
-      $("#sidebar-col").stick_in_parent({offset_top: 60});
+      handleSticky();
 
       $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 
@@ -6335,6 +6321,19 @@ See also
 
       hljs.initHighlightingOnLoad();
     });
+
+    // let a user resize for 250ms before triggering actions
+    $(window).resize(function() {
+       if(this.resizeTO) clearTimeout(this.resizeTO);
+       this.resizeTO = setTimeout(function() {
+          $(this).trigger('resizeEnd');
+       }, 250);
+    });
+
+    $(window).bind('resizeEnd', function() {
+      handleSticky();
+    });
+
   </script>
 
   

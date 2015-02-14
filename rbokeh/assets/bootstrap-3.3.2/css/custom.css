@@ -12,7 +12,6 @@ body {
   background-color: #000;
 }
 
-
 @media (min-width: 979px) {
   #sidebar-col {
     padding-top: 20px;
@@ -81,3 +80,8 @@ body {
 h1 {
   border-bottom: 1px solid #eee;
 }
+
+.rd-dd {
+  padding-left: 20px;
+}
+

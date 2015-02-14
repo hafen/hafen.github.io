@@ -6,6 +6,7 @@ copyright: Ryan Hafen
 output:
   packagedocs:
     toc: true
+rd_page: true
 navpills: |
   <li><a href='index.html'>Docs</a></li>
   <li class="active"><a href='rd.html'>Function Ref</a></li>
@@ -14,17 +15,17 @@ navpills: |
 
 <h1>R Interface for Bokeh</h1>
 
-<p><strong>Author:</strong> Ryan Hafen &lt;rhafen@gmail.com&gt; [aut, cre]</p>
+<p><strong>Author:</strong> Ryan Hafen <rhafen@gmail.com> [aut, cre]</p>
 <p><strong>Version:</strong> 0.2</p>
 <p><strong>Date:</strong> </p>
 <p><strong>License:</strong> MIT + file LICENSE</p>
 
 <h4>Description</h4>
-<p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, &lt;a href = 'http://bokeh.pydata.org/en/latest/'&gt;http://bokeh.pydata.org/en/latest/&lt;/a&gt;</p>
+<p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a></p>
 
 <h4>Depends</h4>
 <p>
-R (&gt;= 3.1.1)</p>
+R (>= 3.1.1)</p>
 
 <h4>Suggests</h4>
 <p>
@@ -70,8 +71,7 @@ Data for periodic table of the elements
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -187,8 +187,7 @@ Daily counts of domestic flights in the U.S. from 1999 to mid-2008
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-p <- figure(width = 1000) %>%
+<pre class="r"><code>p <- figure(width = 1000) %>%
   ly_points(date, Freq, data = flightfreq,
     hover = list(date, Freq, dow), size = 5) %>%
   ly_abline(v = as.Date("2001-09-11"))
@@ -231,8 +230,7 @@ p
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 
 p1 <- figure(tools = tools) %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
@@ -323,8 +321,7 @@ Draws one or more straight lines.
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -468,8 +465,7 @@ Other layer functions: <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></c
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -624,8 +620,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -742,8 +737,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1057,8 +1051,7 @@ Computes and draws contour lines.
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -1197,8 +1190,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -1327,8 +1319,7 @@ Draws a curve corresponding to a function over the interval <code>[from, to]</co
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-chippy <- function(x) sin(cos(x)*exp(-x/2))
+<pre class="r"><code>chippy <- function(x) sin(cos(x)*exp(-x/2))
 figure(width = 800) %>%
   ly_curve(chippy, -8, 7, n = 2001)
 </code></pre>
@@ -1470,8 +1461,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+<pre class="r"><code>figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 </code></pre>
 
 
@@ -1631,8 +1621,7 @@ Draws a grid of rectangles with colors corresponding to the values in <code>z</c
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -1697,8 +1686,7 @@ Renders raster images from URLs at provided coordinates
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+<pre class="r"><code>url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -1802,8 +1790,7 @@ Draws lines with the given coordinates.</h3>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -1972,16 +1959,9 @@ Draws multiple lines with the given lists of coordinates.
   <dd class="rd-dd">layer name</dd>
   <dt>lgroup</dt>
   <dd class="rd-dd">layer group</dd>
-  <dt>legend</dt>
-  <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>...</dt>
   <dd class="rd-dd">additional parameters for fine control over line properties (see "Additional parameters" below)</dd>
 </dl>
-
-  <h4>Mapped plot attributes and legends</h4>
-
-  <p class="rd-p">When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(..., data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points.  Here, <code>Species</code> is "mapped" to the <code>color</code> attribute.  Both continuous and categorical variables can be mapped.  In the case of continuous variables, the range is cut into slices and attributes are applied to each interval.  The mapping from the values of the variable to the actual plot attributes is determined based on the theme.</p>
-
 
   <h4>Additional parameters</h4>
 
@@ -2386,8 +2366,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-p <- figure() %>%
+<pre class="r"><code>p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
@@ -3131,8 +3110,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -3316,8 +3294,7 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -3370,7 +3347,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>point_types(size = 25, color = "blue")</code></pre>
+<pre class="r"><code>point_types(size = 25, color = "blue", width = 800, height
+  = 450)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3378,6 +3356,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">size of the glyph</dd>
   <dt>color</dt>
   <dd class="rd-dd">color to use for line and fill properties</dd>
+  <dt>width,height</dt>
+  <dd class="rd-dd">dimensions of output plot</dd>
 </dl>
 
 
@@ -3434,8 +3414,8 @@ web browser</dd>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>print_model_json(fig, prepare = TRUE, pretty = TRUE, pbcopy
-  = FALSE)</code></pre>
+<pre class="r"><code>print_model_json(fig, prepare = TRUE, pretty = TRUE, file =
+  "", pbcopy = FALSE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3445,14 +3425,15 @@ web browser</dd>
   <dd class="rd-dd">logical - should the figure be sent through preparations that need to be done prior to plotting (TRUE), or printed as-is (FALSE)</dd>
   <dt>pretty</dt>
   <dd class="rd-dd">parameter passed on to <code><a href='http://www.inside-r.org/packages/cran/RJSONIO/docs/toJSON'>toJSON</a></code></dd>
+  <dt>file</dt>
+  <dd class="rd-dd">parameter passed on to <code><a href='http://www.inside-r.org/packages/cran/base/docs/cat'>cat</a></code></dd>
   <dt>pbcopy</dt>
   <dd class="rd-dd">logical - if on OSX, should the results be passed to the clipboard (TRUE) instead of printed to the screen (FALSE)?</dd>
 </dl>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-p <- figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>p <- figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
@@ -3497,8 +3478,7 @@ R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href 
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_select()
 </code></pre>
 
@@ -3535,8 +3515,7 @@ Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_zoom()
 </code></pre>
 
@@ -3573,8 +3552,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_crosshair()
 </code></pre>
 
@@ -3613,8 +3591,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_lasso_select()
 </code></pre>
 
@@ -3653,8 +3630,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# only pan on x axis
+<pre class="r"><code># only pan on x axis
 figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 </code></pre>
@@ -3693,8 +3669,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_reset()
 </code></pre>
 
@@ -3731,8 +3706,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_resize()
 </code></pre>
 
@@ -3769,8 +3743,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_save()
 </code></pre>
 
@@ -3807,8 +3780,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_tap()
 </code></pre>
 
@@ -3847,8 +3819,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# only zoom on x axis
+<pre class="r"><code># only zoom on x axis
 figure() %>% ly_points(1:10) %>%
  tool_wheel_zoom(dimensions = "height")
 </code></pre>
@@ -3892,8 +3863,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
@@ -3924,8 +3894,7 @@ Other axes: <code><a href='#y_axis'>y_axis</a></code>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -3974,8 +3943,7 @@ Other ranges: <code><a href='#y_range'>y_range</a></code>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
@@ -4006,8 +3974,7 @@ Other axes: <code><a href='#x_axis'>x_axis</a></code>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
