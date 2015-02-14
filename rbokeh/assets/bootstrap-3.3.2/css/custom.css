@@ -12,21 +12,19 @@ body {
   background-color: #000;
 }
 
-.affix-top,.affix{
-  position: static;
-}
 
 @media (min-width: 979px) {
-  #sidebar.affix-top {
-    position: static;
-    margin-top: 20px;
-    width: 228px;
+  #sidebar-col {
+    padding-top: 20px;
+    position: fixed;
+    z-index: 2;
+    width: 260px;
   }
 
-  #sidebar.affix {
-    position: fixed;
-    top: 70px;
-    width: 228px;
+  #content-col {
+    position: relative;
+    left: 280px;
+    z-index: 1;
   }
 }
 

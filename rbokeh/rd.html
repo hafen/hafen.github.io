@@ -5,8 +5,8 @@
   <meta name="generator" content="pandoc" />
 
     <meta name="author" content="Ryan Hafen" />
-
-
+  
+  
   <title>rbokeh</title>
 
     <script src="assets/jquery-1.11.0/jquery.min.js"></script>
@@ -18,16 +18,17 @@
   <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
   <script src="assets/highlight-8.4/highlight.pack.js"></script>
   <link href="assets/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-
-
-
-
+  <script src="assets/stickykit-1.1.1/sticky-kit.min.js"></script>
+  
+  
+  
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body>
 
-
+  
     <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
     <div class="container">
       <div class="navbar-header">
@@ -54,68 +55,70 @@
       </nav>
     </div>
   </header>
-
+  
   <!-- Begin Body -->
   <div class="container">
     <div class="row">
-            <div class="col-md-3" id="leftCol">
-        <ul>
-        <li><a href="#bokeh_render_json">bokeh_render_json</a></li>
-        <li><a href="#elements">elements</a></li>
-        <li><a href="#figure">figure</a></li>
-        <li><a href="#flightfreq">flightfreq</a></li>
-        <li><a href="#grid_plot">grid_plot</a></li>
-        <li><a href="#ly_abline">ly_abline</a></li>
-        <li><a href="#ly_annular_wedge">ly_annular_wedge</a></li>
-        <li><a href="#ly_annulus">ly_annulus</a></li>
-        <li><a href="#ly_arc">ly_arc</a></li>
-        <li><a href="#ly_bezier">ly_bezier</a></li>
-        <li><a href="#ly_boxplot">ly_boxplot</a></li>
-        <li><a href="#ly_contour">ly_contour</a></li>
-        <li><a href="#ly_crect">ly_crect</a></li>
-        <li><a href="#ly_curve">ly_curve</a></li>
-        <li><a href="#ly_density">ly_density</a></li>
-        <li><a href="#ly_hexbin">ly_hexbin</a></li>
-        <li><a href="#ly_hist">ly_hist</a></li>
-        <li><a href="#ly_image">ly_image</a></li>
-        <li><a href="#ly_image_url">ly_image_url</a></li>
-        <li><a href="#ly_lines">ly_lines</a></li>
-        <li><a href="#ly_map">ly_map</a></li>
-        <li><a href="#ly_multi_line">ly_multi_line</a></li>
-        <li><a href="#ly_oval">ly_oval</a></li>
-        <li><a href="#ly_patch">ly_patch</a></li>
-        <li><a href="#ly_points">ly_points</a></li>
-        <li><a href="#ly_polygons">ly_polygons</a></li>
-        <li><a href="#ly_quadratic">ly_quadratic</a></li>
-        <li><a href="#ly_quantile">ly_quantile</a></li>
-        <li><a href="#ly_ray">ly_ray</a></li>
-        <li><a href="#ly_rect">ly_rect</a></li>
-        <li><a href="#ly_segments">ly_segments</a></li>
-        <li><a href="#ly_text">ly_text</a></li>
-        <li><a href="#ly_wedge">ly_wedge</a></li>
-        <li><a href="#point_types">point_types</a></li>
-        <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
-        <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
-        <li><a href="#print_model_json">print_model_json</a></li>
-        <li><a href="#rbokeh-package">rbokeh-package</a></li>
-        <li><a href="#tool_box_select">tool_box_select</a></li>
-        <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
-        <li><a href="#tool_crosshair">tool_crosshair</a></li>
-        <li><a href="#tool_lasso_select">tool_lasso_select</a></li>
-        <li><a href="#tool_pan">tool_pan</a></li>
-        <li><a href="#tool_reset">tool_reset</a></li>
-        <li><a href="#tool_resize">tool_resize</a></li>
-        <li><a href="#tool_save">tool_save</a></li>
-        <li><a href="#tool_tap">tool_tap</a></li>
-        <li><a href="#tool_wheel_zoom">tool_wheel_zoom</a></li>
-        <li><a href="#x_axis">x_axis</a></li>
-        <li><a href="#x_range">x_range</a></li>
-        <li><a href="#y_axis">y_axis</a></li>
-        <li><a href="#y_range">y_range</a></li>
-        </ul>
+            <div class="col-md-3" id="sidebar-col">
+        <div id="toc">
+          <ul>
+          <li><a href="#bokeh_render_json">bokeh_render_json</a></li>
+          <li><a href="#elements">elements</a></li>
+          <li><a href="#figure">figure</a></li>
+          <li><a href="#flightfreq">flightfreq</a></li>
+          <li><a href="#grid_plot">grid_plot</a></li>
+          <li><a href="#ly_abline">ly_abline</a></li>
+          <li><a href="#ly_annular_wedge">ly_annular_wedge</a></li>
+          <li><a href="#ly_annulus">ly_annulus</a></li>
+          <li><a href="#ly_arc">ly_arc</a></li>
+          <li><a href="#ly_bezier">ly_bezier</a></li>
+          <li><a href="#ly_boxplot">ly_boxplot</a></li>
+          <li><a href="#ly_contour">ly_contour</a></li>
+          <li><a href="#ly_crect">ly_crect</a></li>
+          <li><a href="#ly_curve">ly_curve</a></li>
+          <li><a href="#ly_density">ly_density</a></li>
+          <li><a href="#ly_hexbin">ly_hexbin</a></li>
+          <li><a href="#ly_hist">ly_hist</a></li>
+          <li><a href="#ly_image">ly_image</a></li>
+          <li><a href="#ly_image_url">ly_image_url</a></li>
+          <li><a href="#ly_lines">ly_lines</a></li>
+          <li><a href="#ly_map">ly_map</a></li>
+          <li><a href="#ly_multi_line">ly_multi_line</a></li>
+          <li><a href="#ly_oval">ly_oval</a></li>
+          <li><a href="#ly_patch">ly_patch</a></li>
+          <li><a href="#ly_points">ly_points</a></li>
+          <li><a href="#ly_polygons">ly_polygons</a></li>
+          <li><a href="#ly_quadratic">ly_quadratic</a></li>
+          <li><a href="#ly_quantile">ly_quantile</a></li>
+          <li><a href="#ly_ray">ly_ray</a></li>
+          <li><a href="#ly_rect">ly_rect</a></li>
+          <li><a href="#ly_segments">ly_segments</a></li>
+          <li><a href="#ly_text">ly_text</a></li>
+          <li><a href="#ly_wedge">ly_wedge</a></li>
+          <li><a href="#point_types">point_types</a></li>
+          <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
+          <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
+          <li><a href="#print_model_json">print_model_json</a></li>
+          <li><a href="#rbokeh-package">rbokeh-package</a></li>
+          <li><a href="#tool_box_select">tool_box_select</a></li>
+          <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
+          <li><a href="#tool_crosshair">tool_crosshair</a></li>
+          <li><a href="#tool_lasso_select">tool_lasso_select</a></li>
+          <li><a href="#tool_pan">tool_pan</a></li>
+          <li><a href="#tool_reset">tool_reset</a></li>
+          <li><a href="#tool_resize">tool_resize</a></li>
+          <li><a href="#tool_save">tool_save</a></li>
+          <li><a href="#tool_tap">tool_tap</a></li>
+          <li><a href="#tool_wheel_zoom">tool_wheel_zoom</a></li>
+          <li><a href="#x_axis">x_axis</a></li>
+          <li><a href="#x_range">x_range</a></li>
+          <li><a href="#y_axis">y_axis</a></li>
+          <li><a href="#y_range">y_range</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-9">
-
+      <div class="col-md-9" id="content-col">
+      
 <h1>
 R Interface for Bokeh
 </h1>
@@ -6312,15 +6315,13 @@ See also
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#leftCol ul:first').addClass('nav nav-stacked affix-top')
-      $('#leftCol ul:first').attr("id", "sidebar");
+      $('#toc ul:first').addClass('nav nav-stacked')
+      $('#toc ul:first').attr("id", "sidebar");
 
       // add class to toc sub-elements
-      $('#leftCol ul:first ul').addClass("nav nav-stacked")
+      $('#toc ul:first ul').addClass("nav nav-stacked")
 
-      $('#leftCol ul:first').affix({
-        offset: { top: 0 }
-      });
+      $("#sidebar-col").stick_in_parent({offset_top: 60});
 
       $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 
@@ -6328,7 +6329,7 @@ See also
       var navHeight = $('.navbar').outerHeight(true) + 10;
 
       $body.scrollspy({
-        target: '#leftCol',
+        target: '#toc',
         offset: navHeight
       });
 
@@ -6336,6 +6337,6 @@ See also
     });
   </script>
 
-
+  
 </body>
 </html>
