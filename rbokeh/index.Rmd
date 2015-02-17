@@ -15,11 +15,11 @@ navpills: |
 
 [Bokeh](http://bokeh.pydata.org) is a visualization library that provides a flexible and powerful declarative framework for creating web-based plots.  Bokeh renders plots using HTML canvas and provides many mechanisms for interactivity.  Bokeh has interfaces in Python, Scala, Julia, and now R.  Full acknowledgements to the [Bokeh team at Continuum Analytics](http://bokeh.pydata.org/en/latest/).
 
-<span class="label label-success">Note:</span> This package has not been publicly announced and we'd like to keep it that way until we are sure we are settled on things.  So if you have come across this site, we encourage you to try it out and [provide feedback](), but to wait until the official announcement to share on social media.
+<span class="label label-success">Note:</span> This is the initial release of this package.  If you find bugs or have issues, please file them on the [github issue tracker](https://github.com/bokeh/rbokeh/issues) or hop on the [Bokeh mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh) and be sure tag your subject with [R].
 
 # Installation #
 
-To try it out, install the package and dependencies:
+To try it out, install the package and dependencies.  This assumes you have the `devtools` package installed from CRAN (`install.packages("devtools")`).
 
 ```r
 devtools::install_github("ramnathv/htmlwidgets")
