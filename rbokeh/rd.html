@@ -105,6 +105,7 @@
           <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
           <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
           <li><a href="#print_model_json">print_model_json</a></li>
+          <li><a href="#rbokeh-package">rbokeh-package</a></li>
           <li><a href="#tool_box_select">tool_box_select</a></li>
           <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
           <li><a href="#tool_crosshair">tool_crosshair</a></li>
@@ -201,8 +202,7 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -342,13 +342,13 @@ whether to draw y axis grid lines
 xaxes
 </dt>
 <dd class="rd-dd">
-where to put x axis labels
+where to put x axis, or FALSE if no x axis ticks / labels
 </dd>
 <dt>
 yaxes
 </dt>
 <dd class="rd-dd">
-where to put y axis labels
+where to put y axis, or FALSE if no y axis ticks / labels
 </dd>
 <dt>
 tools
@@ -501,7 +501,7 @@ The line dash of the axis line.
 <code>major_label_orientation</code>
 </td>
 <td>
-(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+(‘horizontal’, ‘vertical’, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.
 </td>
 </tr>
 <tr>
@@ -728,8 +728,7 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(width = 1000) %>%
+<pre class="r"><code>p <- figure(width = 1000) %>%
   ly_points(date, Freq, data = flightfreq,
     hover = list(date, Freq, dow), size = 5) %>%
   ly_abline(v = as.Date("2001-09-11"))
@@ -799,8 +798,7 @@ If <code>link_data</code> is <code>TRUE</code>, then an effort will be made to l
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 
 p1 <- figure(tools = tools) %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
@@ -962,8 +960,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -1216,8 +1213,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1470,8 +1466,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1657,8 +1652,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -2171,8 +2165,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -2416,8 +2409,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -2591,8 +2583,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-chippy <- function(x) sin(cos(x)*exp(-x/2))
+<pre class="r"><code>chippy <- function(x) sin(cos(x)*exp(-x/2))
 figure(width = 800) %>%
   ly_curve(chippy, -8, 7, n = 2001)
 </code></pre>
@@ -2811,8 +2802,7 @@ logical - should a hover tool be added to show the count in each hexagon?
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+<pre class="r"><code>figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 </code></pre>
 </div>
 <div id="ly_hist" class="section level1">
@@ -3089,8 +3079,7 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -3186,8 +3175,7 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+<pre class="r"><code>url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -3347,8 +3335,7 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -4304,8 +4291,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure() %>%
+<pre class="r"><code>p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
@@ -5590,8 +5576,7 @@ When specifying an input data frame for a layer through the <code>data</code> ar
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# prepare data
+<pre class="r"><code># prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -5880,8 +5865,7 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-rescale <- function(x)
+<pre class="r"><code>rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -6048,11 +6032,23 @@ logical - if on OSX, should the results be passed to the clipboard (TRUE) instea
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-p <- figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>p <- figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
+</div>
+<div id="rbokeh-package" class="section level1">
+<h1>rbokeh-package</h1>
+<h3>
+rbokeh: R interface for Bokeh
+</h3>
+<p>R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a></p>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+For full documentation on the package, visit <a href = 'http://hafen.github.io/rbokeh'>http://hafen.github.io/rbokeh</a>
+</p>
 </div>
 <div id="tool_box_select" class="section level1">
 <h1>tool_box_select</h1>
@@ -6089,8 +6085,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_select()
 </code></pre>
 <h4>
@@ -6127,8 +6122,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_box_zoom()
 </code></pre>
 <h4>
@@ -6165,8 +6159,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_crosshair()
 </code></pre>
 <h4>
@@ -6209,8 +6202,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_lasso_select()
 </code></pre>
 <h4>
@@ -6253,8 +6245,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# only pan on x axis
+<pre class="r"><code># only pan on x axis
 figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 </code></pre>
@@ -6292,8 +6283,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_reset()
 </code></pre>
 <h4>
@@ -6330,8 +6320,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_resize()
 </code></pre>
 <h4>
@@ -6368,8 +6357,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>figure() %>% ly_points(1:10) %>%
  tool_save()
 </code></pre>
 <h4>
@@ -6412,8 +6400,7 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# only zoom on x axis
+<pre class="r"><code># only zoom on x axis
 figure() %>% ly_points(1:10) %>%
  tool_wheel_zoom(dimensions = "height")
 </code></pre>
@@ -6617,7 +6604,7 @@ The line dash of the axis line.
 <code>major_label_orientation</code>
 </td>
 <td>
-(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+(‘horizontal’, ‘vertical’, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.
 </td>
 </tr>
 <tr>
@@ -6833,11 +6820,10 @@ The line dash of the minor ticks.
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE, axis_line_color = "red")
+  y_axis(label = "y", log = TRUE)
 </code></pre>
 <h4>
 See also
@@ -6873,8 +6859,7 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -7088,7 +7073,7 @@ The line dash of the axis line.
 <code>major_label_orientation</code>
 </td>
 <td>
-(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+(‘horizontal’, ‘vertical’, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.
 </td>
 </tr>
 <tr>
@@ -7304,11 +7289,10 @@ The line dash of the minor ticks.
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE, axis_line_color = "red")
+  y_axis(label = "y", log = TRUE)
 </code></pre>
 <h4>
 See also
@@ -7344,8 +7328,7 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>
-# get data from Duluth site in 'barley' data
+<pre class="r"><code># get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -7376,7 +7359,7 @@ See also
                 <p>&copy; Ryan Hafen, 2015</p>
               </div>
       <div class="col-md-6">
-        <p class="pull-right">created with <a href="">packagedocs</a></p>
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>
       </div>
     </div>
   </div>

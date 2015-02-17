@@ -46,7 +46,7 @@ p <- figure() %>%
 p
 ```
 
-Here since we are specifying color and glyph by `Species`, a legend is automatically created and the points are colored according to the default color scheme.
+Here since we are specifying color and glyph by `Species`, a legend is automatically created and the points are colored according to the default color scheme.  You can hover over points to see the tooltips we added with the `hover` argument.  You can also play around with the other interactive components such as panning and zooming.
 
 We can also specify legend entries manually:
 
@@ -148,6 +148,8 @@ p <- figure(width = 800, height = 400) %>%
   ly_abline(v = as.Date("2001-09-11"))
 p
 ```
+
+Note that using your scroll wheel over the x or y axis activates a zoom in the dimension of the axis you are hovered over.
 
 Scatterplot matrix of iris data with linked panning, zooming, and brushing (try the pan, zoom, and box_select tools in the figure below):
 
