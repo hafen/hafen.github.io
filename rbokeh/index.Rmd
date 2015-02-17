@@ -154,18 +154,23 @@ Scatterplot matrix of iris data with linked panning, zooming, and brushing (try 
 ```{r, message=FALSE}
 tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 nms <- expand.grid(names(iris)[1:4], rev(names(iris)[1:4]), stringsAsFactors = FALSE)
+nms$yaxis <- rep(c(TRUE, rep(FALSE, 3)), 4)
+nms$xaxis <- c(rep(FALSE, 12), rep(TRUE, 4))
+nms$h <- nms$w <- 200
+nms$h[nms$xaxis] <- nms$w[nms$yaxis] <- 240
 splom_list <- vector("list", 16)
 
 for(i in seq_along(splom_list)) {
-  splom_list[[i]] <- figure(width = 200, height = 200, tools = tools) %>%
+  splom_list[[i]] <- figure(width = nms$w[i], height = nms$h[i],
+    tools = tools, min_border = 2) %>%
     ly_points(nms$Var1[i], nms$Var2[i], data = iris,
-      color = Species, size = 5, legend = FALSE)
+      color = Species, size = 5, legend = FALSE) %>%
+    x_axis(visible = nms$xaxis[i], axis_label_text_font_size = "10pt") %>%
+    y_axis(visible = nms$yaxis[i], axis_label_text_font_size = "10pt")
 }
 
 grid_plot(splom_list, nrow = 4, ncol = 4, same_axes = TRUE, link_data = TRUE)
 ```
-
-More control over axes will be added very soon so that adjacent panels in the grid can be closer together.
 
 A hexbin plot:
 

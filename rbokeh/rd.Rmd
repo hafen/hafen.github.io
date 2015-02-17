@@ -71,7 +71,8 @@ Data for periodic table of the elements
 
 
 <h4>Examples</h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -136,7 +137,7 @@ p
   NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes
   = "left", tools = c("pan", "wheel_zoom", "box_zoom",
   "resize", "reset", "save"), theme =
-  getOption("bokeh_theme"))</code></pre>
+  getOption("bokeh_theme"), ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -170,7 +171,142 @@ p
   <dd class="rd-dd">interactivity tools options</dd>
   <dt>theme</dt>
   <dd class="rd-dd">an rbokeh theme to use (tableau by default)</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">additional parameters for fine control over axes (see "Additional parameters" below)</dd>
 </dl>
+
+  <h4>Additional parameters</h4>
+
+  <p class="rd-p"></p>
+
+  <p class="rd-p"><table><tr><td>
+<code>axis_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
+</tr><tr><td>
+<code>axis_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_color</code> </td>
+<td> (color) The text color of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font</code> </td>
+<td> (string) The text font of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the axis label. </td>
+</tr><tr><td>
+<code>axis_line_alpha</code> </td>
+<td> (numeric) The line alpha of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_color</code> </td>
+<td> (color) The line color of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash</code> </td>
+<td> The line dash of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_width</code> </td>
+<td> (integer) The line width of the axis line. </td>
+</tr><tr><td>
+<code>major_label_orientation</code> </td>
+<td> ('horizontal', 'vertical'), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal. </td>
+</tr><tr><td>
+<code>major_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
+</tr><tr><td>
+<code>major_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_color</code> </td>
+<td> (color) The text color of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font</code> </td>
+<td> (string - 'Helvetica') The text font of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the major tick labels. </td>
+</tr><tr><td>
+<code>major_tick_in</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>major_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_color</code> </td>
+<td> (color) The line color of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash</code> </td>
+<td> The line dash of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_width</code> </td>
+<td> (integer) The line width of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_in</code> </td>
+<td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_color</code> </td>
+<td> (color) The line color of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash</code> </td>
+<td> The line dash of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_width</code> </td>
+<td> (integer) The line width of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr></table></p>
+
 
 
 
@@ -187,7 +323,8 @@ Daily counts of domestic flights in the U.S. from 1999 to mid-2008
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure(width = 1000) %>%
+<pre class="r"><code>
+p <- figure(width = 1000) %>%
   ly_points(date, Freq, data = flightfreq,
     hover = list(date, Freq, dow), size = 5) %>%
   ly_abline(v = as.Date("2001-09-11"))
@@ -230,7 +367,8 @@ p
 
 
 <h4>Examples</h4>
-<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 
 p1 <- figure(tools = tools) %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
@@ -321,7 +459,8 @@ Draws one or more straight lines.
 
 
 <h4>Examples</h4>
-<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -358,8 +497,8 @@ Other layer functions: <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></c
 <pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = NULL,
   inner_radius = 0.1, outer_radius = 0.3, start_angle = 0,
   end_angle = 2 * pi, direction = "anticlock", color =
-  NULL, alpha = 1, hover = NULL, legend = NULL, lname =
-  NULL, lgroup = NULL, ...)</code></pre>
+  NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -387,6 +526,8 @@ Other layer functions: <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></c
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -465,7 +606,8 @@ Other layer functions: <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></c
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -520,7 +662,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 <h4>Usage</h4>
 <pre class="r"><code>ly_annulus(fig, x, y = NULL, data = NULL, inner_radius =
   0.1, outer_radius = 0.2, color = NULL, alpha = 1, hover =
-  NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  NULL, url = NULL, legend = NULL, lname = NULL, lgroup =
+  NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -542,6 +685,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -620,7 +765,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -737,7 +883,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1051,7 +1198,8 @@ Computes and draws contour lines.
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -1085,8 +1233,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 <h4>Usage</h4>
 <pre class="r"><code>ly_crect(fig, x, y = NULL, data = NULL, width = 1, height =
   1, angle = 0, dilate = FALSE, color = NULL, alpha = 1,
-  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
-  ...)</code></pre>
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1112,6 +1260,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -1190,7 +1340,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -1319,7 +1470,8 @@ Draws a curve corresponding to a function over the interval <code>[from, to]</co
 
 
 <h4>Examples</h4>
-<pre class="r"><code>chippy <- function(x) sin(cos(x)*exp(-x/2))
+<pre class="r"><code>
+chippy <- function(x) sin(cos(x)*exp(-x/2))
 figure(width = 800) %>%
   ly_curve(chippy, -8, 7, n = 2001)
 </code></pre>
@@ -1461,7 +1613,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+<pre class="r"><code>
+figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 </code></pre>
 
 
@@ -1621,7 +1774,8 @@ Draws a grid of rectangles with colors corresponding to the values in <code>z</c
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -1686,7 +1840,8 @@ Renders raster images from URLs at provided coordinates
 
 
 <h4>Examples</h4>
-<pre class="r"><code>url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+<pre class="r"><code>
+url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -1790,7 +1945,8 @@ Draws lines with the given coordinates.</h3>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -2136,8 +2292,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_patch(fig, x, y, data = NULL, color = NULL, alpha = 1,
-  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
-  ...)</code></pre>
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2155,6 +2311,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -2265,8 +2423,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_points(fig, x, y = NULL, data = NULL, glyph = 21, color
-  = NULL, alpha = 1, size = 10, hover = NULL, legend =
-  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  = NULL, alpha = 1, size = 10, hover = NULL, url = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2288,6 +2446,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">size of the glyph in screen units</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -2366,7 +2526,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure() %>%
+<pre class="r"><code>
+p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
@@ -2400,8 +2561,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_polygons(fig, xs, ys, group = NULL, data = NULL, color =
-  NULL, alpha = 1, hover = NULL, lname = NULL, lgroup =
-  NULL, ...)</code></pre>
+  NULL, alpha = 1, hover = NULL, url = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2421,6 +2582,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>lname</dt>
   <dd class="rd-dd">layer name</dd>
   <dt>lgroup</dt>
@@ -2844,8 +3007,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_rect(fig, xleft, ybottom, xright, ytop, data = NULL,
-  color = NULL, alpha = 1, hover = NULL, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  color = NULL, alpha = 1, hover = NULL, url = NULL, legend
+  = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2867,6 +3030,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -3110,7 +3275,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -3189,8 +3355,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 <h4>Usage</h4>
 <pre class="r"><code>ly_wedge(fig, x, y = NULL, data = NULL, radius = 0.3,
   start_angle = 0, end_angle = 2 * pi, direction =
-  "anticlock", color = NULL, alpha = 1, hover = NULL,
-  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  "anticlock", color = NULL, alpha = 1, hover = NULL, url =
+  NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3216,6 +3382,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
   <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
   <dt>hover</dt>
   <dd class="rd-dd">a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument</dd>
+  <dt>url</dt>
+  <dd class="rd-dd">a string of URLs or a single string that references a variable name (via @var_name) that can be found and extracted from the <code>data</code> argument</dd>
   <dt>legend</dt>
   <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
   <dt>lname</dt>
@@ -3294,7 +3462,8 @@ Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -3433,26 +3602,11 @@ web browser</dd>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+p <- figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
-
-
-
-# rbokeh-package #
-
-<h3>rbokeh: R interface for Bokeh</h3>
-
-R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a>
-
-  <h4>Details</h4>
-
-  <p class="rd-p">For full documentation on the package, visit <a href = 'http://hafen.github.io/rbokeh'>http://hafen.github.io/rbokeh</a></p>
-
-
-
-
 
 
 # tool_box_select #
@@ -3478,7 +3632,8 @@ R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href 
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_box_select()
 </code></pre>
 
@@ -3488,8 +3643,7 @@ Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>;
-  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3515,7 +3669,8 @@ Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_box_zoom()
 </code></pre>
 
@@ -3525,8 +3680,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>;
-  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3552,7 +3706,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_crosshair()
 </code></pre>
 
@@ -3562,8 +3717,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>;
-  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3591,7 +3745,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_lasso_select()
 </code></pre>
 
@@ -3601,8 +3756,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>;
-  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3630,7 +3784,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code># only pan on x axis
+<pre class="r"><code>
+# only pan on x axis
 figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 </code></pre>
@@ -3642,8 +3797,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>;
-  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3669,7 +3823,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_reset()
 </code></pre>
 
@@ -3680,7 +3835,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>;
-  <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3706,7 +3861,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_resize()
 </code></pre>
 
@@ -3717,7 +3873,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_save'>tool_save</a></code>;
-  <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3743,7 +3899,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_save()
 </code></pre>
 
@@ -3754,44 +3911,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
-
-
-
-
-# tool_tap #
-
-<h3>Add "tap" tool to a Bokeh figure</h3>
-
-
-<h4>Usage</h4>
-<pre class="r"><code>tool_tap(fig)</code></pre>
-
-<h4>Arguments</h4>
-<dl class="rd-dl">
-  <dt>fig</dt>
-  <dd class="rd-dd">figure to modify</dd>
-</dl>
-
-  <h4>Note</h4>
-
-  <p class="rd-p">Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>.  In this case, they are added with defaults.  Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.</p>
-
-
-
-<h4>Examples</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
- tool_tap()
-</code></pre>
-
-<h4>See also</h4>
-
-Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
-  <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>;
-  <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
-  <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
-  <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
+  <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code>
 
 
 
@@ -3819,7 +3939,8 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code># only zoom on x axis
+<pre class="r"><code>
+# only zoom on x axis
 figure() %>% ly_points(1:10) %>%
  tool_wheel_zoom(dimensions = "height")
 </code></pre>
@@ -3831,7 +3952,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <code><a href='#tool_crosshair'>tool_crosshair</a></code>;
   <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>;
   <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>;
-  <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>
+  <code><a href='#tool_save'>tool_save</a></code>
 
 
 
@@ -3843,7 +3964,7 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
 
 <h4>Usage</h4>
 <pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid =
-  TRUE, num_minor_ticks = 5)</code></pre>
+  TRUE, num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3859,14 +3980,152 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   <dd class="rd-dd">logical - should a reference grid be shown for this axis?</dd>
   <dt>num_minor_ticks</dt>
   <dd class="rd-dd">number of minor ticks</dd>
+  <dt>visible</dt>
+  <dd class="rd-dd">should axis be shown?</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">additional parameters for fine control over axes (see "Additional parameters" below)</dd>
 </dl>
+
+  <h4>Additional parameters</h4>
+
+  <p class="rd-p"></p>
+
+  <p class="rd-p"><table><tr><td>
+<code>axis_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
+</tr><tr><td>
+<code>axis_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_color</code> </td>
+<td> (color) The text color of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font</code> </td>
+<td> (string) The text font of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the axis label. </td>
+</tr><tr><td>
+<code>axis_line_alpha</code> </td>
+<td> (numeric) The line alpha of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_color</code> </td>
+<td> (color) The line color of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash</code> </td>
+<td> The line dash of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_width</code> </td>
+<td> (integer) The line width of the axis line. </td>
+</tr><tr><td>
+<code>major_label_orientation</code> </td>
+<td> ('horizontal', 'vertical'), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal. </td>
+</tr><tr><td>
+<code>major_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
+</tr><tr><td>
+<code>major_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_color</code> </td>
+<td> (color) The text color of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font</code> </td>
+<td> (string - 'Helvetica') The text font of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the major tick labels. </td>
+</tr><tr><td>
+<code>major_tick_in</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>major_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_color</code> </td>
+<td> (color) The line color of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash</code> </td>
+<td> The line dash of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_width</code> </td>
+<td> (integer) The line width of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_in</code> </td>
+<td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_color</code> </td>
+<td> (color) The line color of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash</code> </td>
+<td> The line dash of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_width</code> </td>
+<td> (integer) The line width of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr></table></p>
+
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>%
+<pre class="r"><code>
+figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE)
+  y_axis(label = "y", log = TRUE, axis_line_color = "red")
 </code></pre>
 
 <h4>See also</h4>
@@ -3894,7 +4153,8 @@ Other axes: <code><a href='#y_axis'>y_axis</a></code>
 
 
 <h4>Examples</h4>
-<pre class="r"><code># get data from Duluth site in 'barley' data
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -3923,7 +4183,7 @@ Other ranges: <code><a href='#y_range'>y_range</a></code>
 
 <h4>Usage</h4>
 <pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid =
-  TRUE, num_minor_ticks = 5)</code></pre>
+  TRUE, num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3939,14 +4199,152 @@ Other ranges: <code><a href='#y_range'>y_range</a></code>
   <dd class="rd-dd">logical - should a reference grid be shown for this axis?</dd>
   <dt>num_minor_ticks</dt>
   <dd class="rd-dd">number of minor ticks</dd>
+  <dt>visible</dt>
+  <dd class="rd-dd">should axis be shown?</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">additional parameters for fine control over axes (see "Additional parameters" below)</dd>
 </dl>
+
+  <h4>Additional parameters</h4>
+
+  <p class="rd-p"></p>
+
+  <p class="rd-p"><table><tr><td>
+<code>axis_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
+</tr><tr><td>
+<code>axis_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_color</code> </td>
+<td> (color) The text color of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font</code> </td>
+<td> (string) The text font of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the axis label. </td>
+</tr><tr><td>
+<code>axis_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the axis label. </td>
+</tr><tr><td>
+<code>axis_line_alpha</code> </td>
+<td> (numeric) The line alpha of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_color</code> </td>
+<td> (color) The line color of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash</code> </td>
+<td> The line dash of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the axis line. </td>
+</tr><tr><td>
+<code>axis_line_width</code> </td>
+<td> (integer) The line width of the axis line. </td>
+</tr><tr><td>
+<code>major_label_orientation</code> </td>
+<td> ('horizontal', 'vertical'), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal. </td>
+</tr><tr><td>
+<code>major_label_standoff</code> </td>
+<td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
+</tr><tr><td>
+<code>major_label_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_alpha</code> </td>
+<td> (numeric) The text alpha of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_color</code> </td>
+<td> (color) The text color of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font</code> </td>
+<td> (string - 'Helvetica') The text font of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size of the major tick labels. </td>
+</tr><tr><td>
+<code>major_label_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style of the major tick labels. </td>
+</tr><tr><td>
+<code>major_tick_in</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>major_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_color</code> </td>
+<td> (color) The line color of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash</code> </td>
+<td> The line dash of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_line_width</code> </td>
+<td> (integer) The line width of the major ticks. </td>
+</tr><tr><td>
+<code>major_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_in</code> </td>
+<td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
+</tr><tr><td>
+<code>minor_tick_line_alpha</code> </td>
+<td> (numeric) The line alpha of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_color</code> </td>
+<td> (color) The line color of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash</code> </td>
+<td> The line dash of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_dash_offset</code> </td>
+<td> (integer) The line dash offset of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_line_width</code> </td>
+<td> (integer) The line width of the minor ticks. </td>
+</tr><tr><td>
+<code>minor_tick_out</code> </td>
+<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+</tr></table></p>
+
 
 
 <h4>Examples</h4>
-<pre class="r"><code>figure() %>%
+<pre class="r"><code>
+figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE)
+  y_axis(label = "y", log = TRUE, axis_line_color = "red")
 </code></pre>
 
 <h4>See also</h4>
@@ -3974,7 +4372,8 @@ Other axes: <code><a href='#x_axis'>x_axis</a></code>
 
 
 <h4>Examples</h4>
-<pre class="r"><code># get data from Duluth site in 'barley' data
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges

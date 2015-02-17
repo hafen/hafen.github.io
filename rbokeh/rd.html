@@ -105,7 +105,6 @@
           <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
           <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
           <li><a href="#print_model_json">print_model_json</a></li>
-          <li><a href="#rbokeh-package">rbokeh-package</a></li>
           <li><a href="#tool_box_select">tool_box_select</a></li>
           <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
           <li><a href="#tool_crosshair">tool_crosshair</a></li>
@@ -114,7 +113,6 @@
           <li><a href="#tool_reset">tool_reset</a></li>
           <li><a href="#tool_resize">tool_resize</a></li>
           <li><a href="#tool_save">tool_save</a></li>
-          <li><a href="#tool_tap">tool_tap</a></li>
           <li><a href="#tool_wheel_zoom">tool_wheel_zoom</a></li>
           <li><a href="#x_axis">x_axis</a></li>
           <li><a href="#x_range">x_range</a></li>
@@ -203,7 +201,8 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -268,7 +267,7 @@ Usage
   NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes
   = "left", tools = c("pan", "wheel_zoom", "box_zoom",
   "resize", "reset", "save"), theme =
-  getOption("bokeh_theme"))</code></pre>
+  getOption("bokeh_theme"), ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -363,7 +362,358 @@ theme
 <dd class="rd-dd">
 an rbokeh theme to use (tableau by default)
 </dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over axes (see “Additional parameters” below)
+</dd>
 </dl>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>axis_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the axis labels should be offset from the tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_color</code>
+</td>
+<td>
+(color) The text color of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font</code>
+</td>
+<td>
+(string) The text font of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_color</code>
+</td>
+<td>
+(color) The line color of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash</code>
+</td>
+<td>
+The line dash of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_width</code>
+</td>
+<td>
+(integer) The line width of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_orientation</code>
+</td>
+<td>
+(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the major tick labels should be offset from the associated ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_color</code>
+</td>
+<td>
+(color) The text color of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font</code>
+</td>
+<td>
+(string - ‘Helvetica’) The text font of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash</code>
+</td>
+<td>
+The line dash of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that minor ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash</code>
+</td>
+<td>
+The line dash of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+</table>
+</p>
 </div>
 <div id="flightfreq" class="section level1">
 <h1>flightfreq</h1>
@@ -378,7 +728,8 @@ Usage
 <h4>
 Examples
 </h4>
-<pre class="r"><code>p <- figure(width = 1000) %>%
+<pre class="r"><code>
+p <- figure(width = 1000) %>%
   ly_points(date, Freq, data = flightfreq,
     hover = list(date, Freq, dow), size = 5) %>%
   ly_abline(v = as.Date("2001-09-11"))
@@ -448,7 +799,8 @@ If <code>link_data</code> is <code>TRUE</code>, then an effort will be made to l
 <h4>
 Examples
 </h4>
-<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
 
 p1 <- figure(tools = tools) %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
@@ -610,7 +962,8 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -633,8 +986,8 @@ Usage
 <pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = NULL,
   inner_radius = 0.1, outer_radius = 0.3, start_angle = 0,
   end_angle = 2 * pi, direction = "anticlock", color =
-  NULL, alpha = 1, hover = NULL, legend = NULL, lname =
-  NULL, lgroup = NULL, ...)</code></pre>
+  NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -712,6 +1065,12 @@ hover
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
 legend
 </dt>
 <dd class="rd-dd">
@@ -857,7 +1216,8 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -898,7 +1258,8 @@ Usage
 </h4>
 <pre class="r"><code>ly_annulus(fig, x, y = NULL, data = NULL, inner_radius =
   0.1, outer_radius = 0.2, color = NULL, alpha = 1, hover =
-  NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  NULL, url = NULL, legend = NULL, lname = NULL, lgroup =
+  NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -958,6 +1319,12 @@ hover
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
 legend
 </dt>
 <dd class="rd-dd">
@@ -1103,7 +1470,8 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1289,7 +1657,8 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -1802,7 +2171,8 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -1822,8 +2192,8 @@ Usage
 </h4>
 <pre class="r"><code>ly_crect(fig, x, y = NULL, data = NULL, width = 1, height =
   1, angle = 0, dilate = FALSE, color = NULL, alpha = 1,
-  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
-  ...)</code></pre>
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1893,6 +2263,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 legend
@@ -2040,7 +2416,8 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -2214,7 +2591,8 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>chippy <- function(x) sin(cos(x)*exp(-x/2))
+<pre class="r"><code>
+chippy <- function(x) sin(cos(x)*exp(-x/2))
 figure(width = 800) %>%
   ly_curve(chippy, -8, 7, n = 2001)
 </code></pre>
@@ -2433,7 +2811,8 @@ logical - should a hover tool be added to show the count in each hexagon?
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
+<pre class="r"><code>
+figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 </code></pre>
 </div>
 <div id="ly_hist" class="section level1">
@@ -2710,7 +3089,8 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+<pre class="r"><code>
+p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -2806,7 +3186,8 @@ layer group
 <h4>
 Examples
 </h4>
-<pre class="r"><code>url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+<pre class="r"><code>
+url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -2966,7 +3347,8 @@ an integer between 1 and 6 matching the <code>lty</code> property in <code><a hr
 <h4>
 Examples
 </h4>
-<pre class="r"><code>z <- lm(dist ~ speed, data = cars)
+<pre class="r"><code>
+z <- lm(dist ~ speed, data = cars)
 p <- figure() %>%
   ly_points(cars, hover = cars) %>%
   ly_lines(lowess(cars), legend = "lowess") %>%
@@ -3493,8 +3875,8 @@ Add a “patch” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_patch(fig, x, y, data = NULL, color = NULL, alpha = 1,
-  hover = NULL, legend = NULL, lname = NULL, lgroup = NULL,
-  ...)</code></pre>
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3540,6 +3922,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 legend
@@ -3704,8 +4092,8 @@ Add a “points” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_points(fig, x, y = NULL, data = NULL, glyph = 21, color
-  = NULL, alpha = 1, size = 10, hover = NULL, legend =
-  NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  = NULL, alpha = 1, size = 10, hover = NULL, url = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3763,6 +4151,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 legend
@@ -3910,7 +4304,8 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>p <- figure() %>%
+<pre class="r"><code>
+p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
@@ -3930,8 +4325,8 @@ Add a “polygons” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_polygons(fig, xs, ys, group = NULL, data = NULL, color =
-  NULL, alpha = 1, hover = NULL, lname = NULL, lgroup =
-  NULL, ...)</code></pre>
+  NULL, alpha = 1, hover = NULL, url = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3983,6 +4378,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 lname
@@ -4695,8 +5096,8 @@ Add a “rect” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_rect(fig, xleft, ybottom, xright, ytop, data = NULL,
-  color = NULL, alpha = 1, hover = NULL, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  color = NULL, alpha = 1, hover = NULL, url = NULL, legend
+  = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4754,6 +5155,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 legend
@@ -5183,7 +5590,8 @@ When specifying an input data frame for a layer through the <code>data</code> ar
 <h4>
 Examples
 </h4>
-<pre class="r"><code># prepare data
+<pre class="r"><code>
+# prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
 elements$period <- as.character(elements$period)
@@ -5248,8 +5656,8 @@ Usage
 </h4>
 <pre class="r"><code>ly_wedge(fig, x, y = NULL, data = NULL, radius = 0.3,
   start_angle = 0, end_angle = 2 * pi, direction =
-  "anticlock", color = NULL, alpha = 1, hover = NULL,
-  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  "anticlock", color = NULL, alpha = 1, hover = NULL, url =
+  NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5319,6 +5727,12 @@ hover
 </dt>
 <dd class="rd-dd">
 a data frame of variables to be displayed when hovering over the glyph or a vector of variable names that can be found and extracted from the <code>data</code> argument
+</dd>
+<dt>
+url
+</dt>
+<dd class="rd-dd">
+a string of URLs or a single string that references a variable name (via <span class="citation">@var_name</span>) that can be found and extracted from the <code>data</code> argument
 </dd>
 <dt>
 legend
@@ -5466,7 +5880,8 @@ array of integer pixel distances that describe the on-off pattern of dashing to 
 <h4>
 Examples
 </h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>
+rescale <- function(x)
   (x - min(x)) / diff(range(x))
 
 figure() %>%
@@ -5633,23 +6048,11 @@ logical - if on OSX, should the results be passed to the clipboard (TRUE) instea
 <h4>
 Examples
 </h4>
-<pre class="r"><code>p <- figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+p <- figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
-</div>
-<div id="rbokeh-package" class="section level1">
-<h1>rbokeh-package</h1>
-<h3>
-rbokeh: R interface for Bokeh
-</h3>
-<p>R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a></p>
-<h4>
-Details
-</h4>
-<p class="rd-p">
-For full documentation on the package, visit <a href = 'http://hafen.github.io/rbokeh'>http://hafen.github.io/rbokeh</a>
-</p>
 </div>
 <div id="tool_box_select" class="section level1">
 <h1>tool_box_select</h1>
@@ -5686,13 +6089,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_box_select()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_box_zoom" class="section level1">
 <h1>tool_box_zoom</h1>
@@ -5723,13 +6127,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_box_zoom()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_crosshair" class="section level1">
 <h1>tool_crosshair</h1>
@@ -5760,13 +6165,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_crosshair()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_lasso_select" class="section level1">
 <h1>tool_lasso_select</h1>
@@ -5803,13 +6209,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_lasso_select()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_pan" class="section level1">
 <h1>tool_pan</h1>
@@ -5846,14 +6253,15 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code># only pan on x axis
+<pre class="r"><code>
+# only pan on x axis
 figure() %>% ly_points(1:10) %>%
  tool_pan(dimensions = "height")
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_reset" class="section level1">
 <h1>tool_reset</h1>
@@ -5884,13 +6292,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_reset()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_resize" class="section level1">
 <h1>tool_resize</h1>
@@ -5921,13 +6330,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_resize()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_save" class="section level1">
 <h1>tool_save</h1>
@@ -5958,50 +6368,14 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
+<pre class="r"><code>
+figure() %>% ly_points(1:10) %>%
  tool_save()
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_tap'>tool_tap</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
-</div>
-<div id="tool_tap" class="section level1">
-<h1>tool_tap</h1>
-<h3>
-Add “tap” tool to a Bokeh figure
-</h3>
-<h4>
-Usage
-</h4>
-<pre class="r"><code>tool_tap(fig)</code></pre>
-<h4>
-Arguments
-</h4>
-<dl class="rd-dl">
-<dt>
-fig
-</dt>
-<dd class="rd-dd">
-figure to modify
-</dd>
-</dl>
-<h4>
-Note
-</h4>
-<p class="rd-p">
-Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href='#figure'>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
-</p>
-<h4>
-Examples
-</h4>
-<pre class="r"><code>figure() %>% ly_points(1:10) %>%
- tool_tap()
-</code></pre>
-<h4>
-See also
-</h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_wheel_zoom" class="section level1">
 <h1>tool_wheel_zoom</h1>
@@ -6038,14 +6412,15 @@ Tools can be easily specified as a vector of tool names in the <code>tools</code
 <h4>
 Examples
 </h4>
-<pre class="r"><code># only zoom on x axis
+<pre class="r"><code>
+# only zoom on x axis
 figure() %>% ly_points(1:10) %>%
  tool_wheel_zoom(dimensions = "height")
 </code></pre>
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_tap'>tool_tap</a></code></p>
+<p>Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_pan'>tool_pan</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code></p>
 </div>
 <div id="x_axis" class="section level1">
 <h1>x_axis</h1>
@@ -6056,7 +6431,7 @@ Add x axis to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid =
-  TRUE, num_minor_ticks = 5)</code></pre>
+  TRUE, num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6097,14 +6472,372 @@ num_minor_ticks
 <dd class="rd-dd">
 number of minor ticks
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should axis be shown?
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over axes (see “Additional parameters” below)
+</dd>
 </dl>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>axis_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the axis labels should be offset from the tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_color</code>
+</td>
+<td>
+(color) The text color of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font</code>
+</td>
+<td>
+(string) The text font of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_color</code>
+</td>
+<td>
+(color) The line color of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash</code>
+</td>
+<td>
+The line dash of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_width</code>
+</td>
+<td>
+(integer) The line width of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_orientation</code>
+</td>
+<td>
+(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the major tick labels should be offset from the associated ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_color</code>
+</td>
+<td>
+(color) The text color of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font</code>
+</td>
+<td>
+(string - ‘Helvetica’) The text font of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash</code>
+</td>
+<td>
+The line dash of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that minor ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash</code>
+</td>
+<td>
+The line dash of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+</table>
+</p>
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>%
+<pre class="r"><code>
+figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE)
+  y_axis(label = "y", log = TRUE, axis_line_color = "red")
 </code></pre>
 <h4>
 See also
@@ -6140,7 +6873,8 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code># get data from Duluth site in 'barley' data
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
@@ -6168,7 +6902,7 @@ Add y axis to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid =
-  TRUE, num_minor_ticks = 5)</code></pre>
+  TRUE, num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6209,14 +6943,372 @@ num_minor_ticks
 <dd class="rd-dd">
 number of minor ticks
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should axis be shown?
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters for fine control over axes (see “Additional parameters” below)
+</dd>
 </dl>
+<h4>
+Additional parameters
+</h4>
+<p class="rd-p">
+</p>
+<p class="rd-p">
+<table>
+<tr>
+<td>
+<code>axis_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the axis labels should be offset from the tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_color</code>
+</td>
+<td>
+(color) The text color of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font</code>
+</td>
+<td>
+(string) The text font of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the axis label.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_color</code>
+</td>
+<td>
+(color) The line color of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash</code>
+</td>
+<td>
+The line dash of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>axis_line_width</code>
+</td>
+<td>
+(integer) The line width of the axis line.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_orientation</code>
+</td>
+<td>
+(‘horizontal’, ‘vertical’), or angle) What direction the major label text should be oriented. If a i number is supplied, the angle of the text is measured from horizontal.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_standoff</code>
+</td>
+<td>
+(integer) The distance in pixels that the major tick labels should be offset from the associated ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_align</code>
+</td>
+<td>
+(‘left’, ‘right’, ‘center’) The text align of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_alpha</code>
+</td>
+<td>
+(numeric) The text alpha of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_baseline</code>
+</td>
+<td>
+(‘top’, ‘middle’, ‘bottom’, ‘alphabetic’, ‘hanging’) The text baseline of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_color</code>
+</td>
+<td>
+(color) The text color of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font</code>
+</td>
+<td>
+(string - ‘Helvetica’) The text font of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_size</code>
+</td>
+<td>
+(string - e.g. ‘12pt’) The text font size of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_label_text_font_style</code>
+</td>
+<td>
+(‘normal’, ‘italic’, ‘bold’) The text font style of the major tick labels.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash</code>
+</td>
+<td>
+The line dash of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the major ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>major_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_in</code>
+</td>
+<td>
+(integer) The distance in pixels that minor ticks should extend into the main plot area.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_alpha</code>
+</td>
+<td>
+(numeric) The line alpha of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_cap</code>
+</td>
+<td>
+(‘butt’, ‘round’, ‘square’) The line cap of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_color</code>
+</td>
+<td>
+(color) The line color of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash</code>
+</td>
+<td>
+The line dash of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_dash_offset</code>
+</td>
+<td>
+(integer) The line dash offset of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_join</code>
+</td>
+<td>
+(‘miter’, ‘round’, ‘bevel’) The line join of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_line_width</code>
+</td>
+<td>
+(integer) The line width of the minor ticks.
+</td>
+</tr>
+<tr>
+<td>
+<code>minor_tick_out</code>
+</td>
+<td>
+(integer) The distance in pixels that major ticks should extend out of the main plot area.
+</td>
+</tr>
+</table>
+</p>
 <h4>
 Examples
 </h4>
-<pre class="r"><code>figure() %>%
+<pre class="r"><code>
+figure() %>%
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
-  y_axis(label = "y", log = TRUE)
+  y_axis(label = "y", log = TRUE, axis_line_color = "red")
 </code></pre>
 <h4>
 See also
@@ -6252,7 +7344,8 @@ either a vector (min, max) if the axis is numeric, or a vector of values if the 
 <h4>
 Examples
 </h4>
-<pre class="r"><code># get data from Duluth site in 'barley' data
+<pre class="r"><code>
+# get data from Duluth site in 'barley' data
 du <- subset(lattice::barley, site == "Duluth")
 
 # plot with default ranges
