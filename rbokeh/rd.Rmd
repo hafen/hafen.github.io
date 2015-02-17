@@ -21,7 +21,7 @@ navpills: |
 <p><strong>License:</strong> MIT + file LICENSE</p>
 
 <h4>Description</h4>
-<p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a></p>
+<p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, \url{http://bokeh.pydata.org/en/latest/}.</p>
 
 <h4>Depends</h4>
 <p>
@@ -3544,21 +3544,6 @@ web browser</dd>
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
-
-
-
-# rbokeh-package #
-
-<h3>rbokeh: R interface for Bokeh</h3>
-
-R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, <a href = 'http://bokeh.pydata.org/en/latest/'>http://bokeh.pydata.org/en/latest/</a>
-
-  <h4>Details</h4>
-
-  <p class="rd-p">For full documentation on the package, visit <a href = 'http://hafen.github.io/rbokeh'>http://hafen.github.io/rbokeh</a></p>
-
-
-
 
 
 
