@@ -171,7 +171,7 @@ p
   <dt>theme</dt>
   <dd class="rd-dd">an rbokeh theme to use (tableau by default)</dd>
   <dt>...</dt>
-  <dd class="rd-dd">additional parameters for fine control over axes (see "Additional parameters" below)</dd>
+  <dd class="rd-dd">additional parameters for fine control figure properties (see "Additional parameters" below)</dd>
 </dl>
 
   <h4>Additional parameters</h4>
@@ -179,131 +179,86 @@ p
   <p class="rd-p"></p>
 
   <p class="rd-p"><table><tr><td>
-<code>axis_label_standoff</code> </td>
-<td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
+<code>background_fill</code> </td>
+<td> (color) background color of plot </td>
 </tr><tr><td>
-<code>axis_label_text_align</code> </td>
-<td> ('left', 'right', 'center') The text align of the axis label. </td>
+<code>border_fill</code> </td>
+<td> (color) fill color of border area of plot </td>
 </tr><tr><td>
-<code>axis_label_text_alpha</code> </td>
-<td> (numeric) The text alpha of the axis label. </td>
+<code>min_border</code> </td>
+<td> (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border. </td>
 </tr><tr><td>
-<code>axis_label_text_baseline</code> </td>
-<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the axis label. </td>
+<code>min_border_bottom</code> </td>
+<td> (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
 </tr><tr><td>
-<code>axis_label_text_color</code> </td>
-<td> (color) The text color of the axis label. </td>
+<code>min_border_left</code> </td>
+<td> (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
 </tr><tr><td>
-<code>axis_label_text_font</code> </td>
-<td> (string) The text font of the axis label. </td>
+<code>min_border_right</code> </td>
+<td> (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
 </tr><tr><td>
-<code>axis_label_text_font_size</code> </td>
-<td> (string - e.g. '12pt') The text font size of the axis label. </td>
+<code>min_border_top</code> </td>
+<td> (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
 </tr><tr><td>
-<code>axis_label_text_font_style</code> </td>
-<td> ('normal', 'italic', 'bold') The text font style of the axis label. </td>
+<code>outline_line_alpha</code> </td>
+<td> (numeric) The line alpha for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_alpha</code> </td>
-<td> (numeric) The line alpha of the axis line. </td>
+<code>outline_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_cap</code> </td>
-<td> ('butt', 'round', 'square') The line cap of the axis line. </td>
+<code>outline_line_color</code> </td>
+<td> (color) The line color for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_color</code> </td>
-<td> (color) The line color of the axis line. </td>
+<code>outline_line_dash</code> </td>
+<td> The line dash for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_dash</code> </td>
-<td> The line dash of the axis line. </td>
+<code>outline_line_dash_offset</code> </td>
+<td> (integer) The line dash offset for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_dash_offset</code> </td>
-<td> (integer) The line dash offset of the axis line. </td>
+<code>outline_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_join</code> </td>
-<td> ('miter', 'round', 'bevel') The line join of the axis line. </td>
+<code>outline_line_width</code> </td>
+<td> (integer) The line width for the plot border outline. </td>
 </tr><tr><td>
-<code>axis_line_width</code> </td>
-<td> (integer) The line width of the axis line. </td>
+<code>plot_height</code> </td>
+<td> (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used. </td>
 </tr><tr><td>
-<code>major_label_orientation</code> </td>
-<td> ('horizontal', 'vertical', or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal. </td>
+<code>plot_width</code> </td>
+<td> (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used. </td>
 </tr><tr><td>
-<code>major_label_standoff</code> </td>
-<td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
+<code>title_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_align</code> </td>
-<td> ('left', 'right', 'center') The text align of the major tick labels. </td>
+<code>title_text_alpha</code> </td>
+<td> The text alpha for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_alpha</code> </td>
-<td> (numeric) The text alpha of the major tick labels. </td>
+<code>title_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_baseline</code> </td>
-<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline of the major tick labels. </td>
+<code>title_text_color</code> </td>
+<td> (color) The text color for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_color</code> </td>
-<td> (color) The text color of the major tick labels. </td>
+<code>title_text_font</code> </td>
+<td> (string) The text font for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_font</code> </td>
-<td> (string - 'Helvetica') The text font of the major tick labels. </td>
+<code>title_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_font_size</code> </td>
-<td> (string - e.g. '12pt') The text font size of the major tick labels. </td>
+<code>title_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style for the plot title. </td>
 </tr><tr><td>
-<code>major_label_text_font_style</code> </td>
-<td> ('normal', 'italic', 'bold') The text font style of the major tick labels. </td>
+<code>toolbar_location</code> </td>
+<td> ('above', 'below', 'left', 'right') Where the toolbar will be located. If set to None, no toolbar will be attached to the plot. </td>
 </tr><tr><td>
-<code>major_tick_in</code> </td>
-<td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
+<code>h_symmetry</code> </td>
+<td> (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger). </td>
 </tr><tr><td>
-<code>major_tick_line_alpha</code> </td>
-<td> (numeric) The line alpha of the major ticks. </td>
+<code>v_symmetry</code> </td>
+<td> (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger). </td>
 </tr><tr><td>
-<code>major_tick_line_cap</code> </td>
-<td> ('butt', 'round', 'square') The line cap of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_color</code> </td>
-<td> (color) The line color of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash</code> </td>
-<td> The line dash of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash_offset</code> </td>
-<td> (integer) The line dash offset of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_join</code> </td>
-<td> ('miter', 'round', 'bevel') The line join of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_width</code> </td>
-<td> (integer) The line width of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_out</code> </td>
-<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_in</code> </td>
-<td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_line_alpha</code> </td>
-<td> (numeric) The line alpha of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_cap</code> </td>
-<td> ('butt', 'round', 'square') The line cap of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_color</code> </td>
-<td> (color) The line color of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash</code> </td>
-<td> The line dash of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash_offset</code> </td>
-<td> (integer) The line dash offset of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_join</code> </td>
-<td> ('miter', 'round', 'bevel') The line join of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_width</code> </td>
-<td> (integer) The line width of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_out</code> </td>
-<td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
+<code>logo</code> </td>
+<td> ('normal', 'grey') What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed. </td>
 </tr></table></p>
 
 

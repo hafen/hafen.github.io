@@ -12,3 +12,4 @@ check_output("rd.html")
 
 # a <- function_ref_template("rbokeh", code_path, exclude = c("pipe", "scales"))
 # cat(a, file = pipe("pbcopy"))
+# render("rd.Rmd", output_format = package_docs(lib_dir = "assets"))
