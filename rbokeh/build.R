@@ -2,14 +2,13 @@ library(rbokeh)
 library(rmarkdown)
 library(packagedocs)
 
+code_path <- "~/Documents/Code/rbokeh"
+
 render("index.Rmd", output_format = package_docs(lib_dir = "assets"))
+check_output("index.html")
 
-tmp <- readLines("index.html")
-which(grepl("Error", tmp))
-which(grepl("Warning", tmp))
+render_rd("rd_skeleton.Rmd", "rbokeh", code_path, exclude = c("pipe", "scales"))
+check_output("rd.html")
 
-a <- function_ref_template("rbokeh", "~/Documents/Code/rbokeh", exclude = c("pipe", "scales"))
-cat(a, file = pipe("pbcopy"))
-
-render("rd.Rmd", output_format = package_docs(lib_dir = "assets"))
-
+# a <- function_ref_template("rbokeh", code_path, exclude = c("pipe", "scales"))
+# cat(a, file = pipe("pbcopy"))
