@@ -286,6 +286,24 @@ p
 
 
 
+# get_bokeh_html #
+
+<h3>Get the HTML content required to embed a Bokeh figure</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>get_bokeh_html(fig)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure</dd>
+</dl>
+
+
+
+
+
 # grid_plot #
 
 <h3>Create a Bokeh grid plot from a list of Bokeh figures</h3>
@@ -1685,7 +1703,7 @@ Draws a grid of rectangles with colors corresponding to the values in <code>z</c
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_image(fig, z, rows, cols, x = 0, y = 0, dw = 1, dh = 1,
-  palette = "Spectral-10", dilate = FALSE, lname = NULL,
+  palette = "Spectral10", dilate = FALSE, lname = NULL,
   lgroup = NULL)</code></pre>
 
 <h4>Arguments</h4>
@@ -1707,7 +1725,7 @@ Draws a grid of rectangles with colors corresponding to the values in <code>z</c
   <dt>dh</dt>
   <dd class="rd-dd">image height distances</dd>
   <dt>palette</dt>
-  <dd class="rd-dd">palette to use for color-mapping</dd>
+  <dd class="rd-dd">name of color palette to use for color ramp (see <a href = 'http://bokeh.pydata.org/en/latest/docs/reference/#palettes'>here</a> for acceptable values)</dd>
   <dt>dilate</dt>
   <dd class="rd-dd">logical - whether to dilate pixel distance computations when drawing</dd>
   <dt>lname</dt>

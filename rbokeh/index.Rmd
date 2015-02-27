@@ -184,11 +184,17 @@ Hovering will show the counts in the hexagon bin.
 
 Here's a combination of many layers using hexbins to show the density of the fielding location of all doubles in the 2014 MLB season, inspired by [this](https://baseballwithr.wordpress.com/2014/06/06/creating-hexbin-plots/):
 
-```{r, message=FALSE}
+```{r, echo=FALSE}
+load("_ignore/doubles.rda")
+```
+
+```{r, eval=FALSE}
 f <- tempfile()
 download.file("https://gist.githubusercontent.com/hafen/77f25b556725b3d0066b/raw/10f0e811f09f2b9f0f9ccfb542e296dfac2761d4/doubles.csv", method="curl", f)
 doubles <- read.csv(f)
+```
 
+```{r, message=FALSE}
 base_x <- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
 base_y <- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
 distarc_x <- lapply(c(2:4) * 100, function(a)

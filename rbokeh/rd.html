@@ -35,7 +35,7 @@
 <body>
 
   
-    <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+  <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
     <div class="container">
       <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,7 +46,7 @@
         </button>
         <a href="#" class="navbar-brand">rbokeh - Function Reference</a>
       </div>
-      <nav class="collapse navbar-collapse" role="navigation">
+            <nav class="collapse navbar-collapse" role="navigation">
         <ul class="nav nav-pills pull-right">
 <li>
 <a href='index.html'>Docs</a>
@@ -59,9 +59,9 @@
 </li>
         </ul>
       </nav>
-    </div>
+          </div>
   </header>
-  
+
   <!-- Begin Body -->
   <div class="container">
     <div class="row">
@@ -72,6 +72,7 @@
           <li><a href="#elements">elements</a></li>
           <li><a href="#figure">figure</a></li>
           <li><a href="#flightfreq">flightfreq</a></li>
+          <li><a href="#get_bokeh_html">get_bokeh_html</a></li>
           <li><a href="#grid_plot">grid_plot</a></li>
           <li><a href="#ly_abline">ly_abline</a></li>
           <li><a href="#ly_annular_wedge">ly_annular_wedge</a></li>
@@ -613,6 +614,27 @@ Examples
   ly_abline(v = as.Date("2001-09-11"))
 p
 </code></pre>
+</div>
+<div id="get_bokeh_html" class="section level1">
+<h1>get_bokeh_html</h1>
+<h3>
+Get the HTML content required to embed a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>get_bokeh_html(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure
+</dd>
+</dl>
 </div>
 <div id="grid_plot" class="section level1">
 <h1>grid_plot</h1>
@@ -2876,7 +2898,7 @@ Add an “image” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_image(fig, z, rows, cols, x = 0, y = 0, dw = 1, dh = 1,
-  palette = "Spectral-10", dilate = FALSE, lname = NULL,
+  palette = "Spectral10", dilate = FALSE, lname = NULL,
   lgroup = NULL)</code></pre>
 <h4>
 Arguments
@@ -2934,7 +2956,7 @@ image height distances
 palette
 </dt>
 <dd class="rd-dd">
-palette to use for color-mapping
+name of color palette to use for color ramp (see <a href = 'http://bokeh.pydata.org/en/latest/docs/reference/#palettes'>here</a> for acceptable values)
 </dd>
 <dt>
 dilate
