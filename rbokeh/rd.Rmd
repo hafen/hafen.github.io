@@ -304,6 +304,163 @@ p
 
 
 
+# gmap #
+
+<h3>Initialize a Bokeh Google Map plot</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>gmap(lat = 0, lng = 0, zoom = 0, map_type = "hybrid", width
+  = 480, height = 480, title = NULL, xlab = NULL, ylab =
+  NULL, xlim = NULL, ylim = NULL, padding_factor = 0.07,
+  plot_width = NULL, plot_height = NULL, xgrid = FALSE,
+  ygrid = FALSE, xaxes = "below", yaxes = "left", tools =
+  c("pan", "wheel_zoom", "box_zoom", "resize", "reset",
+  "save"), theme = getOption("bokeh_theme"), ...)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>lat</dt>
+  <dd class="rd-dd">latitude where the map should be centered</dd>
+  <dt>lng</dt>
+  <dd class="rd-dd">longitude where the map should be centered</dd>
+  <dt>zoom</dt>
+  <dd class="rd-dd">initial <a href = 'https://developers.google.com/maps/documentation/staticmaps/#Zoomlevels'>zoom level</a> to use when displaying the map</dd>
+  <dt>map_type</dt>
+  <dd class="rd-dd"><a href = 'https://developers.google.com/maps/documentation/staticmaps/#MapTypes'>map type</a> to use for the plot - one of "hybrid", "satellite", "roadmap", "terrain"</dd>
+  <dt>width</dt>
+  <dd class="rd-dd">figure width in pixels</dd>
+  <dt>height</dt>
+  <dd class="rd-dd">figure width in pixels</dd>
+  <dt>title</dt>
+  <dd class="rd-dd">a title to display above the plot. - "title" is also the prefix for a set of Text Properties, so you can set the font for the title with the parameter text_font.</dd>
+  <dt>xlab</dt>
+  <dd class="rd-dd">label for x axis</dd>
+  <dt>ylab</dt>
+  <dd class="rd-dd">label for y axis</dd>
+  <dt>xlim</dt>
+  <dd class="rd-dd">the extent of the plotting area in the x-dimension (will be computed automatically if not specified).</dd>
+  <dt>ylim</dt>
+  <dd class="rd-dd">the extent of the plotting area in the y-dimension (will be computed automatically if not specified).</dd>
+  <dt>padding_factor</dt>
+  <dd class="rd-dd">if limits are not specified, by what factor should the extents of the data be padded</dd>
+  <dt>plot_width</dt>
+  <dd class="rd-dd">width and height of the entire plot in pixels, including border space</dd>
+  <dt>plot_height</dt>
+  <dd class="rd-dd">width and height of the entire plot in pixels, including border space</dd>
+  <dt>xgrid</dt>
+  <dd class="rd-dd">whether to draw x axis grid lines</dd>
+  <dt>ygrid</dt>
+  <dd class="rd-dd">whether to draw y axis grid lines</dd>
+  <dt>xaxes</dt>
+  <dd class="rd-dd">where to put x axis, or FALSE if no x axis ticks / labels</dd>
+  <dt>yaxes</dt>
+  <dd class="rd-dd">where to put y axis, or FALSE if no y axis ticks / labels</dd>
+  <dt>tools</dt>
+  <dd class="rd-dd">interactivity tools options</dd>
+  <dt>theme</dt>
+  <dd class="rd-dd">an rbokeh theme to use (tableau by default)</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">additional parameters for fine control figure properties (see "Additional parameters" below)</dd>
+</dl>
+
+  <h4>Additional parameters</h4>
+
+  <p class="rd-p"></p>
+
+  <p class="rd-p"><table><tr><td>
+<code>background_fill</code> </td>
+<td> (color) background color of plot </td>
+</tr><tr><td>
+<code>border_fill</code> </td>
+<td> (color) fill color of border area of plot </td>
+</tr><tr><td>
+<code>min_border</code> </td>
+<td> (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border. </td>
+</tr><tr><td>
+<code>min_border_bottom</code> </td>
+<td> (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
+</tr><tr><td>
+<code>min_border_left</code> </td>
+<td> (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
+</tr><tr><td>
+<code>min_border_right</code> </td>
+<td> (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
+</tr><tr><td>
+<code>min_border_top</code> </td>
+<td> (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
+</tr><tr><td>
+<code>outline_line_alpha</code> </td>
+<td> (numeric) The line alpha for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_cap</code> </td>
+<td> ('butt', 'round', 'square') The line cap for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_color</code> </td>
+<td> (color) The line color for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_dash</code> </td>
+<td> The line dash for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_dash_offset</code> </td>
+<td> (integer) The line dash offset for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_join</code> </td>
+<td> ('miter', 'round', 'bevel') The line join for the plot border outline. </td>
+</tr><tr><td>
+<code>outline_line_width</code> </td>
+<td> (integer) The line width for the plot border outline. </td>
+</tr><tr><td>
+<code>plot_height</code> </td>
+<td> (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used. </td>
+</tr><tr><td>
+<code>plot_width</code> </td>
+<td> (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used. </td>
+</tr><tr><td>
+<code>title_text_align</code> </td>
+<td> ('left', 'right', 'center') The text align for the plot title. </td>
+</tr><tr><td>
+<code>title_text_alpha</code> </td>
+<td> The text alpha for the plot title. </td>
+</tr><tr><td>
+<code>title_text_baseline</code> </td>
+<td> ('top', 'middle', 'bottom', 'alphabetic', 'hanging') The text baseline for the plot title. </td>
+</tr><tr><td>
+<code>title_text_color</code> </td>
+<td> (color) The text color for the plot title. </td>
+</tr><tr><td>
+<code>title_text_font</code> </td>
+<td> (string) The text font for the plot title. </td>
+</tr><tr><td>
+<code>title_text_font_size</code> </td>
+<td> (string - e.g. '12pt') The text font size for the plot title. </td>
+</tr><tr><td>
+<code>title_text_font_style</code> </td>
+<td> ('normal', 'italic', 'bold') The text font style for the plot title. </td>
+</tr><tr><td>
+<code>toolbar_location</code> </td>
+<td> ('above', 'below', 'left', 'right') Where the toolbar will be located. If set to None, no toolbar will be attached to the plot. </td>
+</tr><tr><td>
+<code>h_symmetry</code> </td>
+<td> (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger). </td>
+</tr><tr><td>
+<code>v_symmetry</code> </td>
+<td> (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger). </td>
+</tr><tr><td>
+<code>logo</code> </td>
+<td> ('normal', 'grey') What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed. </td>
+</tr></table></p>
+
+
+  <h4>Note</h4>
+
+  <p class="rd-p">This can be used in the same way as <code><a href='#figure'>figure</a></code>, adding layers on top of the Google Map.</p>
+
+
+
+
+
+
 # grid_plot #
 
 <h3>Create a Bokeh grid plot from a list of Bokeh figures</h3>
@@ -4072,6 +4229,10 @@ Other tools: <code><a href='#tool_box_select'>tool_box_select</a></code>;
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
+
+figure() %>%
+  ly_points(2^(1:10)) %>%
+  y_axis(log = 2)
 </code></pre>
 
 <h4>See also</h4>
@@ -4289,6 +4450,10 @@ Other ranges: <code><a href='#y_range'>y_range</a></code>
   ly_points(rexp(1000), rexp(1000)) %>%
   x_axis(label = "x", log = TRUE) %>%
   y_axis(label = "y", log = TRUE)
+
+figure() %>%
+  ly_points(2^(1:10)) %>%
+  y_axis(log = 2)
 </code></pre>
 
 <h4>See also</h4>
