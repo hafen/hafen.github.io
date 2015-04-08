@@ -94,7 +94,7 @@ elements$namey <- paste(elements$period, ":0.3", sep = "")
 p <- figure(title = "Periodic Table", tools = c("resize", "hover"),
   ylim = as.character(c(7:1)), xlim = as.character(1:18),
   xgrid = FALSE, ygrid = FALSE, xlab = "", ylab = "",
-  height = 400, width = 800) %>%
+  height = 445, width = 800) %>%
 
 # plot rectangles
 ly_crect(group, period, data = elements, 0.9, 0.9,
@@ -202,7 +202,7 @@ distarc_x <- lapply(c(2:4) * 100, function(a)
 distarc_y <- lapply(distarc_x, function(x)
   sqrt((x[1]/cos(3 * pi/4))^2 - x^2))
 
-figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 500,
+figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 540,
   xlab = "Horizontal distance from home plate (ft.)",
   ylab = "Vertical distance from home plate (ft.)") %>%
   ## boundary

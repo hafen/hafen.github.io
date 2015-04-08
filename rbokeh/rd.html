@@ -13,6 +13,7 @@
   <link href="assets/bootstrap-3.3.2/css/custom.css" rel="stylesheet" />
   <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/js/custom.js"></script>
   <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
   <script src="assets/bootstrap-3.3.2/shim/respond.min.js"></script>
   <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
@@ -103,10 +104,11 @@
           <li><a href="#ly_segments">ly_segments</a></li>
           <li><a href="#ly_text">ly_text</a></li>
           <li><a href="#ly_wedge">ly_wedge</a></li>
+          <li><a href="#nyctaxihex">nyctaxihex</a></li>
           <li><a href="#point_types">point_types</a></li>
-          <li><a href="#print.bokehfigure">print.BokehFigure</a></li>
-          <li><a href="#print.bokehgridplot">print.BokehGridPlot</a></li>
           <li><a href="#print_model_json">print_model_json</a></li>
+          <li><a href="#rbokehoutput">rbokehOutput</a></li>
+          <li><a href="#renderrbokeh">renderRbokeh</a></li>
           <li><a href="#tool_box_select">tool_box_select</a></li>
           <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
           <li><a href="#tool_crosshair">tool_crosshair</a></li>
@@ -132,7 +134,7 @@ R Interface for Bokeh
 <strong>Author:</strong> Ryan Hafen <a href="mailto:rhafen@gmail.com">rhafen@gmail.com</a> [aut, cre]
 </p>
 <p>
-<strong>Version:</strong> 0.2
+<strong>Version:</strong> 0.2.2
 </p>
 <p>
 <strong>Date:</strong>
@@ -150,13 +152,12 @@ R interface for creating plots in Bokeh. Bokeh by Continuum Analytics, .
 Depends
 </h4>
 <p>
-R (&gt;= 3.1.1)
 </p>
 <h4>
 Suggests
 </h4>
 <p>
-testthat
+testthat, knitr (&gt;= 1.8)
 </p>
 <div id="bokeh_render_json" class="section level1">
 <h1>bokeh_render_json</h1>
@@ -262,7 +263,7 @@ Initialize a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>figure(width = 480, height = 480, title = NULL, xlab =
+<pre class="r"><code>figure(width = 480, height = 520, title = NULL, xlab =
   NULL, ylab = NULL, xlim = NULL, ylim = NULL,
   padding_factor = 0.07, plot_width = NULL, plot_height =
   NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes
@@ -355,7 +356,7 @@ where to put y axis, or FALSE if no y axis ticks / labels
 tools
 </dt>
 <dd class="rd-dd">
-interactivity tools options
+character vector of interactivity tools options (acceptable values are: “pan”, “wheel_zoom”, “box_zoom”, “resize”, “crosshair”, “box_select”, “lasso_select”, “reset”, “save”). Additionally, tool functions can be called on a figure to specify more control - see the “See Also” section below for a list of tool functions. If <code>NULL</code>, the toolbar will not be drawn. If <code>“”</code> the toolbar will be drawn but no tools will be added by default.
 </dd>
 <dt>
 theme
@@ -595,6 +596,48 @@ The text alpha for the plot title.
 </tr>
 </table>
 </p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>list(spec = list(width = 480, height = 520, title = NULL, xlab = "index", ylab = "1:10", xlim = NULL, ylim = NULL, padding_factor = 0.07, plot_width = NULL, plot_height = NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes = "left", tools = c("pan", "wheel_zoom", "box_zoom", "resize", "reset", "save"), theme = list(line = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF"), glyph = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", 
+"#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF")), model = list(plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", attributes = list(title = NULL, id = "65eb57dec7cc9778670492b97a74d54c", plot_width = 480, plot_height = 520, x_range = list(), y_range = list(), left = list(), below = list(), right = list(), above = list(), renderers = list(`37252eb2895dc67a0e34c6b259ef7dd1` = list(type = "GlyphRenderer", id = "37252eb2895dc67a0e34c6b259ef7dd1")), tools = list(`92ed9311a7286a612fae4db1552ba3c1` = list(
+    type = "PanTool", id = "92ed9311a7286a612fae4db1552ba3c1"), `3508e83b612bfa8f66fb1ddb4db77077` = list(type = "WheelZoomTool", id = "3508e83b612bfa8f66fb1ddb4db77077"), baaff96b4b226a2b1703313ca99110a6 = list(type = "BoxZoomTool", id = "baaff96b4b226a2b1703313ca99110a6"), `638ead7938ce8fc0c2ab97ab5f662bf7` = list(type = "ResizeTool", id = "638ead7938ce8fc0c2ab97ab5f662bf7"), `2c3a7af1b357847177d0f83777c9c630` = list(type = "ResetTool", id = "2c3a7af1b357847177d0f83777c9c630"), b5eaf1cc6086d4446246b246a01f3325 = list(
+    type = "PreviewSaveTool", id = "b5eaf1cc6086d4446246b246a01f3325")), tool_events = list(type = "ToolEvents", id = "12fd15ee2e55f411aa68cb5c1cf62654"), extra_y_ranges = list(), extra_x_ranges = list(), tags = list(), doc = NULL, min_border = 4), subtype = "Figure"), `92ed9311a7286a612fae4db1552ba3c1` = list(type = "PanTool", id = "92ed9311a7286a612fae4db1552ba3c1", attributes = list(id = "92ed9311a7286a612fae4db1552ba3c1", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", 
+    subtype = "Figure"), dimensions = c("width", "height"))), `12fd15ee2e55f411aa68cb5c1cf62654` = list(type = "ToolEvents", id = "12fd15ee2e55f411aa68cb5c1cf62654", attributes = list(id = "12fd15ee2e55f411aa68cb5c1cf62654", tags = list(), doc = NULL), geometries = list()), `3508e83b612bfa8f66fb1ddb4db77077` = list(type = "WheelZoomTool", id = "3508e83b612bfa8f66fb1ddb4db77077", attributes = list(id = "3508e83b612bfa8f66fb1ddb4db77077", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", 
+    subtype = "Figure"), dimensions = c("width", "height"))), baaff96b4b226a2b1703313ca99110a6 = list(type = "BoxZoomTool", id = "baaff96b4b226a2b1703313ca99110a6", attributes = list(id = "baaff96b4b226a2b1703313ca99110a6", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `638ead7938ce8fc0c2ab97ab5f662bf7` = list(type = "ResizeTool", id = "638ead7938ce8fc0c2ab97ab5f662bf7", attributes = list(id = "638ead7938ce8fc0c2ab97ab5f662bf7", 
+    tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `2c3a7af1b357847177d0f83777c9c630` = list(type = "ResetTool", id = "2c3a7af1b357847177d0f83777c9c630", attributes = list(id = "2c3a7af1b357847177d0f83777c9c630", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), b5eaf1cc6086d4446246b246a01f3325 = list(type = "PreviewSaveTool", id = "b5eaf1cc6086d4446246b246a01f3325", 
+    attributes = list(id = "b5eaf1cc6086d4446246b246a01f3325", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `307bd0f0a3b893c447fba5f6c8c91fea` = list(type = "ColumnDataSource", id = "307bd0f0a3b893c447fba5f6c8c91fea", attributes = list(id = "307bd0f0a3b893c447fba5f6c8c91fea", tags = list(), doc = NULL, column_names = c("x", "y"), selected = list(), discrete_ranges = list(), cont_ranges = list(), data = list(x = 1:10, y = 1:10))), 
+    `4d11edc15eb77f230c6bc3e758c4c821` = list(type = "Circle", id = "4d11edc15eb77f230c6bc3e758c4c821", attributes = list(id = "4d11edc15eb77f230c6bc3e758c4c821", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#1F77B4"), fill_color = list(units = "data", value = "#1F77B4"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
+    `775a5bfc6846f6cf2c8ef157d0afbac6` = list(type = "Circle", id = "775a5bfc6846f6cf2c8ef157d0afbac6", attributes = list(id = "775a5bfc6846f6cf2c8ef157d0afbac6", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#e1e1e1"), fill_color = list(units = "data", value = "#e1e1e1"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
+    `37252eb2895dc67a0e34c6b259ef7dd1` = list(type = "GlyphRenderer", id = "37252eb2895dc67a0e34c6b259ef7dd1", attributes = list(id = "37252eb2895dc67a0e34c6b259ef7dd1", tags = list(), doc = NULL, selection_glyph = NULL, nonselection_glyph = list(type = "Circle", id = "775a5bfc6846f6cf2c8ef157d0afbac6"), server_data_source = NULL, name = NULL, data_source = list(type = "ColumnDataSource", id = "307bd0f0a3b893c447fba5f6c8c91fea"), glyph = list(type = "Circle", id = "4d11edc15eb77f230c6bc3e758c4c821")))), 
+    modeltype = "Plot", ref = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"), time = 1428469541.46958, glyph_defer_specs = list(), glyph_defer_data = list(), glyph_defer = list(), layers = list(group1 = list(lgroup = "group1", glyph_ids = list(layer1 = "37252eb2895dc67a0e34c6b259ef7dd1"))), data_sigs = list(`37252eb2895dc67a0e34c6b259ef7dd1` = list(glr_id = "37252eb2895dc67a0e34c6b259ef7dd1", sig = NULL)), glyph_x_ranges = list(group1_layer1 = c(1, 10)), glyph_y_ranges = list(
+        group1_layer1 = c(1, 10)), x_axis_type = "numeric", y_axis_type = "numeric", has_x_axis = FALSE, has_y_axis = FALSE, has_x_range = FALSE, has_y_range = FALSE), elementid = "eef13824cc78453747553a926db12be6", modeltype = "Plot", modelid = "65eb57dec7cc9778670492b97a74d54c")480520list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, viewer = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = TRUE, suppress = FALSE, paneHeight = NULL), browser = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = FALSE), knitr = list(defaultWidth = NULL, defaultHeight = NULL, figure = TRUE))NULLNULLfunction (fig) 
+{
+    if (fig$x$modeltype %in% c("Plot", "GMapPlot")) {
+        if (length(fig$x$spec$layers) == 0 && fig$x$spec$model$plot$type != "GMapPlot") {
+            message("This figure is empty...")
+            return(NULL)
+        }
+        else {
+            fig <- prepare_figure(fig)
+        }
+    }
+    else if (fig$x$modeltype == "GridPlot") {
+        fig <- prepare_gridplot(fig)
+    }
+    else {
+        stop("Unsupported model type: ", fig$x$modeltype)
+    }
+    fig$x$all_models <- fig$x$spec$model
+    fig$x$all_models <- remove_model_names(fig$x$all_models)
+    fig$x$spec <- NULL
+    fig$preRenderHook <- NULL
+    fig
+}</code></pre>
+<h4>
+See also
+</h4>
+<p>Layers to add to a figure: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code>; <code><a href='#ly_wedge'>ly_wedge</a></code> Tools to add to a figure: <code><a href='#tool_box_select'>tool_box_select</a></code>; <code><a href='#tool_box_zoom'>tool_box_zoom</a></code>; <code><a href='#tool_crosshair'>tool_crosshair</a></code>; <code><a href='#tool_lasso_select'>tool_lasso_select</a></code>; <code><a href='#tool_reset'>tool_reset</a></code>; <code><a href='#tool_resize'>tool_resize</a></code>; <code><a href='#tool_save'>tool_save</a></code>; <code><a href='#tool_wheel_zoom'>tool_wheel_zoom</a></code> Other figure types: <code><a href='#grid_plot'>grid_plot</a></code>; <code><a href='#gmap'>gmap</a></code></p>
 </div>
 <div id="flightfreq" class="section level1">
 <h1>flightfreq</h1>
@@ -768,7 +811,7 @@ where to put y axis, or FALSE if no y axis ticks / labels
 tools
 </dt>
 <dd class="rd-dd">
-interactivity tools options
+character vector of interactivity tools options (acceptable values are: “pan”, “wheel_zoom”, “box_zoom”, “resize”, “crosshair”, “box_select”, “lasso_select”, “reset”, “save”). Additionally, tool functions can be called on a figure to specify more control - see the “See Also” section below for a list of tool functions. If <code>NULL</code>, the toolbar will not be drawn. If <code>“”</code> the toolbar will be drawn but no tools will be added by default.
 </dd>
 <dt>
 theme
@@ -1014,6 +1057,15 @@ Note
 <p class="rd-p">
 This can be used in the same way as <code><a href='#figure'>figure</a></code>, adding layers on top of the Google Map.
 </p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>gmap(title = "NYC taxi pickups January 2013",
+  lat = 40.74, lng = -73.95, zoom = 11,
+  map_type = "roadmap", width = 1000, height = 800) %>%
+  ly_hexbin(nyctaxihex, alpha = 0.5,
+    palette = "Spectral10", trans = log, inv = exp)
+</code></pre>
 </div>
 <div id="grid_plot" class="section level1">
 <h1>grid_plot</h1>
@@ -1023,8 +1075,8 @@ Create a Bokeh grid plot from a list of Bokeh figures
 <h4>
 Usage
 </h4>
-<pre class="r"><code>grid_plot(figs, nrow = 1, ncol = 1, byrow = TRUE, same_axes
-  = FALSE, link_data = FALSE)</code></pre>
+<pre class="r"><code>grid_plot(figs, width = NULL, height = NULL, nrow = 1, ncol
+  = 1, byrow = TRUE, same_axes = FALSE, link_data = FALSE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1034,6 +1086,18 @@ figs
 </dt>
 <dd class="rd-dd">
 list of Bokeh figures - see details for what is acceptable
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+width of the entire grid plot in pixels - if <code>NULL</code>, the sum of the grid widths of columns will be used - if not <code>NULL</code>, the widths of the plots will be proportionately shrunk to meet the specified width
+</dd>
+<dt>
+height
+</dt>
+<dd class="rd-dd">
+height of the entire grid plot in pixels - if <code>NULL</code>, the sum of the grid heights of rows will be used - if not <code>NULL</code>, the heights of the plots will be proportionately shrunk to meet the specified height
 </dd>
 <dt>
 nrow
@@ -6176,6 +6240,26 @@ See also
 </h4>
 <p>Other layer functions: <code><a href='#ly_abline'>ly_abline</a></code>; <code><a href='#ly_annular_wedge'>ly_annular_wedge</a></code>; <code><a href='#ly_annulus'>ly_annulus</a></code>; <code><a href='#ly_arc'>ly_arc</a></code>; <code><a href='#ly_bezier'>ly_bezier</a></code>; <code><a href='#ly_boxplot'>ly_boxplot</a></code>; <code><a href='#ly_contour'>ly_contour</a></code>; <code><a href='#ly_crect'>ly_crect</a></code>; <code><a href='#ly_curve'>ly_curve</a></code>; <code><a href='#ly_density'>ly_density</a></code>; <code><a href='#ly_hist'>ly_hist</a></code>; <code><a href='#ly_image_url'>ly_image_url</a></code>; <code><a href='#ly_image'>ly_image</a></code>; <code><a href='#ly_lines'>ly_lines</a></code>; <code><a href='#ly_map'>ly_map</a></code>; <code><a href='#ly_multi_line'>ly_multi_line</a></code>; <code><a href='#ly_oval'>ly_oval</a></code>; <code><a href='#ly_patch'>ly_patch</a></code>; <code><a href='#ly_points'>ly_points</a></code>; <code><a href='#ly_polygons'>ly_polygons</a></code>; <code><a href='#ly_quadratic'>ly_quadratic</a></code>; <code><a href='#ly_quantile'>ly_quantile</a></code>; <code><a href='#ly_ray'>ly_ray</a></code>; <code><a href='#ly_rect'>ly_rect</a></code>; <code><a href='#ly_segments'>ly_segments</a></code>; <code><a href='#ly_text'>ly_text</a></code></p>
 </div>
+<div id="nyctaxihex" class="section level1">
+<h1>nyctaxihex</h1>
+<h3>
+Hexagon binned counts of NYC taxi pickup locations
+</h3>
+<p>Counts of NYC taxi pickups by location for January 2013, obtained from <a href = 'http://chriswhong.com/open-data/foil_nyc_taxi/'>here</a>.</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>nyctaxihex</code></pre>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>gmap(title = "NYC taxi pickups January 2013",
+  lat = 40.74, lng = -73.95, zoom = 11,
+  map_type = "roadmap", width = 1000, height = 800) %>%
+  ly_hexbin(nyctaxihex, alpha = 0.5,
+    palette = "Spectral10", trans = log, inv = exp)
+</code></pre>
+</div>
 <div id="point_types" class="section level1">
 <h1>point_types</h1>
 <h3>
@@ -6207,60 +6291,6 @@ width,height
 </dt>
 <dd class="rd-dd">
 dimensions of output plot
-</dd>
-</dl>
-</div>
-<div id="print.bokehfigure" class="section level1">
-<h1>print.BokehFigure</h1>
-<h3>
-Print a Bokeh figure
-</h3>
-<h4>
-Usage
-</h4>
-<pre class="r"><code>"print"(x, ...)</code></pre>
-<h4>
-Arguments
-</h4>
-<dl class="rd-dl">
-<dt>
-x
-</dt>
-<dd class="rd-dd">
-BokehFigure object
-</dd>
-<dt>
-…
-</dt>
-<dd class="rd-dd">
-further arguments - most importantly <code>debug = TRUE</code> will print information about the figure in the javascript console in the web browser
-</dd>
-</dl>
-</div>
-<div id="print.bokehgridplot" class="section level1">
-<h1>print.BokehGridPlot</h1>
-<h3>
-Print a Bokeh grid plot
-</h3>
-<h4>
-Usage
-</h4>
-<pre class="r"><code>"print"(x, ...)</code></pre>
-<h4>
-Arguments
-</h4>
-<dl class="rd-dl">
-<dt>
-x
-</dt>
-<dd class="rd-dd">
-BokehGridPlot object
-</dd>
-<dt>
-…
-</dt>
-<dd class="rd-dd">
-further arguments - most importantly <code>debug = TRUE</code> will print information about the figure in the javascript console in the web browser
 </dd>
 </dl>
 </div>
@@ -6316,6 +6346,100 @@ Examples
  tool_pan(dimensions = "height")
 print_model_json(p)
 </code></pre>
+</div>
+<div id="rbokehoutput" class="section level1">
+<h1>rbokehOutput</h1>
+<h3>
+Widget output function for use in Shiny
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>rbokehOutput(outputId, width = "100%", height = "400px")</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+outputId
+</dt>
+<dd class="rd-dd">
+output variable to read from
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+a valid CSS unit for the width or a number, which will be coerced to a string and have “px” appended.
+</dd>
+<dt>
+height
+</dt>
+<dd class="rd-dd">
+a valid CSS unit for the height or a number, which will be coerced to a string and have “px” appended.
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># courtesy of Joe Cheng from RStudio
+library("shiny")
+library("rbokeh")
+library("htmlwidgets")
+
+ui <- fluidPage(
+  rbokehOutput("rbokeh")
+)
+
+server <- function(input, output, session) {
+  output$rbokeh <- renderRbokeh({
+    # Use invalidateLater() and jitter() to add some motion
+    invalidateLater(1000, session)
+    p <- figure() %>%
+      ly_points(jitter(cars$speed), jitter(cars$dist))
+    rbokeh:::plot.BokehFigure(p)
+  })
+}
+
+shinyApp(ui, server)
+</code></pre>
+</div>
+<div id="renderrbokeh" class="section level1">
+<h1>renderRbokeh</h1>
+<h3>
+Widget render function for use in Shiny
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>renderRbokeh(expr, env = parent.frame(), quoted = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+expr
+</dt>
+<dd class="rd-dd">
+an expression that generates a rbokeh figure
+</dd>
+<dt>
+env
+</dt>
+<dd class="rd-dd">
+the environment in which to evaluate expr.
+</dd>
+<dt>
+quoted
+</dt>
+<dd class="rd-dd">
+is expr a quoted expression (with quote())? This is useful if you want to save an expression in a variable.
+</dd>
+</dl>
+<h4>
+See also
+</h4>
+<p><code><a href='#rbokehOutput'>rbokehOutput</a></code> for an example in Shiny</p>
 </div>
 <div id="tool_box_select" class="section level1">
 <h1>tool_box_select</h1>
