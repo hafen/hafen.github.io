@@ -3,6 +3,7 @@ library(rmarkdown)
 library(packagedocs)
 code_path <- "~/Documents/Code/rbokeh"
 
+unlink("assets", recursive = TRUE)
 render("index.Rmd", output_format = package_docs(lib_dir = "assets"))
 check_output("index.html")
 system("open index.html")

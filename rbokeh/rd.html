@@ -13,13 +13,14 @@
   <link href="assets/bootstrap-3.3.2/css/custom.css" rel="stylesheet" />
   <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
-  <script src="assets/bootstrap-3.3.2/js/custom.js"></script>
   <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
   <script src="assets/bootstrap-3.3.2/shim/respond.min.js"></script>
   <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
   <script src="assets/highlight-8.4/highlight.pack.js"></script>
   <link href="assets/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
   <script src="assets/stickykit-1.1.1/sticky-kit.min.js"></script>
+  <script src="assets/jqueryeasing-1.3/jquery.easing.min.js"></script>
+  <script src="assets/packagedocscustom-0.0.1/custom.js"></script>
   
   
   
@@ -45,7 +46,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand">rbokeh - Function Reference</a>
+                <a href="#content-top" class="navbar-brand page-scroll">
+        rbokeh - Function Reference
+        </a>
       </div>
             <nav class="collapse navbar-collapse" role="navigation">
         <ul class="nav nav-pills pull-right">
@@ -127,6 +130,7 @@
       </div>
       <div class="col-md-9" id="content-col">
       
+<div id="content-top"></div>
 <h1>
 R Interface for Bokeh
 </h1>
@@ -600,18 +604,18 @@ The text alpha for the plot title.
 Examples
 </h4>
 <pre class="r"><code>list(spec = list(width = 480, height = 520, title = NULL, xlab = "index", ylab = "1:10", xlim = NULL, ylim = NULL, padding_factor = 0.07, plot_width = NULL, plot_height = NULL, xgrid = TRUE, ygrid = TRUE, xaxes = "below", yaxes = "left", tools = c("pan", "wheel_zoom", "box_zoom", "resize", "reset", "save"), theme = list(line = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF"), glyph = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", 
-"#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF")), model = list(plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", attributes = list(title = NULL, id = "65eb57dec7cc9778670492b97a74d54c", plot_width = 480, plot_height = 520, x_range = list(), y_range = list(), left = list(), below = list(), right = list(), above = list(), renderers = list(`37252eb2895dc67a0e34c6b259ef7dd1` = list(type = "GlyphRenderer", id = "37252eb2895dc67a0e34c6b259ef7dd1")), tools = list(`92ed9311a7286a612fae4db1552ba3c1` = list(
-    type = "PanTool", id = "92ed9311a7286a612fae4db1552ba3c1"), `3508e83b612bfa8f66fb1ddb4db77077` = list(type = "WheelZoomTool", id = "3508e83b612bfa8f66fb1ddb4db77077"), baaff96b4b226a2b1703313ca99110a6 = list(type = "BoxZoomTool", id = "baaff96b4b226a2b1703313ca99110a6"), `638ead7938ce8fc0c2ab97ab5f662bf7` = list(type = "ResizeTool", id = "638ead7938ce8fc0c2ab97ab5f662bf7"), `2c3a7af1b357847177d0f83777c9c630` = list(type = "ResetTool", id = "2c3a7af1b357847177d0f83777c9c630"), b5eaf1cc6086d4446246b246a01f3325 = list(
-    type = "PreviewSaveTool", id = "b5eaf1cc6086d4446246b246a01f3325")), tool_events = list(type = "ToolEvents", id = "12fd15ee2e55f411aa68cb5c1cf62654"), extra_y_ranges = list(), extra_x_ranges = list(), tags = list(), doc = NULL, min_border = 4), subtype = "Figure"), `92ed9311a7286a612fae4db1552ba3c1` = list(type = "PanTool", id = "92ed9311a7286a612fae4db1552ba3c1", attributes = list(id = "92ed9311a7286a612fae4db1552ba3c1", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", 
-    subtype = "Figure"), dimensions = c("width", "height"))), `12fd15ee2e55f411aa68cb5c1cf62654` = list(type = "ToolEvents", id = "12fd15ee2e55f411aa68cb5c1cf62654", attributes = list(id = "12fd15ee2e55f411aa68cb5c1cf62654", tags = list(), doc = NULL), geometries = list()), `3508e83b612bfa8f66fb1ddb4db77077` = list(type = "WheelZoomTool", id = "3508e83b612bfa8f66fb1ddb4db77077", attributes = list(id = "3508e83b612bfa8f66fb1ddb4db77077", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", 
-    subtype = "Figure"), dimensions = c("width", "height"))), baaff96b4b226a2b1703313ca99110a6 = list(type = "BoxZoomTool", id = "baaff96b4b226a2b1703313ca99110a6", attributes = list(id = "baaff96b4b226a2b1703313ca99110a6", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `638ead7938ce8fc0c2ab97ab5f662bf7` = list(type = "ResizeTool", id = "638ead7938ce8fc0c2ab97ab5f662bf7", attributes = list(id = "638ead7938ce8fc0c2ab97ab5f662bf7", 
-    tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `2c3a7af1b357847177d0f83777c9c630` = list(type = "ResetTool", id = "2c3a7af1b357847177d0f83777c9c630", attributes = list(id = "2c3a7af1b357847177d0f83777c9c630", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), b5eaf1cc6086d4446246b246a01f3325 = list(type = "PreviewSaveTool", id = "b5eaf1cc6086d4446246b246a01f3325", 
-    attributes = list(id = "b5eaf1cc6086d4446246b246a01f3325", tags = list(), doc = NULL, plot = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"))), `307bd0f0a3b893c447fba5f6c8c91fea` = list(type = "ColumnDataSource", id = "307bd0f0a3b893c447fba5f6c8c91fea", attributes = list(id = "307bd0f0a3b893c447fba5f6c8c91fea", tags = list(), doc = NULL, column_names = c("x", "y"), selected = list(), discrete_ranges = list(), cont_ranges = list(), data = list(x = 1:10, y = 1:10))), 
-    `4d11edc15eb77f230c6bc3e758c4c821` = list(type = "Circle", id = "4d11edc15eb77f230c6bc3e758c4c821", attributes = list(id = "4d11edc15eb77f230c6bc3e758c4c821", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#1F77B4"), fill_color = list(units = "data", value = "#1F77B4"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
-    `775a5bfc6846f6cf2c8ef157d0afbac6` = list(type = "Circle", id = "775a5bfc6846f6cf2c8ef157d0afbac6", attributes = list(id = "775a5bfc6846f6cf2c8ef157d0afbac6", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#e1e1e1"), fill_color = list(units = "data", value = "#e1e1e1"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
-    `37252eb2895dc67a0e34c6b259ef7dd1` = list(type = "GlyphRenderer", id = "37252eb2895dc67a0e34c6b259ef7dd1", attributes = list(id = "37252eb2895dc67a0e34c6b259ef7dd1", tags = list(), doc = NULL, selection_glyph = NULL, nonselection_glyph = list(type = "Circle", id = "775a5bfc6846f6cf2c8ef157d0afbac6"), server_data_source = NULL, name = NULL, data_source = list(type = "ColumnDataSource", id = "307bd0f0a3b893c447fba5f6c8c91fea"), glyph = list(type = "Circle", id = "4d11edc15eb77f230c6bc3e758c4c821")))), 
-    modeltype = "Plot", ref = list(type = "Plot", id = "65eb57dec7cc9778670492b97a74d54c", subtype = "Figure"), time = 1428469541.46958, glyph_defer_specs = list(), glyph_defer_data = list(), glyph_defer = list(), layers = list(group1 = list(lgroup = "group1", glyph_ids = list(layer1 = "37252eb2895dc67a0e34c6b259ef7dd1"))), data_sigs = list(`37252eb2895dc67a0e34c6b259ef7dd1` = list(glr_id = "37252eb2895dc67a0e34c6b259ef7dd1", sig = NULL)), glyph_x_ranges = list(group1_layer1 = c(1, 10)), glyph_y_ranges = list(
-        group1_layer1 = c(1, 10)), x_axis_type = "numeric", y_axis_type = "numeric", has_x_axis = FALSE, has_y_axis = FALSE, has_x_range = FALSE, has_y_range = FALSE), elementid = "eef13824cc78453747553a926db12be6", modeltype = "Plot", modelid = "65eb57dec7cc9778670492b97a74d54c")480520list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, viewer = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = TRUE, suppress = FALSE, paneHeight = NULL), browser = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = FALSE), knitr = list(defaultWidth = NULL, defaultHeight = NULL, figure = TRUE))NULLNULLfunction (fig) 
+"#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF")), model = list(plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", attributes = list(title = NULL, id = "a8272fcedfc5db19b2795efb1733317a", plot_width = 480, plot_height = 520, x_range = list(), y_range = list(), left = list(), below = list(), right = list(), above = list(), renderers = list(`301eb6fe7b038555c55b7171e20f32d4` = list(type = "GlyphRenderer", id = "301eb6fe7b038555c55b7171e20f32d4")), tools = list(`066332d26d6b879192cdba471767b2e4` = list(
+    type = "PanTool", id = "066332d26d6b879192cdba471767b2e4"), `66e849832e672a79ecd2295d01fca2f2` = list(type = "WheelZoomTool", id = "66e849832e672a79ecd2295d01fca2f2"), `0e5fdd855c18629d796aaeca644c1e07` = list(type = "BoxZoomTool", id = "0e5fdd855c18629d796aaeca644c1e07"), `7eb5d61dfccf7edb2cd3fe3a0571b100` = list(type = "ResizeTool", id = "7eb5d61dfccf7edb2cd3fe3a0571b100"), `7fc267e291e606e2499fde8cfb8c7579` = list(type = "ResetTool", id = "7fc267e291e606e2499fde8cfb8c7579"), `417f5c385db9df43545fb5e615ce060a` = list(
+    type = "PreviewSaveTool", id = "417f5c385db9df43545fb5e615ce060a")), tool_events = list(type = "ToolEvents", id = "227a7a16d3e9fd3f144f30c5abec4d35"), extra_y_ranges = list(), extra_x_ranges = list(), tags = list(), doc = NULL, min_border = 4), subtype = "Figure"), `066332d26d6b879192cdba471767b2e4` = list(type = "PanTool", id = "066332d26d6b879192cdba471767b2e4", attributes = list(id = "066332d26d6b879192cdba471767b2e4", tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", 
+    subtype = "Figure"), dimensions = c("width", "height"))), `227a7a16d3e9fd3f144f30c5abec4d35` = list(type = "ToolEvents", id = "227a7a16d3e9fd3f144f30c5abec4d35", attributes = list(id = "227a7a16d3e9fd3f144f30c5abec4d35", tags = list(), doc = NULL), geometries = list()), `66e849832e672a79ecd2295d01fca2f2` = list(type = "WheelZoomTool", id = "66e849832e672a79ecd2295d01fca2f2", attributes = list(id = "66e849832e672a79ecd2295d01fca2f2", tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", 
+    subtype = "Figure"), dimensions = c("width", "height"))), `0e5fdd855c18629d796aaeca644c1e07` = list(type = "BoxZoomTool", id = "0e5fdd855c18629d796aaeca644c1e07", attributes = list(id = "0e5fdd855c18629d796aaeca644c1e07", tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", subtype = "Figure"))), `7eb5d61dfccf7edb2cd3fe3a0571b100` = list(type = "ResizeTool", id = "7eb5d61dfccf7edb2cd3fe3a0571b100", attributes = list(id = "7eb5d61dfccf7edb2cd3fe3a0571b100", 
+    tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", subtype = "Figure"))), `7fc267e291e606e2499fde8cfb8c7579` = list(type = "ResetTool", id = "7fc267e291e606e2499fde8cfb8c7579", attributes = list(id = "7fc267e291e606e2499fde8cfb8c7579", tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", subtype = "Figure"))), `417f5c385db9df43545fb5e615ce060a` = list(type = "PreviewSaveTool", id = "417f5c385db9df43545fb5e615ce060a", 
+    attributes = list(id = "417f5c385db9df43545fb5e615ce060a", tags = list(), doc = NULL, plot = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", subtype = "Figure"))), `54c508a92f4f69b8edae21713e255ec1` = list(type = "ColumnDataSource", id = "54c508a92f4f69b8edae21713e255ec1", attributes = list(id = "54c508a92f4f69b8edae21713e255ec1", tags = list(), doc = NULL, column_names = c("x", "y"), selected = list(), discrete_ranges = list(), cont_ranges = list(), data = list(x = 1:10, y = 1:10))), 
+    `846a809fef5a3d0dee685198e4ecf16c` = list(type = "Circle", id = "846a809fef5a3d0dee685198e4ecf16c", attributes = list(id = "846a809fef5a3d0dee685198e4ecf16c", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#1F77B4"), fill_color = list(units = "data", value = "#1F77B4"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
+    `2ab4561e7021af9d4561fe3b0b26f126` = list(type = "Circle", id = "2ab4561e7021af9d4561fe3b0b26f126", attributes = list(id = "2ab4561e7021af9d4561fe3b0b26f126", tags = list(), doc = NULL, size = list(units = "screen", value = 10), line_color = list(units = "data", value = "#e1e1e1"), fill_color = list(units = "data", value = "#e1e1e1"), line_alpha = list(units = "data", value = 1), fill_alpha = list(units = "data", value = 0.5), x = list(units = "data", field = "x"), y = list(units = "data", field = "y"))), 
+    `301eb6fe7b038555c55b7171e20f32d4` = list(type = "GlyphRenderer", id = "301eb6fe7b038555c55b7171e20f32d4", attributes = list(id = "301eb6fe7b038555c55b7171e20f32d4", tags = list(), doc = NULL, selection_glyph = NULL, nonselection_glyph = list(type = "Circle", id = "2ab4561e7021af9d4561fe3b0b26f126"), server_data_source = NULL, name = NULL, data_source = list(type = "ColumnDataSource", id = "54c508a92f4f69b8edae21713e255ec1"), glyph = list(type = "Circle", id = "846a809fef5a3d0dee685198e4ecf16c")))), 
+    modeltype = "Plot", ref = list(type = "Plot", id = "a8272fcedfc5db19b2795efb1733317a", subtype = "Figure"), time = 1430336390.53313, glyph_defer_specs = list(), glyph_defer_data = list(), glyph_defer = list(), layers = list(group1 = list(lgroup = "group1", glyph_ids = list(layer1 = "301eb6fe7b038555c55b7171e20f32d4"))), data_sigs = list(`301eb6fe7b038555c55b7171e20f32d4` = list(glr_id = "301eb6fe7b038555c55b7171e20f32d4", sig = NULL)), glyph_x_ranges = list(group1_layer1 = c(1, 10)), glyph_y_ranges = list(
+        group1_layer1 = c(1, 10)), x_axis_type = "numeric", y_axis_type = "numeric", has_x_axis = FALSE, has_y_axis = FALSE, has_x_range = FALSE, has_y_range = FALSE), elementid = "54648dfe39342843213ddf401ed7dbc9", modeltype = "Plot", modelid = "a8272fcedfc5db19b2795efb1733317a")480520list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, viewer = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = TRUE, suppress = FALSE, paneHeight = NULL), browser = list(defaultWidth = NULL, defaultHeight = NULL, padding = NULL, fill = FALSE), knitr = list(defaultWidth = NULL, defaultHeight = NULL, figure = TRUE))NULLNULLfunction (fig) 
 {
     if (fig$x$modeltype %in% c("Plot", "GMapPlot")) {
         if (length(fig$x$spec$layers) == 0 && fig$x$spec$model$plot$type != "GMapPlot") {
@@ -7762,54 +7766,6 @@ See also
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-    function handleSticky() {
-      if($(window).width() > 979) {
-        var stickBottom = true;
-        if($(window).height() > $("#sidebar-col").height())
-          stickBottom = false;
-        $("#sidebar-col").stick_in_parent({offset_top: 60, bottoming: stickBottom});
-      } else {
-        $("#sidebar-col").trigger("sticky_kit:detach");
-      }
-    }
-
-    $(document).ready(function() {
-      $('#toc ul:first').addClass('nav nav-stacked');
-      $('#toc ul:first').attr('id', 'sidebar');
-
-      // add class to toc sub-elements
-      $('#toc ul:first ul').addClass("nav nav-stacked")
-
-      handleSticky();
-
-      $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
-
-      var $body    = $(document.body);
-      var navHeight = $('.navbar').outerHeight(true) + 10;
-
-      $body.scrollspy({
-        target: '#toc',
-        offset: navHeight
-      });
-
-      hljs.initHighlightingOnLoad();
-    });
-
-    // let a user resize for 250ms before triggering actions
-    $(window).resize(function() {
-       if(this.resizeTO) clearTimeout(this.resizeTO);
-       this.resizeTO = setTimeout(function() {
-          $(this).trigger('resizeEnd');
-       }, 250);
-    });
-
-    $(window).bind('resizeEnd', function() {
-      handleSticky();
-    });
-
-  </script>
 
   
 </body>
