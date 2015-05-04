@@ -7,7 +7,7 @@ output:
     toc: true
 navpills: |
   <li class="active"><a href='index.html'>Docs</a></li>
-  <li><a href='rd.html'>Function Ref</a></li>
+  <li><a href='rd.html'>Package Ref</a></li>
   <li><a href='https://github.com/bokeh/rbokeh'>Github <i class='fa fa-github'></i></a></li>
 ---
 
@@ -137,6 +137,16 @@ figure(width = 800, padding_factor = 0) %>%
 ```
 
 Hover for population info, etc.
+
+Google map plot:
+
+```{r, message=FALSE}
+orstationc <- read.csv("http://geog.uoregon.edu/bartlein/old_courses/geog414s05/data/orstationc.csv")
+
+gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
+  ly_points(lon, lat, data = orstationc, alpha = 0.8, col = "red",
+    hover = c(station, Name, elev, tann))
+```
 
 Time series plot of daily airline flights with hover and vertical line:
 

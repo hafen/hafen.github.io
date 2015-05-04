@@ -1,6 +1,6 @@
 ---
 title: "rbokeh"
-subtitle: "Function Reference"
+subtitle: "Package Reference"
 author: Ryan Hafen
 copyright: Ryan Hafen
 output:
@@ -9,7 +9,7 @@ output:
 rd_page: true
 navpills: |
   <li><a href='index.html'>Docs</a></li>
-  <li class="active"><a href='rd.html'>Function Ref</a></li>
+  <li class="active"><a href='rd.html'>Package Ref</a></li>
   <li><a href='#'>Github <i class='fa fa-github'></i></a></li>
 ---
 
