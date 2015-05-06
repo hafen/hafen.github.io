@@ -15,21 +15,33 @@ navpills: |
 
 <h1>R Interface for Bokeh</h1>
 
-<p><strong>Author:</strong> </p>
+<p><strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],Bokeh team [aut, cph]</p>
 <p><strong>Version:</strong> 0.2.2</p>
-<p><strong>Date:</strong> </p>
 <p><strong>License:</strong> MIT + file LICENSE</p>
 
 <h4>Description</h4>
 <p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, \url{http://bokeh.pydata.org/en/latest/}.</p>
 
 <h4>Depends</h4>
-<p></p>
+<p>(none)</p>
+
+<h4>Imports</h4>
+<p>
+htmlwidgets,
+maps,
+methods,
+RJSONIO,
+digest,
+hexbin,
+magrittr</p>
 
 <h4>Suggests</h4>
 <p>
-testthat,
-knitr (>= 1.8)</p>
+testthat</p>
+
+<h4>Enhances</h4>
+<p>
+shiny (>= 0.10.2.1)</p>
 
 # Plots
 
