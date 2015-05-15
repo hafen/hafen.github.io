@@ -205,27 +205,31 @@ doubles <- read.csv(f)
 ```
 
 ```{r, message=FALSE}
-base_x <- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
-base_y <- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
-distarc_x <- lapply(c(2:4) * 100, function(a)
-  seq(a * cos(3 * pi/4), a * cos(pi/4), length = 200))
-distarc_y <- lapply(distarc_x, function(x)
-  sqrt((x[1]/cos(3 * pi/4))^2 - x^2))
+ly_baseball <- function(x) {
+  base_x <- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
+  base_y <- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
+  distarc_x <- lapply(c(2:4) * 100, function(a)
+    seq(a * cos(3 * pi/4), a * cos(pi/4), length = 200))
+  distarc_y <- lapply(distarc_x, function(x)
+    sqrt((x[1]/cos(3 * pi/4))^2 - x^2))
+
+  ## boundary
+  x %>%
+    ly_segments(c(0, 0), c(0, 0), c(-300, 300), c(300, 300), alpha = 0.4) %>%
+    ## bases
+    ly_crect(base_x, base_y, width = 10, height = 10,
+      angle = 45*pi/180, color = "black", alpha = 0.4) %>%
+    ## infield/outfield boundary
+    ly_curve(60.5 + sqrt(95^2 - x^2),
+      from = base_x[3] - 26, to = base_x[1] + 26, alpha = 0.4) %>%
+    ## distance arcs (ly_arc should work here and would be much simpler but doesn't)
+    ly_multi_line(distarc_x, distarc_y, alpha = 0.4)
+}
 
 figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 540,
   xlab = "Horizontal distance from home plate (ft.)",
   ylab = "Vertical distance from home plate (ft.)") %>%
-  ## boundary
-  ly_segments(c(0, 0), c(0, 0), c(-300, 300), c(300, 300), alpha = 0.4) %>%
-  ## bases
-  ly_crect(base_x, base_y, width = 10, height = 10,
-    angle = 45*pi/180, color = "black", alpha = 0.4) %>%
-  ## infield/outfield boundary
-  ly_curve(60.5 + sqrt(95^2 - x^2),
-    from = base_x[3] - 26, to = base_x[1] + 26, alpha = 0.4) %>%
-  ## distance arcs (ly_arc should work here and would be much simpler but doesn't)
-  ly_multi_line(distarc_x, distarc_y, alpha = 0.4) %>%
-  ## hit hexbin
+  ly_baseball() %>%
   ly_hexbin(doubles, xbins = 50, shape = 0.77, alpha = 0.75, palette = "Spectral10")
 ```
 

@@ -162,10 +162,10 @@
 R Interface for Bokeh
 </h1>
 <p>
-<strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],Bokeh team [aut, cph]
+<strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],Bokeh team [aut, cph]
 </p>
 <p>
-<strong>Version:</strong> 0.2.2
+<strong>Version:</strong> 0.2.3
 </p>
 <p>
 <strong>License:</strong> MIT + file LICENSE
@@ -186,7 +186,7 @@ Depends
 Imports
 </h4>
 <p>
-htmlwidgets, maps, methods, RJSONIO, digest, hexbin, magrittr
+htmlwidgets, maps, methods, jsonlite, digest, hexbin, magrittr
 </p>
 <h4>
 Suggests
@@ -6029,7 +6029,8 @@ Add x axis to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid = TRUE,
-  num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
+  num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
+  "numeral", "printf"), ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6077,6 +6078,12 @@ visible
 should axis be shown?
 </dd>
 <dt>
+number_formatter
+</dt>
+<dd class="rd-dd">
+Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -6089,6 +6096,7 @@ Additional parameters
 <p class="rd-p">
 </p>
 <p class="rd-p">
+Axis
 <table>
 <tr>
 <td>
@@ -6427,6 +6435,74 @@ The line dash of the minor ticks.
 </td>
 </tr>
 </table>
+Basic Tick Format
+<table>
+<tr>
+<td>
+<code>power_limit_high</code>
+</td>
+<td>
+(int) Limit the use of scientific notation to when log(x) &gt;= value.
+</td>
+</tr>
+<tr>
+<td>
+<code>power_limit_low</code>
+</td>
+<td>
+(int) Limit the use of scientific notation to when log(x) &lt;= value.
+</td>
+</tr>
+<tr>
+<td>
+<code>precision</code>
+</td>
+<td>
+(int) How many digits of precision to display in tick labels. Automatically determined if not specified.
+</td>
+</tr>
+<tr>
+<td>
+<code>use_scientific</code>
+</td>
+<td>
+(logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>.
+</td>
+</tr>
+</table>
+Datetime Tick Format
+<table>
+<tr>
+<td>
+<code>formats</code>
+</td>
+<td>
+(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
+</td>
+</tr>
+</table>
+Numeral Tick Format
+<table>
+<tr>
+<td>
+<code>format</code>
+</td>
+<td>
+(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
+</td>
+</tr>
+</table>
+Printf Tick Format
+<table>
+<tr>
+<td>
+<code>format</code>
+</td>
+<td>
+(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
+</td>
+</tr>
+</table>
 </p>
 <h4>
 Examples
@@ -6438,7 +6514,32 @@ Examples
 
 figure() %>%
   ly_points(2^(1:10)) %>%
-  y_axis(log = 2)</code></pre>
+  y_axis(log = 2)
+
+# Disable scientific tick labels
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) / 1000) %>%
+  y_axis(use_scientific = FALSE)
+
+# Specify datetime tick labels; the appropriate datetime units are automatically
+#   chosen
+figure() %>%
+  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-12-31"), by="days"), 
+           rnorm(366)) %>%
+  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+figure() %>%
+  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days"), 
+           rnorm(32)) %>%
+  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+
+# Specify numeric tick labels
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) * 10000) %>%
+  y_axis(number_formatter = "numeral", format = "0,000")
+
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) * 100) %>%
+  y_axis(number_formatter = "printf", format = "%0.1f%%")</code></pre>
 <h4>
 See also
 </h4>
@@ -6500,7 +6601,8 @@ Add y axis to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid = TRUE,
-  num_minor_ticks = 5, visible = TRUE, ...)</code></pre>
+  num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
+  "numeral", "printf"), ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6548,6 +6650,12 @@ visible
 should axis be shown?
 </dd>
 <dt>
+number_formatter
+</dt>
+<dd class="rd-dd">
+Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -6560,6 +6668,7 @@ Additional parameters
 <p class="rd-p">
 </p>
 <p class="rd-p">
+Axis
 <table>
 <tr>
 <td>
@@ -6898,6 +7007,74 @@ The line dash of the minor ticks.
 </td>
 </tr>
 </table>
+Basic Tick Format
+<table>
+<tr>
+<td>
+<code>power_limit_high</code>
+</td>
+<td>
+(int) Limit the use of scientific notation to when log(x) &gt;= value.
+</td>
+</tr>
+<tr>
+<td>
+<code>power_limit_low</code>
+</td>
+<td>
+(int) Limit the use of scientific notation to when log(x) &lt;= value.
+</td>
+</tr>
+<tr>
+<td>
+<code>precision</code>
+</td>
+<td>
+(int) How many digits of precision to display in tick labels. Automatically determined if not specified.
+</td>
+</tr>
+<tr>
+<td>
+<code>use_scientific</code>
+</td>
+<td>
+(logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>.
+</td>
+</tr>
+</table>
+Datetime Tick Format
+<table>
+<tr>
+<td>
+<code>formats</code>
+</td>
+<td>
+(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
+</td>
+</tr>
+</table>
+Numeral Tick Format
+<table>
+<tr>
+<td>
+<code>format</code>
+</td>
+<td>
+(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
+</td>
+</tr>
+</table>
+Printf Tick Format
+<table>
+<tr>
+<td>
+<code>format</code>
+</td>
+<td>
+(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
+</td>
+</tr>
+</table>
 </p>
 <h4>
 Examples
@@ -6909,7 +7086,32 @@ Examples
 
 figure() %>%
   ly_points(2^(1:10)) %>%
-  y_axis(log = 2)</code></pre>
+  y_axis(log = 2)
+
+# Disable scientific tick labels
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) / 1000) %>%
+  y_axis(use_scientific = FALSE)
+
+# Specify datetime tick labels; the appropriate datetime units are automatically
+#   chosen
+figure() %>%
+  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-12-31"), by="days"), 
+           rnorm(366)) %>%
+  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+figure() %>%
+  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days"), 
+           rnorm(32)) %>%
+  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+
+# Specify numeric tick labels
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) * 10000) %>%
+  y_axis(number_formatter = "numeral", format = "0,000")
+
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) * 100) %>%
+  y_axis(number_formatter = "printf", format = "%0.1f%%")</code></pre>
 <h4>
 See also
 </h4>
@@ -7365,7 +7567,7 @@ logical - should the figure be sent through preparations that need to be done pr
 pretty
 </dt>
 <dd class="rd-dd">
-parameter passed on to <code><a href=http://www.inside-r.org/packages/cran/RJSONIO/docs/toJSON>toJSON</a></code>
+parameter passed on to <code><a href=http://www.inside-r.org/packages/cran/jsonlite/docs/fromJSON>toJSON</a></code>
 </dd>
 <dt>
 file
