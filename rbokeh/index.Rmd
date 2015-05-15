@@ -213,8 +213,8 @@ ly_baseball <- function(x) {
   distarc_y <- lapply(distarc_x, function(x)
     sqrt((x[1]/cos(3 * pi/4))^2 - x^2))
 
-  ## boundary
   x %>%
+    ## boundary
     ly_segments(c(0, 0), c(0, 0), c(-300, 300), c(300, 300), alpha = 0.4) %>%
     ## bases
     ly_crect(base_x, base_y, width = 10, height = 10,
