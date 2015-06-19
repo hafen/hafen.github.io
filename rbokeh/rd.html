@@ -165,7 +165,7 @@ R Interface for Bokeh
 <strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],Bokeh team [aut, cph]
 </p>
 <p>
-<strong>Version:</strong> 0.2.3
+<strong>Version:</strong> 0.2.3.2
 </p>
 <p>
 <strong>License:</strong> MIT + file LICENSE
@@ -192,7 +192,7 @@ htmlwidgets, maps, methods, jsonlite, digest, hexbin, magrittr
 Suggests
 </h4>
 <p>
-testthat
+testthat, data.table
 </p>
 <h4>
 Enhances
@@ -328,6 +328,8 @@ Additional parameters
 <td>
 <code>background_fill</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) background color of plot
 </td>
@@ -336,6 +338,8 @@ Additional parameters
 <td>
 <code>border_fill</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) fill color of border area of plot
 </td>
@@ -344,6 +348,8 @@ Additional parameters
 <td>
 <code>min_border</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border.
 </td>
@@ -352,6 +358,8 @@ Additional parameters
 <td>
 <code>min_border_bottom</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -360,6 +368,8 @@ Additional parameters
 <td>
 <code>min_border_left</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -368,6 +378,8 @@ Additional parameters
 <td>
 <code>min_border_right</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -376,6 +388,8 @@ Additional parameters
 <td>
 <code>min_border_top</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -384,6 +398,8 @@ Additional parameters
 <td>
 <code>outline_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha for the plot border outline.
 </td>
@@ -392,6 +408,8 @@ Additional parameters
 <td>
 <code>outline_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap for the plot border outline.
 </td>
@@ -400,6 +418,8 @@ Additional parameters
 <td>
 <code>outline_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color for the plot border outline.
 </td>
@@ -408,6 +428,8 @@ Additional parameters
 <td>
 <code>outline_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash for the plot border outline.
 </td>
@@ -416,6 +438,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset for the plot border outline.
 </td>
@@ -424,6 +448,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join for the plot border outline.
 </td>
@@ -432,6 +458,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width for the plot border outline.
 </td>
@@ -440,6 +468,8 @@ The line dash for the plot border outline.
 <td>
 <code>plot_height</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used.
 </td>
@@ -448,6 +478,8 @@ The line dash for the plot border outline.
 <td>
 <code>plot_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used.
 </td>
@@ -456,6 +488,8 @@ The line dash for the plot border outline.
 <td>
 <code>title_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align for the plot title.
 </td>
@@ -464,6 +498,8 @@ The line dash for the plot border outline.
 <td>
 <code>title_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 The text alpha for the plot title.
 </td>
@@ -472,6 +508,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline for the plot title.
 </td>
@@ -480,6 +518,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color for the plot title.
 </td>
@@ -488,6 +528,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string) The text font for the plot title.
 </td>
@@ -496,6 +538,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size for the plot title.
 </td>
@@ -504,6 +548,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style for the plot title.
 </td>
@@ -512,6 +558,8 @@ The text alpha for the plot title.
 <td>
 <code>toolbar_location</code>
 </td>
+</tr>
+<tr>
 <td>
 (above, below, left, right) Where the toolbar will be located. If set to None, no toolbar will be attached to the plot.
 </td>
@@ -520,6 +568,8 @@ The text alpha for the plot title.
 <td>
 <code>h_symmetry</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger).
 </td>
@@ -528,6 +578,8 @@ The text alpha for the plot title.
 <td>
 <code>v_symmetry</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger).
 </td>
@@ -536,6 +588,8 @@ The text alpha for the plot title.
 <td>
 <code>logo</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, grey) What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed.
 </td>
@@ -585,13 +639,13 @@ longitude where the map should be centered
 zoom
 </dt>
 <dd class="rd-dd">
-initial <a href = https://developers.google.com/maps/documentation/staticmaps/#Zoomlevels>zoom level</a> to use when displaying the map
+initial <a href = https://developers.google.com/maps/documentation/staticmaps/\#Zoomlevels>zoom level</a> to use when displaying the map
 </dd>
 <dt>
 map_type
 </dt>
 <dd class="rd-dd">
-<a href = https://developers.google.com/maps/documentation/staticmaps/#MapTypes>map type</a> to use for the plot - one of “hybrid”, “satellite”, “roadmap”, “terrain”
+<a href = https://developers.google.com/maps/documentation/staticmaps/\#MapTypes>map type</a> to use for the plot - one of “hybrid”, “satellite”, “roadmap”, “terrain”
 </dd>
 <dt>
 width
@@ -707,6 +761,8 @@ Additional parameters
 <td>
 <code>background_fill</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) background color of plot
 </td>
@@ -715,6 +771,8 @@ Additional parameters
 <td>
 <code>border_fill</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) fill color of border area of plot
 </td>
@@ -723,6 +781,8 @@ Additional parameters
 <td>
 <code>min_border</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border.
 </td>
@@ -731,6 +791,8 @@ Additional parameters
 <td>
 <code>min_border_bottom</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -739,6 +801,8 @@ Additional parameters
 <td>
 <code>min_border_left</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -747,6 +811,8 @@ Additional parameters
 <td>
 <code>min_border_right</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -755,6 +821,8 @@ Additional parameters
 <td>
 <code>min_border_top</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.
 </td>
@@ -763,6 +831,8 @@ Additional parameters
 <td>
 <code>outline_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha for the plot border outline.
 </td>
@@ -771,6 +841,8 @@ Additional parameters
 <td>
 <code>outline_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap for the plot border outline.
 </td>
@@ -779,6 +851,8 @@ Additional parameters
 <td>
 <code>outline_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color for the plot border outline.
 </td>
@@ -787,6 +861,8 @@ Additional parameters
 <td>
 <code>outline_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash for the plot border outline.
 </td>
@@ -795,6 +871,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset for the plot border outline.
 </td>
@@ -803,6 +881,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join for the plot border outline.
 </td>
@@ -811,6 +891,8 @@ The line dash for the plot border outline.
 <td>
 <code>outline_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width for the plot border outline.
 </td>
@@ -819,6 +901,8 @@ The line dash for the plot border outline.
 <td>
 <code>plot_height</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used.
 </td>
@@ -827,6 +911,8 @@ The line dash for the plot border outline.
 <td>
 <code>plot_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used.
 </td>
@@ -835,6 +921,8 @@ The line dash for the plot border outline.
 <td>
 <code>title_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align for the plot title.
 </td>
@@ -843,6 +931,8 @@ The line dash for the plot border outline.
 <td>
 <code>title_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 The text alpha for the plot title.
 </td>
@@ -851,6 +941,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline for the plot title.
 </td>
@@ -859,6 +951,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color for the plot title.
 </td>
@@ -867,6 +961,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string) The text font for the plot title.
 </td>
@@ -875,6 +971,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size for the plot title.
 </td>
@@ -883,6 +981,8 @@ The text alpha for the plot title.
 <td>
 <code>title_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style for the plot title.
 </td>
@@ -891,6 +991,8 @@ The text alpha for the plot title.
 <td>
 <code>toolbar_location</code>
 </td>
+</tr>
+<tr>
 <td>
 (above, below, left, right) Where the toolbar will be located. If set to None, no toolbar will be attached to the plot.
 </td>
@@ -899,6 +1001,8 @@ The text alpha for the plot title.
 <td>
 <code>h_symmetry</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger).
 </td>
@@ -907,6 +1011,8 @@ The text alpha for the plot title.
 <td>
 <code>v_symmetry</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger).
 </td>
@@ -915,6 +1021,8 @@ The text alpha for the plot title.
 <td>
 <code>logo</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, grey) What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed.
 </td>
@@ -1213,6 +1321,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -1221,6 +1331,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -1229,6 +1341,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -1237,6 +1351,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -1245,6 +1361,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -1253,6 +1371,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -1261,6 +1381,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -1269,6 +1391,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -1464,6 +1588,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -1472,6 +1598,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -1480,6 +1608,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -1488,6 +1618,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -1496,6 +1628,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -1504,6 +1638,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -1512,6 +1648,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -1520,6 +1658,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -1689,6 +1829,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -1697,6 +1839,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -1705,6 +1849,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -1880,6 +2026,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -1888,6 +2036,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -1896,6 +2046,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -2075,6 +2227,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -2083,6 +2237,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -2091,6 +2247,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -2099,6 +2257,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -2107,6 +2267,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -2115,6 +2277,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -2123,6 +2287,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -2131,6 +2297,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -2514,6 +2682,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -2522,6 +2692,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -2530,6 +2702,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -2632,6 +2806,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -2640,6 +2816,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -2648,6 +2826,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -2803,6 +2983,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -2811,6 +2993,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -2819,6 +3003,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -2827,6 +3013,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -2835,6 +3023,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -2843,6 +3033,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -2851,6 +3043,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -2859,6 +3053,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -3008,6 +3204,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3016,6 +3214,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3024,6 +3224,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3032,6 +3234,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -3040,6 +3244,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3048,6 +3254,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -3056,6 +3264,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -3064,6 +3274,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -3237,6 +3449,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3245,6 +3459,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3253,6 +3469,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3261,6 +3479,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -3269,6 +3489,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3277,6 +3499,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -3285,6 +3509,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -3293,6 +3519,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -3458,6 +3686,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3466,6 +3696,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3474,6 +3706,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3482,6 +3716,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -3490,6 +3726,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3498,6 +3736,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -3506,6 +3746,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -3514,6 +3756,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -3649,6 +3893,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3657,6 +3903,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3665,6 +3913,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -3673,6 +3923,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -3681,6 +3933,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -3689,6 +3943,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -3697,6 +3953,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -3705,6 +3963,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -3828,6 +4088,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -3836,6 +4098,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -3844,6 +4108,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -4005,6 +4271,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4013,6 +4281,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4021,6 +4291,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4029,6 +4301,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -4037,6 +4311,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4045,6 +4321,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -4053,6 +4331,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -4061,6 +4341,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -4184,6 +4466,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -4192,6 +4476,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -4200,6 +4486,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -4568,6 +4856,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4576,6 +4866,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4584,6 +4876,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4592,6 +4886,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -4600,6 +4896,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4608,6 +4906,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -4616,6 +4916,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -4624,6 +4926,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -4811,6 +5115,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4819,6 +5125,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4827,6 +5135,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -4835,6 +5145,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -4843,6 +5155,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -4851,6 +5165,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -4859,6 +5175,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -4867,6 +5185,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -4966,6 +5286,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -4974,6 +5296,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -4982,6 +5306,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5010,16 +5336,22 @@ fig
 figure to modify
 </dd>
 <dt>
-x,breaks,freq,include.lowest,right
+x
 </dt>
 <dd class="rd-dd">
-parameters passed to <code><a href=http://www.inside-r.org/r-doc/graphics/hist>hist</a></code>
+either a vector to be passed to <code><a href=http://www.inside-r.org/r-doc/graphics/hist>hist</a></code> or an object of class “histogram”
 </dd>
 <dt>
 data
 </dt>
 <dd class="rd-dd">
 an optional data frame, providing the source for x
+</dd>
+<dt>
+breaks,freq,include.lowest,right
+</dt>
+<dd class="rd-dd">
+parameters passed to <code><a href=http://www.inside-r.org/r-doc/graphics/hist>hist</a></code>
 </dd>
 <dt>
 color
@@ -5102,6 +5434,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5110,6 +5444,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5118,6 +5454,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5126,6 +5464,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -5134,6 +5474,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5142,6 +5484,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5150,6 +5494,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -5158,6 +5504,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5376,6 +5724,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5384,6 +5734,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5392,6 +5744,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5400,6 +5754,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -5408,6 +5764,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5416,6 +5774,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5424,6 +5784,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -5432,6 +5794,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5555,6 +5919,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5563,6 +5929,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -5571,6 +5939,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5686,6 +6056,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5694,6 +6066,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -5702,6 +6076,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5814,6 +6190,8 @@ Additional parameters
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5822,6 +6200,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -5830,6 +6210,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 an integer between 1 and 6 matching the <code>lty</code> property in <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> or an array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -5950,6 +6332,8 @@ Additional parameters
 <td>
 <code>fill_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5958,6 +6342,8 @@ color to use to fill the glyph with - a hex code (with no alpha) or any of the 1
 <td>
 <code>fill_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5966,6 +6352,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo
 </td>
@@ -5974,6 +6362,8 @@ color to use to stroke lines with - a hex code (with no alpha) or any of the 147
 <td>
 <code>line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 stroke width in units of pixels
 </td>
@@ -5982,6 +6372,8 @@ stroke width in units of pixels
 <td>
 <code>line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 transparency value between 0 (transparent) and 1 (opaque)
 </td>
@@ -5990,6 +6382,8 @@ transparency value between 0 (transparent) and 1 (opaque)
 <td>
 <code>line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be joined together miter round bevel
 </td>
@@ -5998,6 +6392,8 @@ how path segments should be joined together miter round bevel
 <td>
 <code>line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 how path segments should be terminated butt round square
 </td>
@@ -6006,6 +6402,8 @@ how path segments should be terminated butt round square
 <td>
 <code>line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 array of integer pixel distances that describe the on-off pattern of dashing to use
 </td>
@@ -6081,7 +6479,7 @@ should axis be shown?
 number_formatter
 </dt>
 <dd class="rd-dd">
-Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
+Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
 </dd>
 <dt>
 …
@@ -6102,6 +6500,8 @@ Axis
 <td>
 <code>axis_label_standoff</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that the axis labels should be offset from the tick labels.
 </td>
@@ -6110,6 +6510,8 @@ Axis
 <td>
 <code>axis_label_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align of the axis label.
 </td>
@@ -6118,6 +6520,8 @@ Axis
 <td>
 <code>axis_label_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The text alpha of the axis label.
 </td>
@@ -6126,6 +6530,8 @@ Axis
 <td>
 <code>axis_label_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline of the axis label.
 </td>
@@ -6134,6 +6540,8 @@ Axis
 <td>
 <code>axis_label_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color of the axis label.
 </td>
@@ -6142,6 +6550,8 @@ Axis
 <td>
 <code>axis_label_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string) The text font of the axis label.
 </td>
@@ -6150,6 +6560,8 @@ Axis
 <td>
 <code>axis_label_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size of the axis label.
 </td>
@@ -6158,6 +6570,8 @@ Axis
 <td>
 <code>axis_label_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style of the axis label.
 </td>
@@ -6166,6 +6580,8 @@ Axis
 <td>
 <code>axis_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the axis line.
 </td>
@@ -6174,6 +6590,8 @@ Axis
 <td>
 <code>axis_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the axis line.
 </td>
@@ -6182,6 +6600,8 @@ Axis
 <td>
 <code>axis_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the axis line.
 </td>
@@ -6190,6 +6610,8 @@ Axis
 <td>
 <code>axis_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the axis line.
 </td>
@@ -6198,6 +6620,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the axis line.
 </td>
@@ -6206,6 +6630,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the axis line.
 </td>
@@ -6214,6 +6640,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the axis line.
 </td>
@@ -6222,6 +6650,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_orientation</code>
 </td>
+</tr>
+<tr>
 <td>
 (horizontal, vertical, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.
 </td>
@@ -6230,6 +6660,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_standoff</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that the major tick labels should be offset from the associated ticks.
 </td>
@@ -6238,6 +6670,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align of the major tick labels.
 </td>
@@ -6246,6 +6680,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The text alpha of the major tick labels.
 </td>
@@ -6254,6 +6690,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline of the major tick labels.
 </td>
@@ -6262,6 +6700,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color of the major tick labels.
 </td>
@@ -6270,6 +6710,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - Helvetica) The text font of the major tick labels.
 </td>
@@ -6278,6 +6720,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size of the major tick labels.
 </td>
@@ -6286,6 +6730,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style of the major tick labels.
 </td>
@@ -6294,6 +6740,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_in</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend into the main plot area.
 </td>
@@ -6302,6 +6750,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the major ticks.
 </td>
@@ -6310,6 +6760,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the major ticks.
 </td>
@@ -6318,6 +6770,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the major ticks.
 </td>
@@ -6326,6 +6780,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the major ticks.
 </td>
@@ -6334,6 +6790,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the major ticks.
 </td>
@@ -6342,6 +6800,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the major ticks.
 </td>
@@ -6350,6 +6810,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the major ticks.
 </td>
@@ -6358,6 +6820,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_out</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend out of the main plot area.
 </td>
@@ -6366,6 +6830,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_in</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that minor ticks should extend into the main plot area.
 </td>
@@ -6374,6 +6840,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the minor ticks.
 </td>
@@ -6382,6 +6850,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the minor ticks.
 </td>
@@ -6390,6 +6860,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the minor ticks.
 </td>
@@ -6398,6 +6870,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the minor ticks.
 </td>
@@ -6406,6 +6880,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the minor ticks.
 </td>
@@ -6414,6 +6890,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the minor ticks.
 </td>
@@ -6422,6 +6900,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the minor ticks.
 </td>
@@ -6430,6 +6910,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_out</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend out of the main plot area.
 </td>
@@ -6441,6 +6923,8 @@ Basic Tick Format
 <td>
 <code>power_limit_high</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) Limit the use of scientific notation to when log(x) &gt;= value.
 </td>
@@ -6449,6 +6933,8 @@ Basic Tick Format
 <td>
 <code>power_limit_low</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) Limit the use of scientific notation to when log(x) &lt;= value.
 </td>
@@ -6457,6 +6943,8 @@ Basic Tick Format
 <td>
 <code>precision</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) How many digits of precision to display in tick labels. Automatically determined if not specified.
 </td>
@@ -6465,6 +6953,8 @@ Basic Tick Format
 <td>
 <code>use_scientific</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>.
 </td>
@@ -6476,8 +6966,10 @@ Datetime Tick Format
 <td>
 <code>formats</code>
 </td>
+</tr>
+<tr>
 <td>
-(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
+(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
 </td>
 </tr>
 </table>
@@ -6487,8 +6979,10 @@ Numeral Tick Format
 <td>
 <code>format</code>
 </td>
+</tr>
+<tr>
 <td>
-(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
+(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
 </td>
 </tr>
 </table>
@@ -6498,8 +6992,10 @@ Printf Tick Format
 <td>
 <code>format</code>
 </td>
+</tr>
+<tr>
 <td>
-(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
+(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
 </td>
 </tr>
 </table>
@@ -6653,7 +7149,7 @@ should axis be shown?
 number_formatter
 </dt>
 <dd class="rd-dd">
-Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
+Bokeh numeric tick label formatter (<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.BasicTickFormatter>“basic”</a>, <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>“numeral”</a>, or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>“printf”</a>); ignored if <code>log</code> is TRUE
 </dd>
 <dt>
 …
@@ -6674,6 +7170,8 @@ Axis
 <td>
 <code>axis_label_standoff</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that the axis labels should be offset from the tick labels.
 </td>
@@ -6682,6 +7180,8 @@ Axis
 <td>
 <code>axis_label_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align of the axis label.
 </td>
@@ -6690,6 +7190,8 @@ Axis
 <td>
 <code>axis_label_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The text alpha of the axis label.
 </td>
@@ -6698,6 +7200,8 @@ Axis
 <td>
 <code>axis_label_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline of the axis label.
 </td>
@@ -6706,6 +7210,8 @@ Axis
 <td>
 <code>axis_label_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color of the axis label.
 </td>
@@ -6714,6 +7220,8 @@ Axis
 <td>
 <code>axis_label_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string) The text font of the axis label.
 </td>
@@ -6722,6 +7230,8 @@ Axis
 <td>
 <code>axis_label_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size of the axis label.
 </td>
@@ -6730,6 +7240,8 @@ Axis
 <td>
 <code>axis_label_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style of the axis label.
 </td>
@@ -6738,6 +7250,8 @@ Axis
 <td>
 <code>axis_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the axis line.
 </td>
@@ -6746,6 +7260,8 @@ Axis
 <td>
 <code>axis_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the axis line.
 </td>
@@ -6754,6 +7270,8 @@ Axis
 <td>
 <code>axis_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the axis line.
 </td>
@@ -6762,6 +7280,8 @@ Axis
 <td>
 <code>axis_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the axis line.
 </td>
@@ -6770,6 +7290,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the axis line.
 </td>
@@ -6778,6 +7300,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the axis line.
 </td>
@@ -6786,6 +7310,8 @@ The line dash of the axis line.
 <td>
 <code>axis_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the axis line.
 </td>
@@ -6794,6 +7320,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_orientation</code>
 </td>
+</tr>
+<tr>
 <td>
 (horizontal, vertical, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.
 </td>
@@ -6802,6 +7330,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_standoff</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that the major tick labels should be offset from the associated ticks.
 </td>
@@ -6810,6 +7340,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_align</code>
 </td>
+</tr>
+<tr>
 <td>
 (left, right, center) The text align of the major tick labels.
 </td>
@@ -6818,6 +7350,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The text alpha of the major tick labels.
 </td>
@@ -6826,6 +7360,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_baseline</code>
 </td>
+</tr>
+<tr>
 <td>
 (top, middle, bottom, alphabetic, hanging) The text baseline of the major tick labels.
 </td>
@@ -6834,6 +7370,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The text color of the major tick labels.
 </td>
@@ -6842,6 +7380,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - Helvetica) The text font of the major tick labels.
 </td>
@@ -6850,6 +7390,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font_size</code>
 </td>
+</tr>
+<tr>
 <td>
 (string - e.g. 12pt) The text font size of the major tick labels.
 </td>
@@ -6858,6 +7400,8 @@ The line dash of the axis line.
 <td>
 <code>major_label_text_font_style</code>
 </td>
+</tr>
+<tr>
 <td>
 (normal, italic, bold) The text font style of the major tick labels.
 </td>
@@ -6866,6 +7410,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_in</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend into the main plot area.
 </td>
@@ -6874,6 +7420,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the major ticks.
 </td>
@@ -6882,6 +7430,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the major ticks.
 </td>
@@ -6890,6 +7440,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the major ticks.
 </td>
@@ -6898,6 +7450,8 @@ The line dash of the axis line.
 <td>
 <code>major_tick_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the major ticks.
 </td>
@@ -6906,6 +7460,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the major ticks.
 </td>
@@ -6914,6 +7470,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the major ticks.
 </td>
@@ -6922,6 +7480,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the major ticks.
 </td>
@@ -6930,6 +7490,8 @@ The line dash of the major ticks.
 <td>
 <code>major_tick_out</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend out of the main plot area.
 </td>
@@ -6938,6 +7500,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_in</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that minor ticks should extend into the main plot area.
 </td>
@@ -6946,6 +7510,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_alpha</code>
 </td>
+</tr>
+<tr>
 <td>
 (numeric) The line alpha of the minor ticks.
 </td>
@@ -6954,6 +7520,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_cap</code>
 </td>
+</tr>
+<tr>
 <td>
 (butt, round, square) The line cap of the minor ticks.
 </td>
@@ -6962,6 +7530,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_color</code>
 </td>
+</tr>
+<tr>
 <td>
 (color) The line color of the minor ticks.
 </td>
@@ -6970,6 +7540,8 @@ The line dash of the major ticks.
 <td>
 <code>minor_tick_line_dash</code>
 </td>
+</tr>
+<tr>
 <td>
 The line dash of the minor ticks.
 </td>
@@ -6978,6 +7550,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_dash_offset</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line dash offset of the minor ticks.
 </td>
@@ -6986,6 +7560,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_join</code>
 </td>
+</tr>
+<tr>
 <td>
 (miter, round, bevel) The line join of the minor ticks.
 </td>
@@ -6994,6 +7570,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_line_width</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The line width of the minor ticks.
 </td>
@@ -7002,6 +7580,8 @@ The line dash of the minor ticks.
 <td>
 <code>minor_tick_out</code>
 </td>
+</tr>
+<tr>
 <td>
 (integer) The distance in pixels that major ticks should extend out of the main plot area.
 </td>
@@ -7013,6 +7593,8 @@ Basic Tick Format
 <td>
 <code>power_limit_high</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) Limit the use of scientific notation to when log(x) &gt;= value.
 </td>
@@ -7021,6 +7603,8 @@ Basic Tick Format
 <td>
 <code>power_limit_low</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) Limit the use of scientific notation to when log(x) &lt;= value.
 </td>
@@ -7029,6 +7613,8 @@ Basic Tick Format
 <td>
 <code>precision</code>
 </td>
+</tr>
+<tr>
 <td>
 (int) How many digits of precision to display in tick labels. Automatically determined if not specified.
 </td>
@@ -7037,6 +7623,8 @@ Basic Tick Format
 <td>
 <code>use_scientific</code>
 </td>
+</tr>
+<tr>
 <td>
 (logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>.
 </td>
@@ -7048,8 +7636,10 @@ Datetime Tick Format
 <td>
 <code>formats</code>
 </td>
+</tr>
+<tr>
 <td>
-(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
+(list) Display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>.
 </td>
 </tr>
 </table>
@@ -7059,8 +7649,10 @@ Numeral Tick Format
 <td>
 <code>format</code>
 </td>
+</tr>
+<tr>
 <td>
-(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
+(string) Tick formatter based on a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
 </td>
 </tr>
 </table>
@@ -7070,8 +7662,10 @@ Printf Tick Format
 <td>
 <code>format</code>
 </td>
+</tr>
+<tr>
 <td>
-(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
+(string) Tick formatter based on a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.
 </td>
 </tr>
 </table>

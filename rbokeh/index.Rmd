@@ -13,7 +13,9 @@ navpills: |
 
 # Background #
 
-[Bokeh](http://bokeh.pydata.org) is a visualization library that provides a flexible and powerful declarative framework for creating web-based plots.  Bokeh renders plots using HTML canvas and provides many mechanisms for interactivity.  Bokeh has interfaces in Python, Scala, Julia, and now R.  Full acknowledgements to the [Bokeh team at Continuum Analytics](http://bokeh.pydata.org/en/latest/).
+[Bokeh](http://bokeh.pydata.org) is a visualization library that provides a flexible and powerful declarative framework for creating web-based plots.  Bokeh renders plots using HTML canvas and provides many mechanisms for interactivity.  Bokeh has interfaces in Python, Scala, Julia, and now R.
+
+The Bokeh library is written and maintained by the [Bokeh Core Team](http://bokeh.pydata.org/en/latest/docs/contributing.html) consisting of several members of [Continuum Analytics](http://continuum.io) and other members of the open source community.  The rbokeh package is written and maintained by Ryan Hafen ([\@hafenstats](https://twitter.com/hafenstats)) with contributions from [\@timelyportfolio](https://github.com/timelyportfolio) and [\@jrowen](https://github.com/jrowen).  [Contributions are welcome](https://github.com/bokeh/rbokeh/blob/master/CONTRIBUTING.md).
 
 <span class="label label-success">Note:</span> This is the initial release of this package.  If you find bugs or have issues, please file them on the [github issue tracker](https://github.com/bokeh/rbokeh/issues) or hop on the [Bokeh mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh) and be sure tag your subject with [R].
 
