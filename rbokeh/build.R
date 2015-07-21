@@ -10,6 +10,7 @@ if(!require("rbokeh"))
 
 # make sure your working directory is set to repo base directory
 code_path <- "~/Documents/Code/rbokeh"
+setwd("./rbokeh")
 
 # set some optionsf
 pdof1 <- package_docs(lib_dir = "assets", toc_collapse = FALSE)
@@ -23,8 +24,9 @@ check_output("index.html")
 system("open index.html")
 
 # generate rd.html
+dir.create(file.path(code_path, "inst/staticdocs"))
 render_rd("rd_skeleton.Rmd", "rbokeh", code_path,
-  rd_index = "rd_index.yaml",output_format = pdof2)
+  rd_index = "rd_index.yaml", output_format = pdof2)
 check_output("rd.html")
 system("open rd.html")
 

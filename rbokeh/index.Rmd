@@ -197,7 +197,7 @@ Hovering will show the counts in the hexagon bin.
 Here's a combination of many layers using hexbins to show the density of the fielding location of all doubles in the 2014 MLB season, inspired by [this](https://baseballwithr.wordpress.com/2014/06/06/creating-hexbin-plots/):
 
 ```{r, echo=FALSE}
-load("_ignore/doubles.rda")
+load("data/doubles.rda")
 ```
 
 ```{r, eval=FALSE}
@@ -584,7 +584,26 @@ Bokeh provides finer control of parameters for legend appearance (such as where 
 
 Bokeh allows you to specify numeric, categorical, and date/time axes.  In the case of numeric axes, you can also specify a log scale.  Examples for this are in the function reference under [`x_axis`](rd.html#x_axis) and [`y_axis`](rd.html#y_axis).
 
-Full access to the different parameters controlling axis attributes beyond the axis type will be added soon.
+Axis labels formats can be controlled by specifying various tick format parameters in the axis layers.
+
+For example, the default Date axis monthly format of '%b%y' can instead be specified as '%b' using
+
+```{r, message=FALSE}
+figure() %>%
+  ly_lines(seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days"), 
+           rnorm(366)) %>%
+  x_axis(label = "Date", formats = list(months="%b"))
+```
+
+or commas could be added to long numeric labels using
+
+```{r, message=FALSE}
+figure() %>%
+  ly_points(rnorm(10), rnorm(10) * 10000) %>%
+  y_axis(number_formatter = "numeral", format = "0,000")
+```
+
+A complete list of supported axis tick parameters can be found in the function reference under [`x_axis`](rd.html#x_axis) and [`y_axis`](rd.html#y_axis).
 
 ## Tools ##
 
