@@ -15,7 +15,7 @@ navpills: |
 
 [Bokeh](http://bokeh.pydata.org) is a visualization library that provides a flexible and powerful declarative framework for creating web-based plots.  Bokeh renders plots using HTML canvas and provides many mechanisms for interactivity.  Bokeh has interfaces in Python, Scala, Julia, and now R.
 
-The Bokeh library is written and maintained by the [Bokeh Core Team](http://bokeh.pydata.org/en/latest/docs/contributing.html) consisting of several members of [Continuum Analytics](http://continuum.io) and other members of the open source community.  The rbokeh package is written and maintained by Ryan Hafen ([\@hafenstats](https://twitter.com/hafenstats)) with contributions from [\@timelyportfolio](https://github.com/timelyportfolio) and [\@jrowen](https://github.com/jrowen).  [Contributions are welcome](https://github.com/bokeh/rbokeh/blob/master/CONTRIBUTING.md).
+The Bokeh library is written and maintained by the [Bokeh Core Team](http://bokeh.pydata.org/en/latest/docs/contributing.html) consisting of several members of [Continuum Analytics](http://continuum.io) and other members of the open source community.  The rbokeh package is written and maintained by Ryan Hafen ([\@hafenstats](https://twitter.com/hafenstats)) with several [contributions from others](https://github.com/bokeh/rbokeh/graphs/contributors).  [Contributions are welcome](https://github.com/bokeh/rbokeh/blob/master/CONTRIBUTING.md).
 
 <span class="label label-success">Note:</span> This is the initial release of this package.  If you find bugs or have issues, please file them on the [github issue tracker](https://github.com/bokeh/rbokeh/issues) or hop on the [Bokeh mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh) and be sure tag your subject with [R].
 
@@ -40,7 +40,7 @@ Before providing a tutorial, we first show several examples of plots created wit
 
 Speaking of the iris data, our first plot:
 
-```{r, message=FALSE}
+```{r iris1, message=FALSE}
 p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
@@ -52,7 +52,7 @@ Here since we are specifying color and glyph by `Species`, a legend is automatic
 
 We can also specify legend entries manually:
 
-```{r, message=FALSE}
+```{r cars1, message=FALSE}
 z <- lm(dist ~ speed, data = cars)
 p <- figure(width = 600, height = 600) %>%
   ly_points(cars, hover = cars) %>%
@@ -63,7 +63,7 @@ p
 
 Histogram of old faithful geyser data with density overplotted:
 
-```{r, message=FALSE}
+```{r eruptions1, message=FALSE}
 h <- figure(width = 600, height = 400) %>%
   ly_hist(eruptions, data = faithful, breaks = 40, freq = FALSE) %>%
   ly_density(eruptions, data = faithful)
@@ -72,7 +72,7 @@ h
 
 Periodic table of the elements with additional info on hover:
 
-```{r, message=FALSE}
+```{r elements, message=FALSE}
 # prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
@@ -127,7 +127,7 @@ p
 
 Crude map of the world with capital cities:
 
-```{r, message=FALSE}
+```{r worldmap, message=FALSE}
 library(maps)
 data(world.cities)
 caps <- subset(world.cities, capital == 1)
@@ -142,7 +142,7 @@ Hover for population info, etc.
 
 Google map plot:
 
-```{r, message=FALSE}
+```{r gmap1, message=FALSE}
 orstationc <- read.csv("http://geog.uoregon.edu/bartlein/old_courses/geog414s05/data/orstationc.csv")
 
 gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
@@ -152,7 +152,7 @@ gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
 
 Time series plot of daily airline flights with hover and vertical line:
 
-```{r, message=FALSE}
+```{r flights1, message=FALSE}
 p <- figure(width = 800, height = 400) %>%
   ly_lines(date, Freq, data = flightfreq, alpha = 0.3) %>%
   ly_points(date, Freq, data = flightfreq,
@@ -165,30 +165,22 @@ Note that using your scroll wheel over the x or y axis activates a zoom in the d
 
 Scatterplot matrix of iris data with linked panning, zooming, and brushing (try the pan, zoom, and box_select tools in the figure below):
 
-```{r, message=FALSE}
-tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+```{r splom, message=FALSE}
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "reset")
 nms <- expand.grid(names(iris)[1:4], rev(names(iris)[1:4]), stringsAsFactors = FALSE)
-nms$yaxis <- rep(c(TRUE, rep(FALSE, 3)), 4)
-nms$xaxis <- c(rep(FALSE, 12), rep(TRUE, 4))
-nms$h <- nms$w <- 200
-nms$h[nms$xaxis] <- nms$w[nms$yaxis] <- 240
 splom_list <- vector("list", 16)
-
-for(i in seq_along(splom_list)) {
-  splom_list[[i]] <- figure(width = nms$w[i], height = nms$h[i],
-    tools = tools, min_border = 2) %>%
-    ly_points(nms$Var1[i], nms$Var2[i], data = iris,
-      color = Species, size = 5, legend = FALSE) %>%
-    x_axis(visible = nms$xaxis[i], axis_label_text_font_size = "10pt") %>%
-    y_axis(visible = nms$yaxis[i], axis_label_text_font_size = "10pt")
+for(ii in seq_len(nrow(nms))) {
+  splom_list[[ii]] <- figure(width = 200, height = 200, tools = tools,
+    xlab = nms$Var1[ii], ylab = nms$Var2[ii]) %>%
+    ly_points(nms$Var1[ii], nms$Var2[ii], data = iris,
+      color = Species, size = 5, legend = FALSE)
 }
-
-grid_plot(splom_list, nrow = 4, ncol = 4, same_axes = TRUE, link_data = TRUE)
+grid_plot(splom_list, ncol = 4, same_axes = TRUE, link_data = TRUE)
 ```
 
 A hexbin plot:
 
-```{r, message=FALSE}
+```{r hexbin1, message=FALSE}
 figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 ```
 
@@ -206,7 +198,7 @@ download.file("https://gist.githubusercontent.com/hafen/77f25b556725b3d0066b/raw
 doubles <- read.csv(f)
 ```
 
-```{r, message=FALSE}
+```{r baseball, message=FALSE}
 ly_baseball <- function(x) {
   base_x <- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
   base_y <- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
@@ -237,8 +229,8 @@ figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 540,
 
 Image plot of Maunga Whau volcano topography with contour line:
 
-```{r, message=FALSE, warning=FALSE}
-p <- figure(xlim = c(0, 1), ylim = c(0, 1), title = "Volcano") %>%
+```{r volcano, message=FALSE, warning=FALSE}
+p <- figure(title = "Volcano", padding_factor = 0) %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
 p
@@ -246,7 +238,7 @@ p
 
 Log axes:
 
-```{r, message=FALSE}
+```{r cranpkgs, message=FALSE}
 figure() %>%
   ly_points(Date, Packages, Ecdat::CRANpackages) %>%
   y_axis(log = TRUE)
@@ -254,8 +246,8 @@ figure() %>%
 
 Embedding images in a figure:
 
-```{r, message=FALSE}
-url <- c("http://bokeh.pydata.org/en/latest/_static/bokeh-transparent.png",
+```{r images, message=FALSE}
+url <- c("http://bokeh.pydata.org/en/latest/_static/images/logo.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
 ss <- seq(0, 2*pi, length = 13)[-1]
@@ -268,37 +260,28 @@ imgdat <- data.frame(
 )
 
 p <- figure(xlab = "x", ylab = "y") %>%
-  ly_image_url(x, y, w = w, h = h, url = url, data = imgdat,
+  ly_image_url(x, y, w = w, h = h, image_url = url, data = imgdat,
     anchor = "center") %>%
   ly_lines(sin(c(ss, ss[1])) * 10, cos(c(ss, ss[1])) * 10,
     width = 15, alpha = 0.1)
 p
 ```
 
-And for all those R cat lovers:
-
-```{r, message=FALSE}
-url <- "http://placekitten.com/g/600/600"
-p <- figure(width = 600, height = 600, padding_factor = 0) %>%
-  ly_image_url(url = url, w = 10, h = 10, anchor = "bottom_left")
-p
-```
-
 Boxplot of voice data:
 
-```{r, message=FALSE}
+```{r singer, message=FALSE}
 figure(ylab = "Height (inches)", width = 600) %>%
   ly_boxplot(voice.part, height, data = lattice::singer)
 ```
 
 Quantile plot with iris data:
 
-```{r, message=FALSE}
-figure(xlim = c(-0.1, 1.32), width = 550) %>%
+```{r iris2, message=FALSE}
+figure(legend_location = "top_left") %>%
   ly_quantile(Sepal.Length, group = Species, data = iris)
 ```
 
-```{r, eval=FALSE, echo=FALSE}
+```{r singer2, eval=FALSE, echo=FALSE}
 # make this work with tableau20 theme (same shades for each part group)
 figure(xlim = c(-0.1, 1.35), width = 550) %>%
   ly_quantile(height, group = voice.part, data = lattice::singer)
@@ -306,7 +289,7 @@ figure(xlim = c(-0.1, 1.35), width = 550) %>%
 
 Washington cancer rates:
 
-```{r, message=FALSE}
+```{r cancer, message=FALSE}
 wa_cancer <- droplevels(subset(latticeExtra::USCancerRates, state == "Washington"))
 ## y axis sorted by male rate
 ylim <- levels(with(wa_cancer, reorder(county, rate.male)))
@@ -417,6 +400,13 @@ Now is a good time to introduce hover capabilities in rbokeh.  Most layer functi
 figure() %>%
   ly_points(speed, dist, data = cars, hover = c(speed, dist))
 ```
+
+
+```{r, message=FALSE}
+figure() %>%
+  ly_points(speed, dist, data = cars, hover = "This car was going @speed mph!")
+```
+
 
 ## Plot attributes ##
 
@@ -590,9 +580,9 @@ For example, the default Date axis monthly format of '%b%y' can instead be speci
 
 ```{r, message=FALSE}
 figure() %>%
-  ly_lines(seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days"), 
-           rnorm(366)) %>%
-  x_axis(label = "Date", formats = list(months="%b"))
+  ly_lines(seq(as.Date("2012-01-01"),
+    as.Date("2012-12-31"), by="days"), rnorm(366)) %>%
+  x_axis(label = "Date", format = list(months = "%b"))
 ```
 
 or commas could be added to long numeric labels using

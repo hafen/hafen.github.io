@@ -1,3 +1,13 @@
+## Layout the order in which topics are presented in the rd docs
+# 1. get a list of topics with the following:
+#    db <- tools::Rd_db("rbokeh")
+#    topics <- gsub("\\.Rd", "", names(db))
+#    cat(paste(topics, collapse = "\n"))
+# 2. arrange the topic names into sections as desired in the format below:
+## If you need to see which topics are missing, do the following in addition:
+# cur <- yaml::yaml.load_file("rd_index.yaml")
+# cur <- unlist(lapply(cur, function(x) x$topics))
+# cat(paste(setdiff(topics, cur), collapse = "\n")
 -
   section_name: Plots
   description:
@@ -41,6 +51,7 @@
     - ly_contour
     - ly_curve
     - ly_map
+    - ly_bar
 -
   section_name: Finer Control
   description:
@@ -50,6 +61,17 @@
     - x_range
     - y_axis
     - y_range
+-
+  section_name: Themes
+  description:
+  topics:
+    - set_theme
+    - theme_axis
+    - theme_grid
+    - theme_legend
+    - theme_plot
+    - themes
+    - palettes
 -
   section_name: Interaction Tools
   description:
@@ -72,6 +94,9 @@
     - bokeh_render_json
     - rbokehOutput
     - renderRbokeh
+    - rbokeh2gist
+    - rbokeh2html
+    - save_figure
 -
   section_name: Misc
   description:
@@ -81,3 +106,4 @@
     - nyctaxihex
     - pipe
     - point_types
+    - gmap_style

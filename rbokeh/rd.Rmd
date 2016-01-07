@@ -15,34 +15,40 @@ navpills: |
 
 <h1>R Interface for Bokeh</h1>
 
-<p><strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],Bokeh team [aut, cph]</p>
-<p><strong>Version:</strong> 0.2.3.2</p>
+<p><strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],<a href="mailto:schloerke@gmail.com">Schloerke Barret</a> [ctb],Continuum Analytics, Inc. [aut, cph]</p>
+<p><strong>Version:</strong> 0.3.1</p>
 <p><strong>License:</strong> MIT + file LICENSE</p>
 
 <h4>Description</h4>
-<p>R interface for creating plots in Bokeh.  Bokeh by Continuum Analytics, \url{http://bokeh.pydata.org/en/latest/}.</p>
+<p>R interface for creating plots in Bokeh. Bokeh by Continuum
+Analytics, \url{http://bokeh.pydata.org/en/latest/}.</p>
 
 <h4>Depends</h4>
 <p>(none)</p>
 
 <h4>Imports</h4>
 <p>
-htmlwidgets,
+htmlwidgets (>= 0.5),
 maps,
 methods,
 jsonlite,
 digest,
 hexbin,
-magrittr</p>
+lazyeval,
+magrittr,
+ggplot2,
+scales,
+gistr</p>
 
 <h4>Suggests</h4>
 <p>
 testthat,
-data.table</p>
+data.table,
+lattice,
+roxygen2 (>= 5.0.0)</p>
 
 <h4>Enhances</h4>
-<p>
-shiny (>= 0.10.2.1)</p>
+<p>shiny (>= 0.12)</p>
 
 # Plots
 
@@ -54,15 +60,20 @@ shiny (>= 0.10.2.1)</p>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>figure(width = 480, height = 520, title = NULL, xlab = NULL,
-  ylab = NULL, xlim = NULL, ylim = NULL, padding_factor = 0.07,
-  plot_width = NULL, plot_height = NULL, xgrid = TRUE, ygrid = TRUE,
-  xaxes = "below", yaxes = "left", tools = c("pan", "wheel_zoom",
-  "box_zoom", "resize", "reset", "save"), theme = getOption("bokeh_theme"),
-  ...)</code></pre>
+<pre class="r"><code>figure(data = NULL, width = 480, height = 520, title = NULL,
+  xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+  padding_factor = 0.07, xgrid = TRUE, ygrid = TRUE, xaxes = "below",
+  yaxes = "left", legend_location = "top_right", tools = c("pan",
+  "wheel_zoom", "box_zoom", "resize", "reset", "save", "help"),
+  theme = getOption("bokeh_theme"), toolbar_location = "above",
+  h_symmetry = TRUE, v_symmetry = FALSE, logo = "normal",
+  lod_factor = 10, lod_interval = 300, lod_threshold = NULL,
+  lod_timeout = 500, webgl = FALSE, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
+  <dt>data</dt>
+  <dd class="rd-dd">data to be supplied to all layers, if the layer doesnt supply a data value</dd>
   <dt>width</dt>
   <dd class="rd-dd">figure width in pixels</dd>
   <dt>height</dt>
@@ -79,8 +90,6 @@ shiny (>= 0.10.2.1)</p>
   <dd class="rd-dd">the extent of the plotting area in the y-dimension (will be computed automatically if not specified).</dd>
   <dt>padding_factor</dt>
   <dd class="rd-dd">if limits are not specified, by what factor should the extents of the data be padded</dd>
-  <dt>plot_width,plot_height</dt>
-  <dd class="rd-dd">width and height of the entire plot in pixels, including border space</dd>
   <dt>xgrid</dt>
   <dd class="rd-dd">whether to draw x axis grid lines</dd>
   <dt>ygrid</dt>
@@ -89,100 +98,41 @@ shiny (>= 0.10.2.1)</p>
   <dd class="rd-dd">where to put x axis, or FALSE if no x axis ticks / labels</dd>
   <dt>yaxes</dt>
   <dd class="rd-dd">where to put y axis, or FALSE if no y axis ticks / labels</dd>
+  <dt>legend_location</dt>
+  <dd class="rd-dd">(top_right, top_left, bottom_left, bottom_right) the location where the legend should draw itself, or NULL to omit the legend</dd>
   <dt>tools</dt>
-  <dd class="rd-dd">character vector of interactivity tools options (acceptable values are: "pan", "wheel_zoom", "box_zoom", "resize", "crosshair", "box_select", "lasso_select", "reset", "save").  Additionally, tool functions can be called on a figure to specify more control - see the "See Also" section below for a list of tool functions.  If <code>NULL</code>, the toolbar will not be drawn.  If <code>""</code> the toolbar will be drawn but no tools will be added by default.</dd>
+  <dd class="rd-dd">character vector of interactivity tools options (acceptable values are: "pan", "wheel_zoom", "box_zoom", "resize", "crosshair", "box_select", "lasso_select", "reset", "save", "help").  Additionally, tool functions can be called on a figure to specify more control - see the "See Also" section below for a list of tool functions.  If <code>NULL</code>, the toolbar will not be drawn.  If <code>""</code> the toolbar will be drawn but no tools will be added by default.</dd>
   <dt>theme</dt>
-  <dd class="rd-dd">an rbokeh theme to use (tableau by default)</dd>
+  <dd class="rd-dd">an rbokeh theme to use</dd>
+  <dt>toolbar_location</dt>
+  <dd class="rd-dd">(above, below, left, right) Where the toolbar will be located. If set to NULL, no toolbar will be attached to the plot.</dd>
+  <dt>h_symmetry</dt>
+  <dd class="rd-dd">(logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger).</dd>
+  <dt>v_symmetry</dt>
+  <dd class="rd-dd">(logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger).</dd>
+  <dt>logo</dt>
+  <dd class="rd-dd">(normal, grey) What version of the Bokeh logo to display on the toolbar. If set to NULL, no logo will be displayed.</dd>
+  <dt>lod_factor</dt>
+  <dd class="rd-dd">(integer) Decimation factor to use when applying level-of-detail decimation (see "Controlling level of detail").</dd>
+  <dt>lod_interval</dt>
+  <dd class="rd-dd">(integer) Interval (in ms) during which an interactive tool event will enable level-of-detail downsampling (see "Controlling level of detail").</dd>
+  <dt>lod_threshold</dt>
+  <dd class="rd-dd">(integer) A number of data points, above which level-of-detail downsampling may be performed by glyph renderers. Set to <code>NULL</code> to disable any level-of-detail downsampling (see "Controlling level of detail").</dd>
+  <dt>lod_timeout</dt>
+  <dd class="rd-dd">(integer) Timeout (in ms) for checking whether interactive tool events are still occurring. Once level-of-detail mode is enabled, a check is made every lod_timeout ms. If no interactive tool events have happened, level-of-detail mode is disabled (see "Controlling level of detail").</dd>
+  <dt>webgl</dt>
+  <dd class="rd-dd">(logical) should webgl be used for rendering?</dd>
   <dt>...</dt>
-  <dd class="rd-dd">additional parameters for fine control figure properties (see "Additional parameters" below)</dd>
+  <dd class="rd-dd">parameters can be specified here that are available in <code><a href=#theme_plot>theme_plot</a></code></dd>
 </dl>
 
-  <h4>Additional parameters</h4>
+  <h4>Controlling level of detail</h4>
 
   <p class="rd-p"></p>
 
-  <p class="rd-p"><table><tr><td>
-<code>background_fill</code> </td>
-</tr><tr><td> (color) background color of plot </td>
-</tr><tr><td>
-<code>border_fill</code> </td>
-</tr><tr><td> (color) fill color of border area of plot </td>
-</tr><tr><td>
-<code>min_border</code> </td>
-</tr><tr><td> (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border. </td>
-</tr><tr><td>
-<code>min_border_bottom</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_left</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_right</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_top</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>outline_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_color</code> </td>
-</tr><tr><td> (color) The line color for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_dash</code> </td>
-</tr><tr><td> The line dash for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_width</code> </td>
-</tr><tr><td> (integer) The line width for the plot border outline. </td>
-</tr><tr><td>
-<code>plot_height</code> </td>
-</tr><tr><td> (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used. </td>
-</tr><tr><td>
-<code>plot_width</code> </td>
-</tr><tr><td> (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used. </td>
-</tr><tr><td>
-<code>title_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align for the plot title. </td>
-</tr><tr><td>
-<code>title_text_alpha</code> </td>
-</tr><tr><td> The text alpha for the plot title. </td>
-</tr><tr><td>
-<code>title_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline for the plot title. </td>
-</tr><tr><td>
-<code>title_text_color</code> </td>
-</tr><tr><td> (color) The text color for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font</code> </td>
-</tr><tr><td> (string) The text font for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style for the plot title. </td>
-</tr><tr><td>
-<code>toolbar_location</code> </td>
-</tr><tr><td> (above, below, left, right) Where the toolbar will be located. If set to None, no toolbar will be attached to the plot. </td>
-</tr><tr><td>
-<code>h_symmetry</code> </td>
-</tr><tr><td> (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger). </td>
-</tr><tr><td>
-<code>v_symmetry</code> </td>
-</tr><tr><td> (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger). </td>
-</tr><tr><td>
-<code>logo</code> </td>
-</tr><tr><td> (normal, grey) What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed. </td>
-</tr></table></p>
+  <p class="rd-p">Although the HTML canvas can comfortably display tens or even hundreds of thousands of glyphs, doing so can have adverse affects on interactive performance. In order to accommodate large-ish (but not enormous) data sizes, Bokeh plots offer "Level of Detail" (LOD) capability in the client.</p>
+
+  <p class="rd-p">The basic idea is that during interactive operations (e.g., panning or zooming), the plot only draws some small fraction data points. This hopefully allows the general sense of the interaction to be preserved mid-flight, while maintaining interactive performance. See the <code>lod_</code> parameters for information on how to control this.</p>
 
 
 
@@ -222,12 +172,12 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
 
 
 <h4>Usage</h4>
-<pre class="r"><code>gmap(lat = 0, lng = 0, zoom = 0, map_type = "hybrid", width = 480,
-  height = 480, title = NULL, xlab = NULL, ylab = NULL, xlim = NULL,
-  ylim = NULL, padding_factor = 0.07, plot_width = NULL,
-  plot_height = NULL, xgrid = FALSE, ygrid = FALSE, xaxes = "below",
+<pre class="r"><code>gmap(lat = 0, lng = 0, zoom = 0, map_type = "hybrid",
+  map_style = NULL, width = 480, height = 480, title = NULL,
+  xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+  padding_factor = 0.07, xgrid = FALSE, ygrid = FALSE, xaxes = "below",
   yaxes = "left", tools = c("pan", "wheel_zoom", "box_zoom", "resize",
-  "reset", "save"), theme = getOption("bokeh_theme"), ...)</code></pre>
+  "reset", "save"), theme = getOption("bokeh_theme"))</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -239,6 +189,8 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   <dd class="rd-dd">initial <a href = https://developers.google.com/maps/documentation/staticmaps/\#Zoomlevels>zoom level</a> to use when displaying the map</dd>
   <dt>map_type</dt>
   <dd class="rd-dd"><a href = https://developers.google.com/maps/documentation/staticmaps/\#MapTypes>map type</a> to use for the plot - one of "hybrid", "satellite", "roadmap", "terrain"</dd>
+  <dt>map_style</dt>
+  <dd class="rd-dd">a json string of a Google Maps style - see <code><a href=#gmap_style>gmap_style</a></code></dd>
   <dt>width</dt>
   <dd class="rd-dd">figure width in pixels</dd>
   <dt>height</dt>
@@ -255,10 +207,6 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   <dd class="rd-dd">the extent of the plotting area in the y-dimension (will be computed automatically if not specified).</dd>
   <dt>padding_factor</dt>
   <dd class="rd-dd">if limits are not specified, by what factor should the extents of the data be padded</dd>
-  <dt>plot_width</dt>
-  <dd class="rd-dd">width and height of the entire plot in pixels, including border space</dd>
-  <dt>plot_height</dt>
-  <dd class="rd-dd">width and height of the entire plot in pixels, including border space</dd>
   <dt>xgrid</dt>
   <dd class="rd-dd">whether to draw x axis grid lines</dd>
   <dt>ygrid</dt>
@@ -268,100 +216,10 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   <dt>yaxes</dt>
   <dd class="rd-dd">where to put y axis, or FALSE if no y axis ticks / labels</dd>
   <dt>tools</dt>
-  <dd class="rd-dd">character vector of interactivity tools options (acceptable values are: "pan", "wheel_zoom", "box_zoom", "resize", "crosshair", "box_select", "lasso_select", "reset", "save").  Additionally, tool functions can be called on a figure to specify more control - see the "See Also" section below for a list of tool functions.  If <code>NULL</code>, the toolbar will not be drawn.  If <code>""</code> the toolbar will be drawn but no tools will be added by default.</dd>
+  <dd class="rd-dd">character vector of interactivity tools options (acceptable values are: "pan", "wheel_zoom", "box_zoom", "resize", "crosshair", "box_select", "lasso_select", "reset", "save", "help").  Additionally, tool functions can be called on a figure to specify more control - see the "See Also" section below for a list of tool functions.  If <code>NULL</code>, the toolbar will not be drawn.  If <code>""</code> the toolbar will be drawn but no tools will be added by default.</dd>
   <dt>theme</dt>
-  <dd class="rd-dd">an rbokeh theme to use (tableau by default)</dd>
-  <dt>...</dt>
-  <dd class="rd-dd">additional parameters for fine control figure properties (see "Additional parameters" below)</dd>
+  <dd class="rd-dd">an rbokeh theme to use</dd>
 </dl>
-
-  <h4>Additional parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>background_fill</code> </td>
-</tr><tr><td> (color) background color of plot </td>
-</tr><tr><td>
-<code>border_fill</code> </td>
-</tr><tr><td> (color) fill color of border area of plot </td>
-</tr><tr><td>
-<code>min_border</code> </td>
-</tr><tr><td> (integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border. </td>
-</tr><tr><td>
-<code>min_border_bottom</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_left</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_right</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>min_border_top</code> </td>
-</tr><tr><td> (integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc. </td>
-</tr><tr><td>
-<code>outline_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_color</code> </td>
-</tr><tr><td> (color) The line color for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_dash</code> </td>
-</tr><tr><td> The line dash for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join for the plot border outline. </td>
-</tr><tr><td>
-<code>outline_line_width</code> </td>
-</tr><tr><td> (integer) The line width for the plot border outline. </td>
-</tr><tr><td>
-<code>plot_height</code> </td>
-</tr><tr><td> (integer) Total height of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the height of the HTML canvas that will be used. </td>
-</tr><tr><td>
-<code>plot_width</code> </td>
-</tr><tr><td> (integer) Total width of the entire plot (including any axes, titles, border padding, etc.) This corresponds directly to the width of the HTML canvas that will be used. </td>
-</tr><tr><td>
-<code>title_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align for the plot title. </td>
-</tr><tr><td>
-<code>title_text_alpha</code> </td>
-</tr><tr><td> The text alpha for the plot title. </td>
-</tr><tr><td>
-<code>title_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline for the plot title. </td>
-</tr><tr><td>
-<code>title_text_color</code> </td>
-</tr><tr><td> (color) The text color for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font</code> </td>
-</tr><tr><td> (string) The text font for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size for the plot title. </td>
-</tr><tr><td>
-<code>title_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style for the plot title. </td>
-</tr><tr><td>
-<code>toolbar_location</code> </td>
-</tr><tr><td> (above, below, left, right) Where the toolbar will be located. If set to None, no toolbar will be attached to the plot. </td>
-</tr><tr><td>
-<code>h_symmetry</code> </td>
-</tr><tr><td> (logical) Whether the total horizontal padding on both sides of the plot will be made equal (the left or right padding amount, whichever is larger). </td>
-</tr><tr><td>
-<code>v_symmetry</code> </td>
-</tr><tr><td> (logical) Whether the total vertical padding on both sides of the plot will be made equal (the top or bottom padding amount, whichever is larger). </td>
-</tr><tr><td>
-<code>logo</code> </td>
-</tr><tr><td> (normal, grey) What version of the Bokeh logo to display on the toolbar. If set to None, no logo will be displayed. </td>
-</tr></table></p>
-
 
   <h4>Note</h4>
 
@@ -374,7 +232,17 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   lat = 40.74, lng = -73.95, zoom = 11,
   map_type = "roadmap", width = 1000, height = 800) %>%
   ly_hexbin(nyctaxihex, alpha = 0.5,
-    palette = "Spectral10", trans = log, inv = exp)</code></pre>
+    palette = "Spectral10", trans = log, inv = exp)
+
+# custom map style
+gmap(lat = 40.74, lng = -73.95, zoom = 11,
+  width = 600, height = 600,
+  map_style = gmap_style("blue_water"))</code></pre>
+
+<h4>See also</h4>
+
+<code><a href=#gmap_style>gmap_style</a></code>
+
 
 
 
@@ -385,7 +253,8 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
 
 <h4>Usage</h4>
 <pre class="r"><code>grid_plot(figs, width = NULL, height = NULL, nrow = 1, ncol = 1,
-  byrow = TRUE, same_axes = FALSE, link_data = FALSE)</code></pre>
+  byrow = TRUE, same_axes = FALSE, simplify_axes = TRUE,
+  y_margin = NULL, x_margin = NULL, link_data = FALSE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -403,6 +272,10 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   <dd class="rd-dd">populate the grid by row according to the order of figure elements supplied in <code>params</code></dd>
   <dt>same_axes</dt>
   <dd class="rd-dd">logical or vector of two logicals specifying whether the x and/or y axis limits should be the same for each plot in the grid</dd>
+  <dt>simplify_axes</dt>
+  <dd class="rd-dd">logical or vector of logicals specifying whether to simply the x and/or y axes (only show the axes along the bottom and left sides of the grid) - only valid if <code>same_axes</code> is <code>TRUE</code> for the axis</dd>
+  <dt>x_margin, y_margin</dt>
+  <dd class="rd-dd">specify the margin space in pixels to be left for axes when using <code>simplify_axes=TRUE</code></dd>
   <dt>link_data</dt>
   <dd class="rd-dd">logical - should an attempt be made to join the data sources of each plot for linked brushing? (see details)</dd>
 </dl>
@@ -416,29 +289,40 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
 
 
 <h4>Examples</h4>
-<pre class="r"><code>tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+<pre class="r"><code>idx <- split(1:150, iris$Species)
+figs <- lapply(idx, function(x) {
+  figure(width = 300, height = 300) %>%
+    ly_points(Sepal.Length, Sepal.Width, data = iris[x,],
+      hover = list(Sepal.Length, Sepal.Width))
+})
 
-p1 <- figure(tools = tools) %>%
-  ly_points(Sepal.Length, Sepal.Width, data = iris,
-    color = Species, hover = list(Sepal.Length, Sepal.Width))
-
-p2 <- figure(tools = tools) %>%
-  ly_points(Petal.Length, Petal.Width, data = iris,
-    color = Species, hover = list(Sepal.Length, Sepal.Width))
-
-# 1 row, 2 columns
-grid_plot(list(p1, p2))
+# 1 row, 3 columns
+grid_plot(figs)
+# unnamed list will remove labels
+grid_plot(unname(figs))
+# 2 rows, 2 columns
+grid_plot(figs, nrow = 2)
 # x and y axis with same (and linked) limits
-grid_plot(list(p1, p2), same_axes = TRUE)
-# x axis has same (and linked) limits
-grid_plot(list(p1, p2), same_axes = c(TRUE, FALSE))
-# same axes and data is linked (try box_select tool)
-grid_plot(list(p1, p2), same_axes = TRUE, link_data = TRUE)
-# 1 column, 2 rows
-grid_plot(list(p1, p2), ncol = 1)
+grid_plot(figs, same_axes = TRUE)
+# x axis with same (and linked) limits
+grid_plot(figs, same_axes = c(TRUE, FALSE))
 # send lists instead of specifying nrow and ncol
-grid_plot(list(c(list(p1), list(p2))))
-grid_plot(list(list(p1), list(p2)))</code></pre>
+grid_plot(list(
+  c(list(figs[[1]]), list(figs[[2]])),
+  list(figs[[3]])
+))
+# a null entry will be skipped in the grid
+figs[1] <- list(NULL)
+grid_plot(figs, nrow = 2)
+
+# link data across plots in the grid (try box_select tool)
+# (data sources must be the same)
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "resize", "reset")
+p1 <- figure(tools = tools) %>%
+  ly_points(Sepal.Length, Sepal.Width, data = iris, color = Species)
+p2 <- figure(tools = tools) %>%
+  ly_points(Petal.Length, Petal.Width, data = iris, color = Species)
+grid_plot(list(p1, p2), same_axes = TRUE, link_data = TRUE)</code></pre>
 
 # Layer Functions
 
@@ -450,9 +334,9 @@ grid_plot(list(list(p1), list(p2)))</code></pre>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = NULL, inner_radius = 0.1,
-  outer_radius = 0.3, start_angle = 0, end_angle = 2 * pi,
-  direction = "anticlock", color = NULL, alpha = 1, hover = NULL,
+<pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = figure_data(fig),
+  inner_radius = 0.1, outer_radius = 0.3, start_angle = 0, end_angle = 2
+  * pi, direction = "anticlock", color = NULL, alpha = 1, hover = NULL,
   url = NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
@@ -561,8 +445,9 @@ grid_plot(list(list(p1), list(p2)))</code></pre>
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>rescale <- function(x) {
   (x - min(x)) / diff(range(x))
+}
 
 figure() %>%
   ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
@@ -583,26 +468,26 @@ figure() %>%
 
 figure() %>%
   ly_annulus(Sepal.Length, Sepal.Width, data = iris,
-    color = Species, hover = Species,
+    color = Species, hover = Species, alpha = 0.5,
     outer_radius = rescale(Petal.Length) * 0.3,
     inner_radius = rescale(Petal.Length) * 0.1)</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annulus>ly_annulus</a></code>; <code><a href=#ly_arc>ly_arc</a></code>;
-  <code><a href=#ly_bezier>ly_bezier</a></code>; <code><a href=#ly_boxplot>ly_boxplot</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annulus>ly_annulus</a></code>, <code><a href=#ly_arc>ly_arc</a></code>,
+  <code><a href=#ly_bar>ly_bar</a></code>, <code><a href=#ly_bezier>ly_bezier</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -613,7 +498,7 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_annulus(fig, x, y = NULL, data = NULL, inner_radius = 0.1,
+<pre class="r"><code>ly_annulus(fig, x, y = NULL, data = figure_data(fig), inner_radius = 0.1,
   outer_radius = 0.2, color = NULL, alpha = 1, hover = NULL,
   url = NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
@@ -717,8 +602,9 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>rescale <- function(x) {
   (x - min(x)) / diff(range(x))
+}
 
 figure() %>%
   ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
@@ -739,26 +625,26 @@ figure() %>%
 
 figure() %>%
   ly_annulus(Sepal.Length, Sepal.Width, data = iris,
-    color = Species, hover = Species,
+    color = Species, hover = Species, alpha = 0.5,
     outer_radius = rescale(Petal.Length) * 0.3,
     inner_radius = rescale(Petal.Length) * 0.1)</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_arc>ly_arc</a></code>;
-  <code><a href=#ly_bezier>ly_bezier</a></code>; <code><a href=#ly_boxplot>ly_boxplot</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_arc>ly_arc</a></code>,
+  <code><a href=#ly_bar>ly_bar</a></code>, <code><a href=#ly_bezier>ly_bezier</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -769,10 +655,10 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_arc(fig, x, y = NULL, data = NULL, color = NULL, alpha = 1,
-  width = 2, type = 1, radius = 0.2, start_angle = 0, end_angle = 2 *
-  pi, direction = "anticlock", legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_arc(fig, x, y = NULL, data = figure_data(fig), color = NULL,
+  alpha = 1, width = 2, type = 1, radius = 0.2, start_angle = 0,
+  end_angle = 2 * pi, direction = "anticlock", legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -833,8 +719,9 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>rescale <- function(x) {
   (x - min(x)) / diff(range(x))
+}
 
 figure() %>%
   ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
@@ -855,26 +742,26 @@ figure() %>%
 
 figure() %>%
   ly_annulus(Sepal.Length, Sepal.Width, data = iris,
-    color = Species, hover = Species,
+    color = Species, hover = Species, alpha = 0.5,
     outer_radius = rescale(Petal.Length) * 0.3,
     inner_radius = rescale(Petal.Length) * 0.1)</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_bezier>ly_bezier</a></code>; <code><a href=#ly_boxplot>ly_boxplot</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_bar>ly_bar</a></code>, <code><a href=#ly_bezier>ly_bezier</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -883,7 +770,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "bezier" layer to a Bokeh figure</h3>
 
-Draws Bezier curves with the given starting, ending, and control points.
+<p class="rd-p">Draws Bezier curves with the given starting, ending, and control points.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_bezier(fig, x0, y0, x1, y1, cx0, cy0, cx1, cy1, data = figure_data(fig),
+  color = "black", alpha = 1, width = 1, type = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -950,20 +842,20 @@ Draws Bezier curves with the given starting, ending, and control points.
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_boxplot>ly_boxplot</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -974,9 +866,10 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_crect(fig, x, y = NULL, data = NULL, width = 1, height = 1,
-  angle = 0, dilate = FALSE, color = NULL, alpha = 1, hover = NULL,
-  url = NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_crect(fig, x, y = NULL, data = figure_data(fig), width = 1,
+  height = 1, angle = 0, dilate = FALSE, color = NULL, alpha = 1,
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1134,20 +1027,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1156,7 +1049,7 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add an "image" layer to a Bokeh figure</h3>
 
-Draws a grid of rectangles with colors corresponding to the values in <code>z</code>
+<p class="rd-p">Draws a grid of rectangles with colors corresponding to the values in <code>z</code></p>
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_image(fig, z, rows, cols, x = 0, y = 0, dw = 1, dh = 1,
@@ -1199,20 +1092,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1221,12 +1114,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add an "image_url" layer to a Bokeh figure</h3>
 
-Renders raster images from URLs at provided coordinates
+<p class="rd-p">Renders raster images from URLs at provided coordinates</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_image_url(fig, x = 0, y = 0, data = NULL, w = 10, h = 10, url,
-  dilate = TRUE, anchor = "top_left", angle = 0, lname = NULL,
-  lgroup = NULL)</code></pre>
+<pre class="r"><code>ly_image_url(fig, x = 0, y = 0, data = figure_data(fig), w = 10,
+  h = 10, image_url, dilate = TRUE, anchor = "top_left", angle = 0,
+  lname = NULL, lgroup = NULL)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1238,9 +1131,9 @@ Renders raster images from URLs at provided coordinates
   <dd class="rd-dd">y coordinates</dd>
   <dt>data</dt>
   <dd class="rd-dd">an optional data frame, providing the source for inputs x, y, and other properties</dd>
-  <dt>w,h</dt>
+  <dt>w, h</dt>
   <dd class="rd-dd">values or field names of width and height of image</dd>
-  <dt>url</dt>
+  <dt>image_url</dt>
   <dd class="rd-dd">values or field name of image URLs</dd>
   <dt>dilate</dt>
   <dd class="rd-dd">logical - whether to dilate pixel distance computations when drawing</dd>
@@ -1269,7 +1162,7 @@ imgdat <- data.frame(
 )
 
 p <- figure(xlab = "x", ylab = "y") %>%
-  ly_image_url(x, y, w = w, h = h, url = url, data = imgdat,
+  ly_image_url(x, y, w = w, h = h, image_url = url, data = imgdat,
     anchor = "center") %>%
   ly_lines(sin(c(ss, ss[1])) * 10, cos(c(ss, ss[1])) * 10,
     width = 15, alpha = 0.1)
@@ -1277,20 +1170,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1302,9 +1195,9 @@ Draws lines with the given coordinates.</h3>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_lines(fig, x, y = NULL, data = NULL, group = NULL, color = "black",
-  type = 1, width = 1, alpha = 1, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_lines(fig, x, y = NULL, data = figure_data(fig), group = NULL,
+  color = "black", type = 1, width = 1, alpha = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1368,20 +1261,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1390,7 +1283,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "multi_line" layer to a Bokeh figure</h3>
 
-Draws multiple lines with the given lists of coordinates.
+<p class="rd-p">Draws multiple lines with the given lists of coordinates.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_multi_line(fig, xs, ys, color = "black", alpha = 1, width = 1,
+  type = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1436,20 +1333,20 @@ Draws multiple lines with the given lists of coordinates.
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1458,6 +1355,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add an "oval" layer to a Bokeh figure</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_oval(fig, x, y = NULL, data = figure_data(fig), width = 0.1,
+  height = 0.1, angle = 0, color = NULL, alpha = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1559,20 +1461,20 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1581,6 +1483,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "patch" layer to a Bokeh figure</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_patch(fig, x, y, data = figure_data(fig), color = NULL, alpha = 1,
+  hover = NULL, url = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1685,20 +1592,20 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1709,9 +1616,9 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_points(fig, x, y = NULL, data = NULL, glyph = 21, color = NULL,
-  alpha = 1, size = 10, hover = NULL, url = NULL, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_points(fig, x, y = NULL, data = figure_data(fig), glyph = 21,
+  color = NULL, alpha = 1, size = 10, hover = NULL, url = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1813,11 +1720,16 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>p <- figure() %>%
+<pre class="r"><code>figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
-p
+
+# custom hover
+mtcars$model <- row.names(mtcars)
+figure() %>%
+  ly_points(disp, mpg, data = mtcars, color = cyl,
+    hover = "This <strong>@model</strong><br>has @hp horsepower!")
 
 
 z <- lm(dist ~ speed, data = cars)
@@ -1829,20 +1741,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1851,6 +1763,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "polygons" layer to a Bokeh figure</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_polygons(fig, xs, ys, group = NULL, data = figure_data(fig),
+  color = NULL, alpha = 1, hover = NULL, url = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1950,20 +1867,20 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -1972,7 +1889,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "quadratic" layer to a Bokeh figure</h3>
 
-Draws quadratic curves with the given starting, ending, and control points.
+<p class="rd-p">Draws quadratic curves with the given starting, ending, and control points.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_quadratic(fig, x0, y0, x1, y1, cx, cy, data = figure_data(fig),
+  color = "black", alpha = 1, width = 1, type = 1, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2050,20 +1972,20 @@ Draws quadratic curves with the given starting, ending, and control points.
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2072,7 +1994,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "ray" layer to a Bokeh figure</h3>
 
-Draws line segments starting at the given coordinate and extending the given length at the given angle.
+<p class="rd-p">Draws line segments starting at the given coordinate and extending the given length at the given angle.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_ray(fig, x, y = NULL, data = figure_data(fig), length = NULL,
+  angle = 0, color = "black", type = 1, width = 1, alpha = NULL,
+  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2131,20 +2058,20 @@ Draws line segments starting at the given coordinate and extending the given len
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_quantile>ly_quantile</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_quantile>ly_quantile</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2153,6 +2080,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "rect" layer to a Bokeh figure</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_rect(fig, xleft, ybottom, xright, ytop, data = figure_data(fig),
+  color = NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2256,20 +2188,20 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_quantile>ly_quantile</a></code>; <code><a href=#ly_ray>ly_ray</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_quantile>ly_quantile</a></code>,
+  <code><a href=#ly_ray>ly_ray</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2278,7 +2210,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "segments" layer to a Bokeh figure</h3>
 
-Draws line segments with the given starting and ending coordinates.
+<p class="rd-p">Draws line segments with the given starting and ending coordinates.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_segments(fig, x0, y0, x1, y1, data = figure_data(fig), color = "black",
+  alpha = 1, width = 1, type = 1, legend = NULL, lname = NULL,
+  lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2337,20 +2274,20 @@ Draws line segments with the given starting and ending coordinates.
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_quantile>ly_quantile</a></code>; <code><a href=#ly_ray>ly_ray</a></code>;
-  <code><a href=#ly_rect>ly_rect</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_quantile>ly_quantile</a></code>,
+  <code><a href=#ly_ray>ly_ray</a></code>, <code><a href=#ly_rect>ly_rect</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2361,10 +2298,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_text(fig, x, y = NULL, text = NULL, data = NULL, color = "black",
-  alpha = 1, angle = 0, align = NULL, baseline = NULL, font = NULL,
-  font_size = NULL, font_style = NULL, x_offset = NULL, y_offset = NULL,
-  legend = NULL, lname = NULL, lgroup = NULL)</code></pre>
+<pre class="r"><code>ly_text(fig, x, y = NULL, text = NULL, data = figure_data(fig),
+  color = "black", alpha = 1, angle = 0, align = NULL,
+  baseline = NULL, font = NULL, font_size = NULL, font_style = NULL,
+  x_offset = NULL, y_offset = NULL, legend = NULL, lname = NULL,
+  lgroup = NULL)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2465,20 +2403,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_quantile>ly_quantile</a></code>; <code><a href=#ly_ray>ly_ray</a></code>;
-  <code><a href=#ly_rect>ly_rect</a></code>; <code><a href=#ly_segments>ly_segments</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_quantile>ly_quantile</a></code>,
+  <code><a href=#ly_ray>ly_ray</a></code>, <code><a href=#ly_rect>ly_rect</a></code>,
+  <code><a href=#ly_segments>ly_segments</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2489,10 +2427,10 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_wedge(fig, x, y = NULL, data = NULL, radius = 0.3, start_angle = 0,
-  end_angle = 2 * pi, direction = "anticlock", color = NULL, alpha = 1,
-  hover = NULL, url = NULL, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_wedge(fig, x, y = NULL, data = figure_data(fig), radius = 0.3,
+  start_angle = 0, end_angle = 2 * pi, direction = "anticlock",
+  color = NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2598,8 +2536,9 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rescale <- function(x)
+<pre class="r"><code>rescale <- function(x) {
   (x - min(x)) / diff(range(x))
+}
 
 figure() %>%
   ly_annular_wedge(Sepal.Length, Sepal.Width, data = iris,
@@ -2620,26 +2559,26 @@ figure() %>%
 
 figure() %>%
   ly_annulus(Sepal.Length, Sepal.Width, data = iris,
-    color = Species, hover = Species,
+    color = Species, hover = Species, alpha = 0.5,
     outer_radius = rescale(Petal.Length) * 0.3,
     inner_radius = rescale(Petal.Length) * 0.1)</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_quantile>ly_quantile</a></code>; <code><a href=#ly_ray>ly_ray</a></code>;
-  <code><a href=#ly_rect>ly_rect</a></code>; <code><a href=#ly_segments>ly_segments</a></code>;
-  <code><a href=#ly_text>ly_text</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_quantile>ly_quantile</a></code>,
+  <code><a href=#ly_ray>ly_ray</a></code>, <code><a href=#ly_rect>ly_rect</a></code>,
+  <code><a href=#ly_segments>ly_segments</a></code>, <code><a href=#ly_text>ly_text</a></code>
 
 
 # Higher-Level Layer Functions
@@ -2650,7 +2589,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "quantile" layer to a Bokeh figure</h3>
 
-Draws quantiles
+<p class="rd-p">Draws quantiles</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_quantile(fig, x, group = NULL, data = figure_data(fig), probs = NULL,
+  distn = qunif, ncutoff = 200, color = NULL, alpha = 1,
+  legend = TRUE, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2752,20 +2696,20 @@ Draws quantiles
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_map>ly_map</a></code>;
-  <code><a href=#ly_multi_line>ly_multi_line</a></code>; <code><a href=#ly_oval>ly_oval</a></code>;
-  <code><a href=#ly_patch>ly_patch</a></code>; <code><a href=#ly_points>ly_points</a></code>;
-  <code><a href=#ly_polygons>ly_polygons</a></code>; <code><a href=#ly_quadratic>ly_quadratic</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_map>ly_map</a></code>, <code><a href=#ly_multi_line>ly_multi_line</a></code>,
+  <code><a href=#ly_oval>ly_oval</a></code>, <code><a href=#ly_patch>ly_patch</a></code>,
+  <code><a href=#ly_points>ly_points</a></code>, <code><a href=#ly_polygons>ly_polygons</a></code>,
+  <code><a href=#ly_quadratic>ly_quadratic</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2774,13 +2718,21 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "density" layer to a Bokeh figure</h3>
 
-Draws a kernel density estimate
+<p class="rd-p">Draws a kernel density estimate</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_density(fig, x, data = figure_data(fig), bw = "nrd0", adjust = 1,
+  kernel = c("gaussian", "epanechnikov", "rectangular", "triangular",
+  "biweight", "cosine", "optcosine"), weights = NULL, window = kernel,
+  n = 512, cut = 3, na.rm = FALSE, color = "black", alpha = 1,
+  width = 1, type = 1, legend = NULL, lname = NULL, lgroup = NULL,
+  ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>fig</dt>
   <dd class="rd-dd">figure to modify</dd>
-  <dt>x,bw,adjust,kernel,weights,window,n,cut,na.rm</dt>
+  <dt>x, bw, adjust, kernel, weights, window, n, cut, na.rm</dt>
   <dd class="rd-dd">parameters passed to <code><a href=http://www.inside-r.org/r-doc/stats/density>density</a></code></dd>
   <dt>data</dt>
   <dd class="rd-dd">an optional data frame, providing the source for x</dd>
@@ -2822,20 +2774,20 @@ Draws a kernel density estimate
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2844,7 +2796,12 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "hist" layer to a Bokeh figure</h3>
 
-Draws a histogram
+<p class="rd-p">Draws a histogram</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_hist(fig, x, data = figure_data(fig), breaks = "Sturges", freq = TRUE,
+  include.lowest = TRUE, right = TRUE, color = NULL, alpha = 1,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2854,7 +2811,7 @@ Draws a histogram
   <dd class="rd-dd">either a vector to be passed to <code><a href=http://www.inside-r.org/r-doc/graphics/hist>hist</a></code> or an object of class "histogram"</dd>
   <dt>data</dt>
   <dd class="rd-dd">an optional data frame, providing the source for x</dd>
-  <dt>breaks,freq,include.lowest,right</dt>
+  <dt>breaks, freq, include.lowest, right</dt>
   <dd class="rd-dd">parameters passed to <code><a href=http://www.inside-r.org/r-doc/graphics/hist>hist</a></code></dd>
   <dt>color</dt>
   <dd class="rd-dd">color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo - for glyphs with both fill and line properties, see "Handling color" below</dd>
@@ -2933,20 +2890,20 @@ Draws a histogram
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -2957,9 +2914,9 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 
 <h4>Usage</h4>
-<pre class="r"><code>ly_hexbin(fig, x, y = NULL, data = NULL, xbins = 30, shape = 1,
-  style = "colorscale", trans = NULL, inv = NULL, palette = "RdYlGn11",
-  line = FALSE, alpha = 1, hover = TRUE)</code></pre>
+<pre class="r"><code>ly_hexbin(fig, x, y = NULL, data = figure_data(fig), xbins = 30,
+  shape = 1, style = "colorscale", trans = NULL, inv = NULL,
+  palette = "RdYlGn11", line = FALSE, alpha = 1, hover = TRUE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2971,11 +2928,11 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
   <dd class="rd-dd">values or field name of center y coordinates to be binned</dd>
   <dt>data</dt>
   <dd class="rd-dd">an optional data frame, providing the source for x and y</dd>
-  <dt>xbins,shape</dt>
+  <dt>xbins, shape</dt>
   <dd class="rd-dd">parameters passed to <code><a href=http://www.inside-r.org/packages/cran/hexbin/docs/hexbin>hexbin</a></code></dd>
   <dt>style</dt>
   <dd class="rd-dd">type of plotting for hexbins (see <code><a href=http://www.inside-r.org/packages/cran/hexbin/docs/grid.hexagons>grid.hexagons</a></code>) - "colorramp" and "lattice" are currently supported</dd>
-  <dt>trans,inv</dt>
+  <dt>trans, inv</dt>
   <dd class="rd-dd">transformation and inverse transformation function for the bin counts</dd>
   <dt>palette</dt>
   <dd class="rd-dd">name of color palette to use for color ramp (see <a href = #http://bokeh.pydata.org/en/latest/docs/reference/palettes>here</a> for acceptable values)</dd>
@@ -2997,6 +2954,10 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "boxplot" layer to a Bokeh figure</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_boxplot(fig, x, y = NULL, data = figure_data(fig), coef = 1.5,
+  color = "blue", alpha = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3087,20 +3048,20 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -3109,7 +3070,7 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add an "abline" layer to a Bokeh figure</h3>
 
-Draws one or more straight lines.
+<p class="rd-p">Draws one or more straight lines.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_abline(fig, a = NULL, b = NULL, v = NULL, h = NULL, coef = NULL,
@@ -3120,7 +3081,7 @@ Draws one or more straight lines.
 <dl class="rd-dl">
   <dt>fig</dt>
   <dd class="rd-dd">figure to modify</dd>
-  <dt>a,b</dt>
+  <dt>a, b</dt>
   <dd class="rd-dd">the intercept and slope of the line(s) to draw</dd>
   <dt>v</dt>
   <dd class="rd-dd">the x value(s) for vertical lines</dd>
@@ -3178,20 +3139,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>;
-  <code><a href=#ly_annulus>ly_annulus</a></code>; <code><a href=#ly_arc>ly_arc</a></code>;
-  <code><a href=#ly_bezier>ly_bezier</a></code>; <code><a href=#ly_boxplot>ly_boxplot</a></code>;
-  <code><a href=#ly_contour>ly_contour</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>,
+  <code><a href=#ly_annulus>ly_annulus</a></code>, <code><a href=#ly_arc>ly_arc</a></code>,
+  <code><a href=#ly_bar>ly_bar</a></code>, <code><a href=#ly_bezier>ly_bezier</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -3200,7 +3161,7 @@ Other layer functions: <code><a href=#ly_annular_wedge>ly_annular_wedge</a></cod
 
 <h3>Add a "contour" layer to a Bokeh figure</h3>
 
-Computes and draws contour lines.
+<p class="rd-p">Computes and draws contour lines.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_contour(fig, z, x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1,
@@ -3214,9 +3175,9 @@ Computes and draws contour lines.
   <dd class="rd-dd">figure to modify</dd>
   <dt>z</dt>
   <dd class="rd-dd">a matrix containing the values to compute contour lines for</dd>
-  <dt>x,y</dt>
+  <dt>x, y</dt>
   <dd class="rd-dd">locations of grid lines at which the values in <code>image</code> are measured (see <code><a href=http://www.inside-r.org/r-doc/grDevices/contourLines>contourLines</a></code>)</dd>
-  <dt>nlevels,levels</dt>
+  <dt>nlevels, levels</dt>
   <dd class="rd-dd">parameters sent to <code><a href=http://www.inside-r.org/r-doc/grDevices/contourLines>contourLines</a></code>)</dd>
   <dt>color</dt>
   <dd class="rd-dd">color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo</dd>
@@ -3259,20 +3220,20 @@ p</code></pre>
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_crect>ly_crect</a></code>;
-  <code><a href=#ly_curve>ly_curve</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -3281,7 +3242,7 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "curve" layer to a Bokeh figure</h3>
 
-Draws a curve corresponding to a function over the interval <code>[from, to]</code>.
+<p class="rd-p">Draws a curve corresponding to a function over the interval <code>[from, to]</code>.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_curve(fig, expr, from = NULL, to = NULL, n = 101, color = "black",
@@ -3292,7 +3253,7 @@ Draws a curve corresponding to a function over the interval <code>[from, to]</co
 <dl class="rd-dl">
   <dt>fig</dt>
   <dd class="rd-dd">figure to modify</dd>
-  <dt>expr,from,to,n</dt>
+  <dt>expr, from, to, n</dt>
   <dd class="rd-dd">parameters sent to <code><a href=http://www.inside-r.org/r-doc/graphics/curve>curve</a></code></dd>
   <dt>color</dt>
   <dd class="rd-dd">color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo</dd>
@@ -3341,20 +3302,20 @@ figure(width = 800) %>%
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_density>ly_density</a></code>;
-  <code><a href=#ly_hist>ly_hist</a></code>; <code><a href=#ly_image_url>ly_image_url</a></code>;
-  <code><a href=#ly_image>ly_image</a></code>; <code><a href=#ly_lines>ly_lines</a></code>;
-  <code><a href=#ly_map>ly_map</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 
@@ -3363,13 +3324,17 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 <h3>Add a "map" layer to a Bokeh figure</h3>
 
-Draws lines and polygons as specified by a map database
+<p class="rd-p">Draws lines and polygons as specified by a map database</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_map(fig, database = "world", regions = ".", color = NULL, alpha = 1,
+  lname = NULL, lgroup = NULL, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>fig</dt>
   <dd class="rd-dd">figure to modify</dd>
-  <dt>database,regions</dt>
+  <dt>database, regions</dt>
   <dd class="rd-dd">parameters passed to <code><a href=http://www.inside-r.org/packages/cran/maps/docs/map>map</a></code></dd>
   <dt>color</dt>
   <dd class="rd-dd">color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo - for glyphs with both fill and line properties, see "Handling color" below</dd>
@@ -3448,20 +3413,181 @@ Draws lines and polygons as specified by a map database
 
 <h4>See also</h4>
 
-Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
-  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>; <code><a href=#ly_annulus>ly_annulus</a></code>;
-  <code><a href=#ly_arc>ly_arc</a></code>; <code><a href=#ly_bezier>ly_bezier</a></code>;
-  <code><a href=#ly_boxplot>ly_boxplot</a></code>; <code><a href=#ly_contour>ly_contour</a></code>;
-  <code><a href=#ly_crect>ly_crect</a></code>; <code><a href=#ly_curve>ly_curve</a></code>;
-  <code><a href=#ly_density>ly_density</a></code>; <code><a href=#ly_hist>ly_hist</a></code>;
-  <code><a href=#ly_image_url>ly_image_url</a></code>; <code><a href=#ly_image>ly_image</a></code>;
-  <code><a href=#ly_lines>ly_lines</a></code>; <code><a href=#ly_multi_line>ly_multi_line</a></code>;
-  <code><a href=#ly_oval>ly_oval</a></code>; <code><a href=#ly_patch>ly_patch</a></code>;
-  <code><a href=#ly_points>ly_points</a></code>; <code><a href=#ly_polygons>ly_polygons</a></code>;
-  <code><a href=#ly_quadratic>ly_quadratic</a></code>; <code><a href=#ly_quantile>ly_quantile</a></code>;
-  <code><a href=#ly_ray>ly_ray</a></code>; <code><a href=#ly_rect>ly_rect</a></code>;
-  <code><a href=#ly_segments>ly_segments</a></code>; <code><a href=#ly_text>ly_text</a></code>;
-  <code><a href=#ly_wedge>ly_wedge</a></code>
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bar>ly_bar</a></code>,
+  <code><a href=#ly_bezier>ly_bezier</a></code>, <code><a href=#ly_boxplot>ly_boxplot</a></code>,
+  <code><a href=#ly_contour>ly_contour</a></code>, <code><a href=#ly_crect>ly_crect</a></code>,
+  <code><a href=#ly_curve>ly_curve</a></code>, <code><a href=#ly_density>ly_density</a></code>,
+  <code><a href=#ly_hist>ly_hist</a></code>, <code><a href=#ly_image_url>ly_image_url</a></code>,
+  <code><a href=#ly_image>ly_image</a></code>, <code><a href=#ly_lines>ly_lines</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
+
+
+
+
+## ly_bar
+
+<h3>Add a "barchart" layer to a Bokeh figure</h3>
+
+<p class="rd-p">Draws a bar chart</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>ly_bar(fig, x, y = NULL, data = figure_data(fig), color = NULL,
+  alpha = 1, position = c("stack", "fill", "dodge"), width = 0.9,
+  origin = NULL, breaks = NULL, right = FALSE, binwidth = NULL,
+  lname = NULL, lgroup = NULL, legend = NULL, ...)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure to modify</dd>
+  <dt>x</dt>
+  <dd class="rd-dd">values or field name for x variable</dd>
+  <dt>y</dt>
+  <dd class="rd-dd">values or field name for y variable, or if NULL, y-axis will be counts of x</dd>
+  <dt>data</dt>
+  <dd class="rd-dd">an optional data frame, providing the source for inputs x, y, and color properties</dd>
+  <dt>color</dt>
+  <dd class="rd-dd">color for the glyph - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo - for glyphs with both fill and line properties, see "Handling color" below</dd>
+  <dt>alpha</dt>
+  <dd class="rd-dd">the alpha transparency of the glyph between 0 (transparent) and 1 (opaque) - if glyph has both fill and color properties, see "Handling alpha" below</dd>
+  <dt>position</dt>
+  <dd class="rd-dd">either "stack", "fill", or "dodge" (see details)</dd>
+  <dt>width</dt>
+  <dd class="rd-dd">with of each bar, a value between 0 (no width) and 1 (full width)</dd>
+  <dt>origin, breaks, right, binwidth</dt>
+  <dd class="rd-dd">parameters to be used for binning x when it is continuous (not yet implemented)</dd>
+  <dt>lname</dt>
+  <dd class="rd-dd">layer name</dd>
+  <dt>lgroup</dt>
+  <dd class="rd-dd">layer group</dd>
+  <dt>legend</dt>
+  <dd class="rd-dd">either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see "Mapped plot attributes and legends" below)</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">additional parameters for fine control over fill and line properties (see "Additional parameters" below)</dd>
+</dl>
+
+  <h4>Details</h4>
+
+  <p class="rd-p">The y variable is summed for each x variable and bars are plotted.  If no y variable is supplied, the unique values of x will be tabulated.  Within each x variable, if color maps to another grouping variable then the bars are split up.  In this case, there are three ways to display the bars with the <code>position</code> argument.  The default, "stack" will stack the bars.  The "fill" choice will show the relative proportion for each group within each x, stacking the bars.  The "dodge" choice will plot the bars for each x side by side.</p>
+
+  <p class="rd-p">Note that currently x cannot be numeric but support will soon be added for numeric x by first binning the x values.</p>
+
+
+  <h4>Handling color</h4>
+
+  <p class="rd-p">The <code>color</code> parameter is a high-level plot attribute that provides default behavior for coloring glyphs.
+<ul>
+<li> When using a glyph that only has line properties, this will be the color of the line.
+  </li>
+<li> When using a glyph that has has line and fill properties, this will be the color of the line and the fill, with the alpha level of the fill reduced by 50%.
+  </li>
+<li> If full control over fill and line color is desired, the <code>fill_color</code> and <code>line_color</code> attributes can be specified explicitly and will override <code>color</code>.
+</li>
+</ul></p>
+
+  <p class="rd-p">When color is <code>NULL</code> and <code>fill_color</code> or <code>line_color</code> are not specified, the color will be chosen from the theme.</p>
+
+
+  <h4>Handling alpha</h4>
+
+  <p class="rd-p">The <code>alpha</code> is a high-level plot attribute that sets the transparency of the glyph being plotted.
+<ul>
+<li> When using a glyph that only has line properties, this will be the alpha of the line.
+  </li>
+<li> When using a glyph that has has line and fill properties, this will be the alpha of the line and the alpha of the fill will be set to 50% of this value.
+  </li>
+<li> Individual fill and line alpha can be specified with <code>fill_alpha</code> and <code>line_alpha</code> and will override <code>alpha</code>.
+</li>
+</ul></p>
+
+  <p class="rd-p"></p>
+
+
+  <h4>Mapped plot attributes and legends</h4>
+
+  <p class="rd-p">When specifying an input data frame for a layer through the <code>data</code> argument, columns of <code>data</code> can be used to specify various plot attributes such as <code>color</code>, etc. For example, with <code>ly_points(..., data = iris, color = Species)</code>, the <code>Species</code> variable is used to determine how to color the points.  Here, <code>Species</code> is "mapped" to the <code>color</code> attribute.  Both continuous and categorical variables can be mapped.  In the case of continuous variables, the range is cut into slices and attributes are applied to each interval.  The mapping from the values of the variable to the actual plot attributes is determined based on the theme.</p>
+
+
+  <h4>Additional parameters</h4>
+
+  <p class="rd-p"></p>
+
+  <p class="rd-p"><table><tr><td>
+  <code>fill_color</code> </td>
+</tr><tr><td> color to use to fill the glyph with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo </td>
+</tr><tr><td>
+  <code>fill_alpha</code> </td>
+</tr><tr><td> transparency value between 0 (transparent) and 1 (opaque) </td>
+</tr><tr><td>
+  <code>line_color</code> </td>
+</tr><tr><td> color to use to stroke lines with - a hex code (with no alpha) or any of the 147 named CSS colors, e.g green, indigo </td>
+</tr><tr><td>
+  <code>line_width</code> </td>
+</tr><tr><td> stroke width in units of pixels </td>
+</tr><tr><td>
+  <code>line_alpha</code> </td>
+</tr><tr><td> transparency value between 0 (transparent) and 1 (opaque) </td>
+</tr><tr><td>
+  <code>line_join</code> </td>
+</tr><tr><td> how path segments should be joined together miter round bevel </td>
+</tr><tr><td>
+  <code>line_cap</code> </td>
+</tr><tr><td> how path segments should be terminated butt round square </td>
+</tr><tr><td>
+  <code>line_dash</code> </td>
+</tr><tr><td> array of integer pixel distances that describe the on-off pattern of dashing to use </td>
+</tr></table></p>
+
+
+
+<h4>Examples</h4>
+<pre class="r"><code># count of variety
+figure() %>%
+  ly_bar(variety, data = lattice::barley) %>%
+  theme_axis("x", major_label_orientation = 90)
+
+# total yield per variety
+figure() %>%
+  ly_bar(variety, yield, data = lattice::barley) %>%
+  theme_axis("x", major_label_orientation = 90)
+
+figure() %>%
+  ly_bar(variety, yield, color = year, data = lattice::barley) %>%
+  theme_axis("x", major_label_orientation = 90)
+
+figure() %>%
+  ly_bar(variety, yield, color = year,
+    data = lattice::barley, position = "fill", width = 1) %>%
+  theme_axis("x", major_label_orientation = 90)
+
+figure() %>%
+  ly_bar(variety, yield, color = year,
+    data = lattice::barley, position = "dodge") %>%
+  theme_axis("x", major_label_orientation = 90)</code></pre>
+
+<h4>See also</h4>
+
+Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
+  <code><a href=#ly_annular_wedge>ly_annular_wedge</a></code>, <code><a href=#ly_annulus>ly_annulus</a></code>,
+  <code><a href=#ly_arc>ly_arc</a></code>, <code><a href=#ly_bezier>ly_bezier</a></code>,
+  <code><a href=#ly_boxplot>ly_boxplot</a></code>, <code><a href=#ly_contour>ly_contour</a></code>,
+  <code><a href=#ly_crect>ly_crect</a></code>, <code><a href=#ly_curve>ly_curve</a></code>,
+  <code><a href=#ly_density>ly_density</a></code>, <code><a href=#ly_hist>ly_hist</a></code>,
+  <code><a href=#ly_image_url>ly_image_url</a></code>, <code><a href=#ly_image>ly_image</a></code>,
+  <code><a href=#ly_lines>ly_lines</a></code>, <code><a href=#ly_map>ly_map</a></code>,
+  <code><a href=#ly_multi_line>ly_multi_line</a></code>, <code><a href=#ly_oval>ly_oval</a></code>,
+  <code><a href=#ly_patch>ly_patch</a></code>, <code><a href=#ly_points>ly_points</a></code>,
+  <code><a href=#ly_polygons>ly_polygons</a></code>, <code><a href=#ly_quadratic>ly_quadratic</a></code>,
+  <code><a href=#ly_quantile>ly_quantile</a></code>, <code><a href=#ly_ray>ly_ray</a></code>,
+  <code><a href=#ly_rect>ly_rect</a></code>, <code><a href=#ly_segments>ly_segments</a></code>,
+  <code><a href=#ly_text>ly_text</a></code>, <code><a href=#ly_wedge>ly_wedge</a></code>
 
 
 # Finer Control
@@ -3470,13 +3596,14 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
 
 ## x_axis
 
-<h3>Add x axis to a Bokeh figure</h3>
+<h3>Customize x axis of a Bokeh figure</h3>
 
 
 <h4>Usage</h4>
 <pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid = TRUE,
   num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
-  "numeral", "printf"), ...)</code></pre>
+  "numeral", "printf"), power_limit_high = 5, power_limit_low = -3,
+  precision = NULL, use_scientific = TRUE, format = NULL)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3496,199 +3623,28 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>;
   <dd class="rd-dd">should axis be shown?</dd>
   <dt>number_formatter</dt>
   <dd class="rd-dd">Bokeh numeric tick label formatter
-(<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.BasicTickFormatter>"basic"</a>,
-<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>"numeral"</a>,
-or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>"printf"</a>);
+(<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>"basic"</a>,
+<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>"numeral"</a>,
+or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>"printf"</a>);
 ignored if <code>log</code> is TRUE</dd>
-  <dt>...</dt>
-  <dd class="rd-dd">additional parameters for fine control over axes (see additional parameters below)</dd>
+  <dt>power_limit_high</dt>
+  <dd class="rd-dd">(int) Limit the use of scientific notation to when log(x) >= value. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>power_limit_low</dt>
+  <dd class="rd-dd">(int) Limit the use of scientific notation to when log(x) <= value. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>precision</dt>
+  <dd class="rd-dd">(int) How many digits of precision to display in tick labels. Automatically determined if not specified. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>use_scientific</dt>
+  <dd class="rd-dd">(logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>format</dt>
+  <dd class="rd-dd">Specification of format options.  Specification depends on the value of <code>number_formatter</code> - see "details" below.</dd>
 </dl>
 
-  <h4>Axis parameters</h4>
+  <h4>Details</h4>
 
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>axis_label_standoff</code> </td>
-</tr><tr><td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
-</tr><tr><td>
-<code>axis_label_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_alpha</code> </td>
-</tr><tr><td> (numeric) The text alpha of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_color</code> </td>
-</tr><tr><td> (color) The text color of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font</code> </td>
-</tr><tr><td> (string) The text font of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style of the axis label. </td>
-</tr><tr><td>
-<code>axis_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_color</code> </td>
-</tr><tr><td> (color) The line color of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_dash</code> </td>
-</tr><tr><td> The line dash of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the axis line. </td>
-</tr><tr><td>
-<code>major_label_orientation</code> </td>
-</tr><tr><td> (horizontal, vertical, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal. </td>
-</tr><tr><td>
-<code>major_label_standoff</code> </td>
-</tr><tr><td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
-</tr><tr><td>
-<code>major_label_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_alpha</code> </td>
-</tr><tr><td> (numeric) The text alpha of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_color</code> </td>
-</tr><tr><td> (color) The text color of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font</code> </td>
-</tr><tr><td> (string - Helvetica) The text font of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style of the major tick labels. </td>
-</tr><tr><td>
-<code>major_tick_in</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
-</tr><tr><td>
-<code>major_tick_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_color</code> </td>
-</tr><tr><td> (color) The line color of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash</code> </td>
-</tr><tr><td> The line dash of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_out</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_in</code> </td>
-</tr><tr><td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_color</code> </td>
-</tr><tr><td> (color) The line color of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash</code> </td>
-</tr><tr><td> The line dash of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_out</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
-</tr></table></p>
-
-
-  <h4>Basic tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>power_limit_high</code> </td>
-</tr><tr><td> (int) Limit the use of scientific notation to when log(x) >= value. </td>
-</tr><tr><td>
-<code>power_limit_low</code> </td>
-</tr><tr><td> (int) Limit the use of scientific notation to when log(x) <= value. </td>
-</tr><tr><td>
-<code>precision</code> </td>
-</tr><tr><td> (int) How many digits of precision to display in tick labels. Automatically
- determined if not specified. </td>
-</tr><tr><td>
-<code>use_scientific</code> </td>
-</tr><tr><td> (logical) Whether to ever display scientific notation. If True, then when to use scientific
- notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>. </td>
-</tr></table></p>
-
-
-  <h4>Datetime tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>formats</code> </td>
-</tr><tr><td> (list) Display tick values from a continuous range as formatted datetimes.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>. </td>
-</tr></table></p>
-
-
-  <h4>Numeral tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>format</code> </td>
-</tr><tr><td> (string) Tick formatter based on a human-readable format string.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>. </td>
-</tr></table></p>
-
-
-  <h4>Printf tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>format</code> </td>
-</tr><tr><td> (string) Tick formatter based on a printf-style format string.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>. </td>
-</tr></table></p>
+  <p class="rd-p"><code>format</code> parameter:
+When <code>number_formatter</code> is "basic" and the axis type is datetime, <code>format</code> specifies how to display tick values from a continuous range as formatted datetimes. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>
+When <code>number_formatter</code> is "numeral", <code>format</code> specifies a human-readable format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>.
+When <code>number_formatter</code> is "printf", <code>format</code> is a printf-style format string. See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>.</p>
 
 
 
@@ -3702,23 +3658,25 @@ figure() %>%
   ly_points(2^(1:10)) %>%
   y_axis(log = 2)
 
-# Disable scientific tick labels
+# disable scientific tick labels
 figure() %>%
   ly_points(rnorm(10), rnorm(10) / 1000) %>%
   y_axis(use_scientific = FALSE)
 
-# Specify datetime tick labels; the appropriate datetime units are automatically
-#   chosen
-figure() %>%
-  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-12-31"), by="days"), 
-           rnorm(366)) %>%
-  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
-figure() %>%
-  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days"), 
-           rnorm(32)) %>%
-  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+# specify datetime tick labels
+# the appropriate datetime units are automatically chosen
+big_range <- seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days")
+small_range <- seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days")
 
-# Specify numeric tick labels
+figure() %>%
+  ly_lines(big_range, rnorm(366)) %>%
+  x_axis(label = "Date", format = list(months="%b-%Y", days="%d"))
+
+figure() %>%
+  ly_lines(small_range, rnorm(32)) %>%
+  x_axis(label = "Date", format = list(months="%b-%Y", days="%d"))
+
+# specify numeric tick labels
 figure() %>%
   ly_points(rnorm(10), rnorm(10) * 10000) %>%
   y_axis(number_formatter = "numeral", format = "0,000")
@@ -3775,13 +3733,14 @@ Other ranges: <code><a href=#y_range>y_range</a></code>
 
 ## y_axis
 
-<h3>Add y axis to a Bokeh figure</h3>
+<h3>Customize x axis of a Bokeh figure</h3>
 
 
 <h4>Usage</h4>
 <pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid = TRUE,
   num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
-  "numeral", "printf"), ...)</code></pre>
+  "numeral", "printf"), power_limit_high = 5, power_limit_low = -3,
+  precision = NULL, use_scientific = TRUE, format = NULL)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3801,200 +3760,21 @@ Other ranges: <code><a href=#y_range>y_range</a></code>
   <dd class="rd-dd">should axis be shown?</dd>
   <dt>number_formatter</dt>
   <dd class="rd-dd">Bokeh numeric tick label formatter
-(<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.BasicTickFormatter>"basic"</a>,
-<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>"numeral"</a>,
-or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>"printf"</a>);
+(<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.BasicTickFormatter>"basic"</a>,
+<a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.NumeralTickFormatter>"numeral"</a>,
+or <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html#bokeh.models.formatters.PrintfTickFormatter>"printf"</a>);
 ignored if <code>log</code> is TRUE</dd>
-  <dt>...</dt>
-  <dd class="rd-dd">additional parameters for fine control over axes (see additional parameters below)</dd>
+  <dt>power_limit_high</dt>
+  <dd class="rd-dd">(int) Limit the use of scientific notation to when log(x) >= value. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>power_limit_low</dt>
+  <dd class="rd-dd">(int) Limit the use of scientific notation to when log(x) <= value. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>precision</dt>
+  <dd class="rd-dd">(int) How many digits of precision to display in tick labels. Automatically determined if not specified. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>use_scientific</dt>
+  <dd class="rd-dd">(logical) Whether to ever display scientific notation. If True, then when to use scientific notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>. Only applicable when <code>number_formatter</code> is "basic".</dd>
+  <dt>format</dt>
+  <dd class="rd-dd">Specification of format options.  Specification depends on the value of <code>number_formatter</code> - see "details" below.</dd>
 </dl>
-
-  <h4>Axis parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>axis_label_standoff</code> </td>
-</tr><tr><td> (integer) The distance in pixels that the axis labels should be offset from the tick labels. </td>
-</tr><tr><td>
-<code>axis_label_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_alpha</code> </td>
-</tr><tr><td> (numeric) The text alpha of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_color</code> </td>
-</tr><tr><td> (color) The text color of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font</code> </td>
-</tr><tr><td> (string) The text font of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size of the axis label. </td>
-</tr><tr><td>
-<code>axis_label_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style of the axis label. </td>
-</tr><tr><td>
-<code>axis_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_color</code> </td>
-</tr><tr><td> (color) The line color of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_dash</code> </td>
-</tr><tr><td> The line dash of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the axis line. </td>
-</tr><tr><td>
-<code>axis_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the axis line. </td>
-</tr><tr><td>
-<code>major_label_orientation</code> </td>
-</tr><tr><td> (horizontal, vertical, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal. </td>
-</tr><tr><td>
-<code>major_label_standoff</code> </td>
-</tr><tr><td> (integer) The distance in pixels that the major tick labels should be offset from the associated ticks. </td>
-</tr><tr><td>
-<code>major_label_text_align</code> </td>
-</tr><tr><td> (left, right, center) The text align of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_alpha</code> </td>
-</tr><tr><td> (numeric) The text alpha of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_baseline</code> </td>
-</tr><tr><td> (top, middle, bottom, alphabetic, hanging) The text baseline of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_color</code> </td>
-</tr><tr><td> (color) The text color of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font</code> </td>
-</tr><tr><td> (string - Helvetica) The text font of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font_size</code> </td>
-</tr><tr><td> (string - e.g. 12pt) The text font size of the major tick labels. </td>
-</tr><tr><td>
-<code>major_label_text_font_style</code> </td>
-</tr><tr><td> (normal, italic, bold) The text font style of the major tick labels. </td>
-</tr><tr><td>
-<code>major_tick_in</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend into the main plot area. </td>
-</tr><tr><td>
-<code>major_tick_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_color</code> </td>
-</tr><tr><td> (color) The line color of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash</code> </td>
-</tr><tr><td> The line dash of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the major ticks. </td>
-</tr><tr><td>
-<code>major_tick_out</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_in</code> </td>
-</tr><tr><td> (integer) The distance in pixels that minor ticks should extend into the main plot area. </td>
-</tr><tr><td>
-<code>minor_tick_line_alpha</code> </td>
-</tr><tr><td> (numeric) The line alpha of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_cap</code> </td>
-</tr><tr><td> (butt, round, square) The line cap of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_color</code> </td>
-</tr><tr><td> (color) The line color of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash</code> </td>
-</tr><tr><td> The line dash of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_dash_offset</code> </td>
-</tr><tr><td> (integer) The line dash offset of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_join</code> </td>
-</tr><tr><td> (miter, round, bevel) The line join of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_line_width</code> </td>
-</tr><tr><td> (integer) The line width of the minor ticks. </td>
-</tr><tr><td>
-<code>minor_tick_out</code> </td>
-</tr><tr><td> (integer) The distance in pixels that major ticks should extend out of the main plot area. </td>
-</tr></table></p>
-
-
-  <h4>Basic tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>power_limit_high</code> </td>
-</tr><tr><td> (int) Limit the use of scientific notation to when log(x) >= value. </td>
-</tr><tr><td>
-<code>power_limit_low</code> </td>
-</tr><tr><td> (int) Limit the use of scientific notation to when log(x) <= value. </td>
-</tr><tr><td>
-<code>precision</code> </td>
-</tr><tr><td> (int) How many digits of precision to display in tick labels. Automatically
- determined if not specified. </td>
-</tr><tr><td>
-<code>use_scientific</code> </td>
-</tr><tr><td> (logical) Whether to ever display scientific notation. If True, then when to use scientific
- notation is controlled by <code>power_limit_low</code> and <code>power_limit_high</code>. </td>
-</tr></table></p>
-
-
-  <h4>Datetime tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>formats</code> </td>
-</tr><tr><td> (list) Display tick values from a continuous range as formatted datetimes.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.DatetimeTickFormatter>DatetimeTickFormatter</a>. </td>
-</tr></table></p>
-
-
-  <h4>Numeral tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>format</code> </td>
-</tr><tr><td> (string) Tick formatter based on a human-readable format string.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.NumeralTickFormatter>NumeralTickFormatter</a>. </td>
-</tr></table></p>
-
-
-  <h4>Printf tick format parameters</h4>
-
-  <p class="rd-p"></p>
-
-  <p class="rd-p"><table><tr><td>
-<code>format</code> </td>
-</tr><tr><td> (string) Tick formatter based on a printf-style format string.
- See <a href = http://bokeh.pydata.org/en/latest/docs/reference/models.html\#bokeh.models.formatters.PrintfTickFormatter>PrintfTickFormatter</a>. </td>
-</tr></table></p>
-
 
 
 <h4>Examples</h4>
@@ -4007,23 +3787,25 @@ figure() %>%
   ly_points(2^(1:10)) %>%
   y_axis(log = 2)
 
-# Disable scientific tick labels
+# disable scientific tick labels
 figure() %>%
   ly_points(rnorm(10), rnorm(10) / 1000) %>%
   y_axis(use_scientific = FALSE)
 
-# Specify datetime tick labels; the appropriate datetime units are automatically
-#   chosen
-figure() %>%
-  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-12-31"), by="days"), 
-           rnorm(366)) %>%
-  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
-figure() %>%
-  ly_lines(seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days"), 
-           rnorm(32)) %>%
-  x_axis(label = "Date", formats = list(months="%b-%Y", days="%d"))
+# specify datetime tick labels
+# the appropriate datetime units are automatically chosen
+big_range <- seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days")
+small_range <- seq(as.Date("2012-01-01"),as.Date("2012-02-01"), by="days")
 
-# Specify numeric tick labels
+figure() %>%
+  ly_lines(big_range, rnorm(366)) %>%
+  x_axis(label = "Date", format = list(months="%b-%Y", days="%d"))
+
+figure() %>%
+  ly_lines(small_range, rnorm(32)) %>%
+  x_axis(label = "Date", format = list(months="%b-%Y", days="%d"))
+
+# specify numeric tick labels
 figure() %>%
   ly_points(rnorm(10), rnorm(10) * 10000) %>%
   y_axis(number_formatter = "numeral", format = "0,000")
@@ -4076,6 +3858,445 @@ p %>%
 Other ranges: <code><a href=#x_range>x_range</a></code>
 
 
+# Themes
+
+
+
+## set_theme
+
+<h3>Set the theme for a figure</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>set_theme(fig, theme)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">a figure to set the theme for</dd>
+  <dt>theme</dt>
+  <dd class="rd-dd">theme</dd>
+</dl>
+
+
+
+
+
+## theme_axis
+
+<h3>Override theme parameters for axis attributes</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>theme_axis(fig, which = c("x", "y"), num_minor_ticks = 5,
+  axis_label_standoff = NULL, axis_label_text_align = "left",
+  axis_label_text_alpha = 1, axis_label_text_baseline = "bottom",
+  axis_label_text_color = "#444444", axis_label_text_font = "Helvetica",
+  axis_label_text_font_size = "12pt", axis_label_text_font_style = "normal",
+  axis_line_alpha = 1, axis_line_cap = "butt", axis_line_color = "black",
+  axis_line_dash = NULL, axis_line_dash_offset = 0,
+  axis_line_join = "miter", axis_line_width = 1,
+  major_label_orientation = "horizontal", major_label_standoff = NULL,
+  major_label_text_align = "left", major_label_text_alpha = 1,
+  major_label_text_baseline = "bottom", major_label_text_color = "#444444",
+  major_label_text_font = "Helvetica", major_label_text_font_size = "12pt",
+  major_label_text_font_style = "normal", major_tick_in = NULL,
+  major_tick_line_alpha = 1, major_tick_line_cap = "butt",
+  major_tick_line_color = "black", major_tick_line_dash = NULL,
+  major_tick_line_dash_offset = 0, major_tick_line_join = "miter",
+  major_tick_line_width = 1, major_tick_out = NULL, minor_tick_in = NULL,
+  minor_tick_line_alpha = 1, minor_tick_line_cap = "butt",
+  minor_tick_line_color = "black", minor_tick_line_dash = NULL,
+  minor_tick_line_dash_offset = 0, minor_tick_line_join = "miter",
+  minor_tick_line_width = 1, minor_tick_out = NULL, pars = NULL)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure to modify</dd>
+  <dt>which</dt>
+  <dd class="rd-dd">which grids to apply attributes to ("x" and/or "y")</dd>
+  <dt>num_minor_ticks</dt>
+  <dd class="rd-dd">number of minor ticks</dd>
+  <dt>axis_label_standoff</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that the axis labels should be offset from the tick labels.</dd>
+  <dt>axis_label_text_align</dt>
+  <dd class="rd-dd">(left, right, center) The text align of the axis label.</dd>
+  <dt>axis_label_text_alpha</dt>
+  <dd class="rd-dd">(numeric) The text alpha of the axis label.</dd>
+  <dt>axis_label_text_baseline</dt>
+  <dd class="rd-dd">(top, middle, bottom, alphabetic, hanging) The text baseline of the axis label.</dd>
+  <dt>axis_label_text_color</dt>
+  <dd class="rd-dd">(color) The text color of the axis label.</dd>
+  <dt>axis_label_text_font</dt>
+  <dd class="rd-dd">(string) The text font of the axis label.</dd>
+  <dt>axis_label_text_font_size</dt>
+  <dd class="rd-dd">(string - e.g. 12pt) The text font size of the axis label.</dd>
+  <dt>axis_label_text_font_style</dt>
+  <dd class="rd-dd">(normal, italic, bold) The text font style of the axis label.</dd>
+  <dt>axis_line_alpha</dt>
+  <dd class="rd-dd">(numeric) The line alpha of the axis line.</dd>
+  <dt>axis_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap of the axis line.</dd>
+  <dt>axis_line_color</dt>
+  <dd class="rd-dd">(color) The line color of the axis line.</dd>
+  <dt>axis_line_dash</dt>
+  <dd class="rd-dd">The line dash of the axis line.</dd>
+  <dt>axis_line_dash_offset</dt>
+  <dd class="rd-dd">(integer) The line dash offset of the axis line.</dd>
+  <dt>axis_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join of the axis line.</dd>
+  <dt>axis_line_width</dt>
+  <dd class="rd-dd">(integer) The line width of the axis line.</dd>
+  <dt>major_label_orientation</dt>
+  <dd class="rd-dd">(horizontal, vertical, or angle in degrees) What direction the major label text should be oriented. If a number is supplied, the angle of the text is measured from horizontal.</dd>
+  <dt>major_label_standoff</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that the major tick labels should be offset from the associated ticks.</dd>
+  <dt>major_label_text_align</dt>
+  <dd class="rd-dd">(left, right, center) The text align of the major tick labels.</dd>
+  <dt>major_label_text_alpha</dt>
+  <dd class="rd-dd">(numeric) The text alpha of the major tick labels.</dd>
+  <dt>major_label_text_baseline</dt>
+  <dd class="rd-dd">(top, middle, bottom, alphabetic, hanging) The text baseline of the major tick labels.</dd>
+  <dt>major_label_text_color</dt>
+  <dd class="rd-dd">(color) The text color of the major tick labels.</dd>
+  <dt>major_label_text_font</dt>
+  <dd class="rd-dd">(string - Helvetica) The text font of the major tick labels.</dd>
+  <dt>major_label_text_font_size</dt>
+  <dd class="rd-dd">(string - e.g. 12pt) The text font size of the major tick labels.</dd>
+  <dt>major_label_text_font_style</dt>
+  <dd class="rd-dd">(normal, italic, bold) The text font style of the major tick labels.</dd>
+  <dt>major_tick_in</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that major ticks should extend into the main plot area.</dd>
+  <dt>major_tick_line_alpha</dt>
+  <dd class="rd-dd">(numeric) The line alpha of the major ticks.</dd>
+  <dt>major_tick_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap of the major ticks.</dd>
+  <dt>major_tick_line_color</dt>
+  <dd class="rd-dd">(color) The line color of the major ticks.</dd>
+  <dt>major_tick_line_dash</dt>
+  <dd class="rd-dd">The line dash of the major ticks.</dd>
+  <dt>major_tick_line_dash_offset</dt>
+  <dd class="rd-dd">(integer) The line dash offset of the major ticks.</dd>
+  <dt>major_tick_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join of the major ticks.</dd>
+  <dt>major_tick_line_width</dt>
+  <dd class="rd-dd">(integer) The line width of the major ticks.</dd>
+  <dt>major_tick_out</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that major ticks should extend out of the main plot area.</dd>
+  <dt>minor_tick_in</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that minor ticks should extend into the main plot area.</dd>
+  <dt>minor_tick_line_alpha</dt>
+  <dd class="rd-dd">(numeric) The line alpha of the minor ticks.</dd>
+  <dt>minor_tick_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap of the minor ticks.</dd>
+  <dt>minor_tick_line_color</dt>
+  <dd class="rd-dd">(color) The line color of the minor ticks.</dd>
+  <dt>minor_tick_line_dash</dt>
+  <dd class="rd-dd">The line dash of the minor ticks.</dd>
+  <dt>minor_tick_line_dash_offset</dt>
+  <dd class="rd-dd">(integer) The line dash offset of the minor ticks.</dd>
+  <dt>minor_tick_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join of the minor ticks.</dd>
+  <dt>minor_tick_line_width</dt>
+  <dd class="rd-dd">(integer) The line width of the minor ticks.</dd>
+  <dt>minor_tick_out</dt>
+  <dd class="rd-dd">(integer) The distance in pixels that major ticks should extend out of the main plot area.</dd>
+  <dt>pars</dt>
+  <dd class="rd-dd">optionally specify a named list of all parameters - useful when dealing with theme lists</dd>
+</dl>
+
+
+<h4>Examples</h4>
+<pre class="r"><code># manually specify a ggplot-like grid and background
+figure() %>%
+  ly_points(1:10) %>%
+  theme_plot(background_fill = "#E6E6E6",
+    outline_line_color = "white") %>%
+  theme_grid(c("x", "y"), grid_line_color = "white",
+    minor_grid_line_color = "white",
+    minor_grid_line_alpha = 0.4) %>%
+  theme_axis(c("x", "y"), axis_line_color = "white",
+    major_label_text_color = "#7F7F7F",
+    major_tick_line_color = "#7F7F7F",
+    minor_tick_line_alpha = 0, num_minor_ticks = 2)
+
+# or use the built in ggplot theme (under development)
+figure() %>%
+  ly_points(1:10) %>%
+  set_theme(bk_ggplot_theme)
+
+# or to set the theme for all future plots
+options(bokeh_theme = bk_ggplot_theme)
+
+figure() %>%
+  ly_points(1:10)
+
+figure() %>%
+  ly_boxplot(1:10)</code></pre>
+
+
+
+## theme_grid
+
+<h3>Override theme parameters for grid attributes</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>theme_grid(fig, which = c("x", "y"), band_fill_alpha = 1,
+  band_fill_color = "gray", grid_line_alpha = 1, grid_line_cap = "butt",
+  grid_line_color = "black", grid_line_dash = NULL,
+  grid_line_dash_offset = 0, grid_line_join = "miter",
+  grid_line_width = 1, minor_grid_line_alpha = 1,
+  minor_grid_line_cap = "butt", minor_grid_line_color = "black",
+  minor_grid_line_dash = NULL, minor_grid_line_dash_offset = 0,
+  minor_grid_line_join = "miter", minor_grid_line_width = 1, pars = NULL)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure to modify</dd>
+  <dt>which</dt>
+  <dd class="rd-dd">which grids to apply attributes to ("x" and/or "y")</dd>
+  <dt>band_fill_alpha</dt>
+  <dd class="rd-dd">The fill alpha of alternating bands between Grid lines.</dd>
+  <dt>band_fill_color</dt>
+  <dd class="rd-dd">The fill color of alternating bands between Grid lines.</dd>
+  <dt>grid_line_alpha</dt>
+  <dd class="rd-dd">The line alpha of the Grid lines.</dd>
+  <dt>grid_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap of the Grid lines.</dd>
+  <dt>grid_line_color</dt>
+  <dd class="rd-dd">The line color of the Grid lines.</dd>
+  <dt>grid_line_dash</dt>
+  <dd class="rd-dd">The line dash of the Grid lines.</dd>
+  <dt>grid_line_dash_offset</dt>
+  <dd class="rd-dd">The line dash offset of the Grid lines.</dd>
+  <dt>grid_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join of the Grid lines.</dd>
+  <dt>grid_line_width</dt>
+  <dd class="rd-dd">The line width of the Grid lines.</dd>
+  <dt>minor_grid_line_alpha</dt>
+  <dd class="rd-dd">The line alpha of the minor Grid lines.</dd>
+  <dt>minor_grid_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap of the minor Grid lines.</dd>
+  <dt>minor_grid_line_color</dt>
+  <dd class="rd-dd">The line color of the minor Grid lines.</dd>
+  <dt>minor_grid_line_dash</dt>
+  <dd class="rd-dd">The line dash of the minor Grid lines.</dd>
+  <dt>minor_grid_line_dash_offset</dt>
+  <dd class="rd-dd">The line dash offset of the minor Grid lines.</dd>
+  <dt>minor_grid_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join of the minor Grid lines.</dd>
+  <dt>minor_grid_line_width</dt>
+  <dd class="rd-dd">The line width of the minor Grid lines.</dd>
+  <dt>pars</dt>
+  <dd class="rd-dd">optionally specify a named list of all parameters - useful when dealing with theme lists</dd>
+</dl>
+
+
+<h4>Examples</h4>
+<pre class="r"><code># manually specify a ggplot-like grid and background
+figure() %>%
+  ly_points(1:10) %>%
+  theme_plot(background_fill = "#E6E6E6",
+    outline_line_color = "white") %>%
+  theme_grid(c("x", "y"), grid_line_color = "white",
+    minor_grid_line_color = "white",
+    minor_grid_line_alpha = 0.4) %>%
+  theme_axis(c("x", "y"), axis_line_color = "white",
+    major_label_text_color = "#7F7F7F",
+    major_tick_line_color = "#7F7F7F",
+    minor_tick_line_alpha = 0, num_minor_ticks = 2)
+
+# or use the built in ggplot theme (under development)
+figure() %>%
+  ly_points(1:10) %>%
+  set_theme(bk_ggplot_theme)
+
+# or to set the theme for all future plots
+options(bokeh_theme = bk_ggplot_theme)
+
+figure() %>%
+  ly_points(1:10)
+
+figure() %>%
+  ly_boxplot(1:10)</code></pre>
+
+
+
+## theme_legend
+
+<h3>Override theme parameters for legend attributes</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>theme_legend(fig, border_line_alpha = 1, border_line_cap = "butt",
+  border_line_color = "black", border_line_dash = NULL,
+  border_line_dash_offset = 0, border_line_join = "miter",
+  border_line_width = 1, glyph_height = 20, glyph_width = 20,
+  label_height = 20, label_standoff = 15, label_text_align = "left",
+  label_text_alpha = 1, label_text_baseline = "bottom",
+  label_text_color = "#444444", label_text_font = "Helvetica",
+  label_text_font_size = "12pt", label_text_font_style = "normal",
+  label_width = 50, legend_padding = 10, legend_spacing = 3,
+  pars = NULL)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure to modify</dd>
+  <dt>border_line_alpha</dt>
+  <dd class="rd-dd">The line alpha for the legend border outline.</dd>
+  <dt>border_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap for the legend border outline.</dd>
+  <dt>border_line_color</dt>
+  <dd class="rd-dd">The line color for the legend border outline.</dd>
+  <dt>border_line_dash</dt>
+  <dd class="rd-dd">The line dash for the legend border outline.</dd>
+  <dt>border_line_dash_offset</dt>
+  <dd class="rd-dd">The line dash offset for the legend border outline.</dd>
+  <dt>border_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join for the legend border outline.</dd>
+  <dt>border_line_width</dt>
+  <dd class="rd-dd">The line width for the legend border outline.</dd>
+  <dt>glyph_height</dt>
+  <dd class="rd-dd">The height (in pixels) that the rendered legend glyph should occupy.</dd>
+  <dt>glyph_width</dt>
+  <dd class="rd-dd">The width (in pixels) that the rendered legend glyph should occupy.</dd>
+  <dt>label_height</dt>
+  <dd class="rd-dd">The height (in pixels) of the area that legend labels should occupy.</dd>
+  <dt>label_standoff</dt>
+  <dd class="rd-dd">The distance (in pixels) to separate the label from its associated glyph.</dd>
+  <dt>label_text_align</dt>
+  <dd class="rd-dd">(left, right, center) The text align for the legend labels.</dd>
+  <dt>label_text_alpha</dt>
+  <dd class="rd-dd">The text alpha for the legend labels.</dd>
+  <dt>label_text_baseline</dt>
+  <dd class="rd-dd">(top, middle, bottom, alphabetic, hanging) The text baseline for the legend labels.</dd>
+  <dt>label_text_color</dt>
+  <dd class="rd-dd">The text color for the legend labels.</dd>
+  <dt>label_text_font</dt>
+  <dd class="rd-dd">The text font for the legend labels.</dd>
+  <dt>label_text_font_size</dt>
+  <dd class="rd-dd">The text font size for the legend labels.</dd>
+  <dt>label_text_font_style</dt>
+  <dd class="rd-dd">(normal, italic, bold) The text font style for the legend labels.</dd>
+  <dt>label_width</dt>
+  <dd class="rd-dd">The width (in pixels) of the area that legend labels should occupy.</dd>
+  <dt>legend_padding</dt>
+  <dd class="rd-dd">Amount of padding around the legend.</dd>
+  <dt>legend_spacing</dt>
+  <dd class="rd-dd">Amount of spacing between legend entries.</dd>
+  <dt>pars</dt>
+  <dd class="rd-dd">optionally specify a named list of all parameters - useful when dealing with theme lists</dd>
+</dl>
+
+
+<h4>Examples</h4>
+<pre class="r"><code>figure(legend_location = "top_left") %>%
+  ly_points(1:10, legend = "a") %>%
+  theme_legend(border_line_width = 2)</code></pre>
+
+
+
+## theme_plot
+
+<h3>Override theme parameters for general plot attributes</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>theme_plot(fig, pars = NULL, background_fill = "white",
+  border_fill = "white", outline_line_alpha = 1,
+  outline_line_cap = "butt", outline_line_color = "black",
+  outline_line_dash = NULL, outline_line_dash_offset = 0,
+  outline_line_join = "miter", outline_line_width = 1,
+  title_text_align = "left", title_text_alpha = 1,
+  title_text_baseline = "bottom", title_text_color = "#444444",
+  title_text_font = "Helvetica", title_text_font_size = "12pt",
+  title_text_font_style = "normal", min_border = 50,
+  min_border_bottom = 50, min_border_left = 50, min_border_right = 50,
+  min_border_top = 50)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure to modify</dd>
+  <dt>pars</dt>
+  <dd class="rd-dd">optionally specify a named list of all parameters - useful when dealing with theme lists</dd>
+  <dt>background_fill</dt>
+  <dd class="rd-dd">(color) background color of plot</dd>
+  <dt>border_fill</dt>
+  <dd class="rd-dd">(color) fill color of border area of plot</dd>
+  <dt>outline_line_alpha</dt>
+  <dd class="rd-dd">(numeric) The line alpha for the plot border outline.</dd>
+  <dt>outline_line_cap</dt>
+  <dd class="rd-dd">(butt, round, square) The line cap for the plot border outline.</dd>
+  <dt>outline_line_color</dt>
+  <dd class="rd-dd">(color) The line color for the plot border outline.</dd>
+  <dt>outline_line_dash</dt>
+  <dd class="rd-dd">The line dash for the plot border outline.</dd>
+  <dt>outline_line_dash_offset</dt>
+  <dd class="rd-dd">(integer) The line dash offset for the plot border outline.</dd>
+  <dt>outline_line_join</dt>
+  <dd class="rd-dd">(miter, round, bevel) The line join for the plot border outline.</dd>
+  <dt>outline_line_width</dt>
+  <dd class="rd-dd">(integer) The line width for the plot border outline.</dd>
+  <dt>title_text_align</dt>
+  <dd class="rd-dd">(left, right, center) The text align for the plot title.</dd>
+  <dt>title_text_alpha</dt>
+  <dd class="rd-dd">The text alpha for the plot title.</dd>
+  <dt>title_text_baseline</dt>
+  <dd class="rd-dd">(top, middle, bottom, alphabetic, hanging) The text baseline for the plot title.</dd>
+  <dt>title_text_color</dt>
+  <dd class="rd-dd">(color) The text color for the plot title.</dd>
+  <dt>title_text_font</dt>
+  <dd class="rd-dd">(string) The text font for the plot title.</dd>
+  <dt>title_text_font_size</dt>
+  <dd class="rd-dd">(string - e.g. 12pt) The text font size for the plot title.</dd>
+  <dt>title_text_font_style</dt>
+  <dd class="rd-dd">(normal, italic, bold) The text font style for the plot title.</dd>
+  <dt>min_border</dt>
+  <dd class="rd-dd">(integer) A convenience property to set all all the min_X_border properties to the same value. If an individual border property is explicitly set, it will override min_border.</dd>
+  <dt>min_border_bottom</dt>
+  <dd class="rd-dd">(integer) Minimum size in pixels of the padding region below the bottom of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.</dd>
+  <dt>min_border_left</dt>
+  <dd class="rd-dd">(integer) Minimum size in pixels of the padding region to the left of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.</dd>
+  <dt>min_border_right</dt>
+  <dd class="rd-dd">(integer) Minimum size in pixels of the padding region to the right of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.</dd>
+  <dt>min_border_top</dt>
+  <dd class="rd-dd">(integer) Minimum size in pixels of the padding region above the top of the central plot region. This is a minimum. The padding region may expand as needed to accommodate titles or axes, etc.</dd>
+</dl>
+
+
+<h4>Examples</h4>
+<pre class="r"><code># manually specify a ggplot-like grid and background
+figure() %>%
+  ly_points(1:10) %>%
+  theme_plot(background_fill = "#E6E6E6",
+    outline_line_color = "white") %>%
+  theme_grid(c("x", "y"), grid_line_color = "white",
+    minor_grid_line_color = "white",
+    minor_grid_line_alpha = 0.4) %>%
+  theme_axis(c("x", "y"), axis_line_color = "white",
+    major_label_text_color = "#7F7F7F",
+    major_tick_line_color = "#7F7F7F",
+    minor_tick_line_alpha = 0, num_minor_ticks = 2)
+
+# or use the built in ggplot theme (under development)
+figure() %>%
+  ly_points(1:10) %>%
+  set_theme(bk_ggplot_theme)
+
+# or to set the theme for all future plots
+options(bokeh_theme = bk_ggplot_theme)
+
+figure() %>%
+  ly_points(1:10)
+
+figure() %>%
+  ly_boxplot(1:10)</code></pre>
+
 # Interaction Tools
 
 
@@ -4108,11 +4329,11 @@ Other ranges: <code><a href=#x_range>x_range</a></code>
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
-  <code><a href=#tool_save>tool_save</a></code>; <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
+Other tools: <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
+  <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
 
@@ -4143,11 +4364,11 @@ Other tools: <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
-  <code><a href=#tool_save>tool_save</a></code>; <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
+  <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
 
@@ -4178,11 +4399,11 @@ Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
-  <code><a href=#tool_save>tool_save</a></code>; <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
+  <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
 
@@ -4215,11 +4436,11 @@ Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
-  <code><a href=#tool_save>tool_save</a></code>; <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
+  <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
 
@@ -4253,12 +4474,12 @@ figure() %>% ly_points(1:10) %>%
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
-  <code><a href=#tool_save>tool_save</a></code>; <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
+  <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
 
@@ -4289,11 +4510,11 @@ Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_resize>tool_resize</a></code>; <code><a href=#tool_save>tool_save</a></code>;
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>,
   <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
@@ -4325,11 +4546,11 @@ Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_save>tool_save</a></code>;
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_save>tool_save</a></code>,
   <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
@@ -4361,11 +4582,11 @@ Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
   <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code>
 
 
@@ -4400,30 +4621,15 @@ figure() %>% ly_points(1:10) %>%
 
 <h4>See also</h4>
 
-Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>;
-  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>;
-  <code><a href=#tool_crosshair>tool_crosshair</a></code>;
-  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>; <code><a href=#tool_pan>tool_pan</a></code>;
-  <code><a href=#tool_reset>tool_reset</a></code>; <code><a href=#tool_resize>tool_resize</a></code>;
+Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>,
+  <code><a href=#tool_box_zoom>tool_box_zoom</a></code>,
+  <code><a href=#tool_crosshair>tool_crosshair</a></code>,
+  <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>,
+  <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>,
   <code><a href=#tool_save>tool_save</a></code>
 
 
 # Output
-
-
-
-## get_bokeh_html
-
-<h3>Get the HTML content required to embed a Bokeh figure</h3>
-
-
-<h4>Arguments</h4>
-<dl class="rd-dl">
-  <dt>fig</dt>
-  <dd class="rd-dd">figure</dd>
-</dl>
-
-
 
 
 
@@ -4462,7 +4668,10 @@ print_model_json(p)</code></pre>
 
 <h3>Plot a Bokeh JSON specification</h3>
 
-Take a path to a Bokeh JSON plot specification file and render it in the browser.
+<p class="rd-p">Take a path to a Bokeh JSON plot specification file and render it in the browser.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>bokeh_render_json(json_file)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -4517,9 +4726,8 @@ server <- function(input, output, session) {
   output$rbokeh <- renderRbokeh({
     # Use invalidateLater() and jitter() to add some motion
     invalidateLater(1000, session)
-    p <- figure() %>%
+    figure() %>%
       ly_points(jitter(cars$speed), jitter(cars$dist))
-    rbokeh:::plot.BokehFigure(p)
   })
 }
 
@@ -4531,6 +4739,9 @@ shinyApp(ui, server)</code></pre>
 
 <h3>Widget render function for use in Shiny</h3>
 
+
+<h4>Usage</h4>
+<pre class="r"><code>renderRbokeh(expr, env = parent.frame(), quoted = FALSE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -4549,6 +4760,86 @@ shinyApp(ui, server)</code></pre>
 <code><a href=#rbokehoutput>rbokehOutput</a></code> for an example in Shiny
 
 
+
+
+## rbokeh2gist
+
+<h3>Export rbokeh plot to a gist</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>rbokeh2gist(fig, name, created = NULL, description = "")</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">a string containing R code to create an rbokeh figure</dd>
+  <dt>name</dt>
+  <dd class="rd-dd">name of the gist</dd>
+  <dt>created</dt>
+  <dd class="rd-dd">optional string for a "Created by" to preceed the README</dd>
+  <dt>description</dt>
+  <dd class="rd-dd">text to go in README.md</dd>
+</dl>
+
+  <h4>Note</h4>
+
+  <p class="rd-p">This requires that you have a github personal access token stored as an environment variable <code>GITHUB_PAT</code>.  See <code><a href=http://www.inside-r.org/packages/cran/gistr/docs/gist_create>gist_create</a></code> for more information.</p>
+
+  <p class="rd-p">Also note that this currently cant handle thumbnails but will find a way to do that soon.</p>
+
+
+
+
+
+
+## rbokeh2html
+
+<h3>Get the HTML content required to embed a Bokeh figure</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>rbokeh2html(fig)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>fig</dt>
+  <dd class="rd-dd">figure</dd>
+</dl>
+
+
+
+
+
+## save_figure
+
+<h3>Make a static png file for an rbokeh figure</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>save_figure(p, file, timeout = 500)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>p</dt>
+  <dd class="rd-dd">Bokeh figure object</dd>
+  <dt>file</dt>
+  <dd class="rd-dd">where to save png file</dd>
+  <dt>timeout</dt>
+  <dd class="rd-dd">plot render timeout in milliseconds (see details)</dd>
+</dl>
+
+  <h4>Details</h4>
+
+  <p class="rd-p">This uses phantomjs (<a href = http://phantomjs.org>http://phantomjs.org</a>) to render your rbokeh figure in a headless browser and take a screenshot of it, creating a static output.  This assumes that phantomjs has been installed on your machine and is available as a system call.  For plots that take longer to load and render, you may need to increase the value of <code>timeout</code>.  Note that this function is experimental.</p>
+
+
+
+<h4>Examples</h4>
+<pre class="r"><code>figure(tools = NULL) %>%
+  ly_points(1:10) %>%
+  save_figure("/tmp/test.png")</code></pre>
+
 # Misc
 
 
@@ -4557,7 +4848,7 @@ shinyApp(ui, server)</code></pre>
 
 <h3>Flight frequency dataset</h3>
 
-Daily counts of domestic flights in the U.S. from 1999 to mid-2008
+<p class="rd-p">Daily counts of domestic flights in the U.S. from 1999 to mid-2008</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>flightfreq</code></pre>
@@ -4576,7 +4867,7 @@ p</code></pre>
 
 <h3>"Periodic Table" dataset</h3>
 
-Data for periodic table of the elements
+<p class="rd-p">Data for periodic table of the elements</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>elements</code></pre>
@@ -4639,7 +4930,7 @@ p</code></pre>
 
 <h3>Hexagon binned counts of NYC taxi pickup locations</h3>
 
-Counts of NYC taxi pickups by location for January 2013, obtained from <a href = 'http://chriswhong.com/open-data/foil_nyc_taxi/'>here</a>.
+<p class="rd-p">Counts of NYC taxi pickups by location for January 2013, obtained from <a href = 'http://chriswhong.com/open-data/foil_nyc_taxi/'>here</a>.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>nyctaxihex</code></pre>
@@ -4650,7 +4941,12 @@ Counts of NYC taxi pickups by location for January 2013, obtained from <a href =
   lat = 40.74, lng = -73.95, zoom = 11,
   map_type = "roadmap", width = 1000, height = 800) %>%
   ly_hexbin(nyctaxihex, alpha = 0.5,
-    palette = "Spectral10", trans = log, inv = exp)</code></pre>
+    palette = "Spectral10", trans = log, inv = exp)
+
+# custom map style
+gmap(lat = 40.74, lng = -73.95, zoom = 11,
+  width = 600, height = 600,
+  map_style = gmap_style("blue_water"))</code></pre>
 
 
 
@@ -4659,16 +4955,58 @@ Counts of NYC taxi pickups by location for January 2013, obtained from <a href =
 <h3>Display glyph types available for ly_points()</h3>
 
 
+<h4>Usage</h4>
+<pre class="r"><code>point_types(size = 25, color = "blue", width = 800, height = 450)</code></pre>
+
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>size</dt>
   <dd class="rd-dd">size of the glyph</dd>
   <dt>color</dt>
   <dd class="rd-dd">color to use for line and fill properties</dd>
-  <dt>width,height</dt>
+  <dt>width, height</dt>
   <dd class="rd-dd">dimensions of output plot</dd>
 </dl>
 
+
+
+
+
+## gmap_style
+
+<h3>Get a Google Map Style</h3>
+
+
+<h4>Usage</h4>
+<pre class="r"><code>gmap_style(name)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>name</dt>
+  <dd class="rd-dd">name of map style to retrieve (see details)</dd>
+</dl>
+
+  <h4>Details</h4>
+
+  <p class="rd-p">This function provides Google Maps themes that can be passed to the <code>map_style</code> argument of <code><a href=#gmap>gmap</a></code>.  Currently the most popular styles from <a href = https://snazzymaps.com>https://snazzymaps.com</a> are available.  You can also visit this site or others to specify a custom <code>map_style</code>.  Available styles are: "subtle_grayscale", "shades_of_grey", "blue_water", "pale_dawn", "blue_essence", "apple_mapsesque", "midnight_commander", "light_monochrome", "paper", "retro", "flat_map", "cool_grey".</p>
+
+
+
+<h4>Examples</h4>
+<pre class="r"><code>gmap(title = "NYC taxi pickups January 2013",
+  lat = 40.74, lng = -73.95, zoom = 11,
+  map_type = "roadmap", width = 1000, height = 800) %>%
+  ly_hexbin(nyctaxihex, alpha = 0.5,
+    palette = "Spectral10", trans = log, inv = exp)
+
+# custom map style
+gmap(lat = 40.74, lng = -73.95, zoom = 11,
+  width = 600, height = 600,
+  map_style = gmap_style("blue_water"))</code></pre>
+
+<h4>See also</h4>
+
+<code><a href=#gmap>gmap</a></code>
 
 
 

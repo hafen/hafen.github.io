@@ -1,35 +1,21 @@
-## load packages (and install if not on system)
-if(!require("staticdocs"))
-  devtools::install_github("hadley/staticdocs")
-if(!require("packagedocs"))
-  devtools::install_github("hafen/packagedocs")
-if(!require("rmarkdown"))
-  install.packages("rmarkdown")
-if(!require("rbokeh"))
-  devtools::install_github("hafen/rbokeh")
+## install packagedocs if not installed:
+# options(repos = c(tessera = "http://packages.tessera.io",
+#   getOption("repos")))
+# install.packages("packagedocs")
 
-# make sure your working directory is set to repo base directory
-code_path <- "~/Documents/Code/rbokeh"
-setwd("./rbokeh")
-
-# set some optionsf
-pdof1 <- package_docs(lib_dir = "assets", toc_collapse = FALSE)
-pdof2 <- package_docs(lib_dir = "assets", toc_collapse = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("."))
 
-# generate index.html
-unlink("assets", recursive = TRUE)
-render("index.Rmd", output_format = pdof1)
-check_output("index.html")
-system("open index.html")
+packagedocs::render_docs(
+  code_path = "~/Documents/Code/rbokeh",
+  docs_path = ".",             # location of docs directory
+  package_name = "rbokeh",     # name of the package
+  main_toc_collapse = FALSE,   # use collapsing toc on main page
+  rd_toc_collapse = TRUE,      # use collapsing toc on rd page
+  lib_dir = "assets",          # put assets in "assets" directory
+  render_main = TRUE,          # render main page
+  render_rd = TRUE,            # render rd page
+  view_output = TRUE,          # look at the output after render
+  rd_index = "./rd_index.yaml" # optional path to rd layout yaml
+)
 
-# generate rd.html
-dir.create(file.path(code_path, "inst/staticdocs"))
-render_rd("rd_skeleton.Rmd", "rbokeh", code_path,
-  rd_index = "rd_index.yaml", output_format = pdof2)
-check_output("rd.html")
-system("open rd.html")
-
-# # get topics
-# db <- tools::Rd_db("rbokeh")
-# gsub("\\.Rd", "", names(db))
+# packagedocs::purl_docs("./", code_base = "./code")
