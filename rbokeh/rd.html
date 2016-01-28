@@ -176,7 +176,7 @@ R Interface for Bokeh
 <strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],<a href="mailto:schloerke@gmail.com">Schloerke Barret</a> [ctb],Continuum Analytics, Inc. [aut, cph]
 </p>
 <p>
-<strong>Version:</strong> 0.3.1
+<strong>Version:</strong> 0.3.4
 </p>
 <p>
 <strong>License:</strong> MIT + file LICENSE
@@ -422,9 +422,9 @@ Usage
 <pre class="r"><code>gmap(lat = 0, lng = 0, zoom = 0, map_type = "hybrid",
   map_style = NULL, width = 480, height = 480, title = NULL,
   xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
-  padding_factor = 0.07, xgrid = FALSE, ygrid = FALSE, xaxes = "below",
-  yaxes = "left", tools = c("pan", "wheel_zoom", "box_zoom", "resize",
-  "reset", "save"), theme = getOption("bokeh_theme"))</code></pre>
+  padding_factor = 0.07, xgrid = FALSE, ygrid = FALSE, xaxes = FALSE,
+  yaxes = FALSE, tools = c("pan", "wheel_zoom", "save"),
+  theme = getOption("bokeh_theme"))</code></pre>
 <h4>
 Arguments
 </h4>
@@ -548,7 +548,7 @@ an rbokeh theme to use
 Note
 </h4>
 <p class="rd-p">
-This can be used in the same way as <code><a href=#figure>figure</a></code>, adding layers on top of the Google Map.
+This can be used in the same way as <code><a href=#figure>figure</a></code>, adding layers on top of the Google Map. There is an open issue documenting points appearing to sometimes be a few pixels off from their intended location. Google has its own terms of service for using Google Maps API and any use of rbokeh with Google Maps must be within Googles Terms of Service
 </p>
 <h4>
 Examples
@@ -8174,13 +8174,13 @@ Export rbokeh plot to a gist
 <h4>
 Usage
 </h4>
-<pre class="r"><code>rbokeh2gist(fig, name, created = NULL, description = "")</code></pre>
+<pre class="r"><code>rbokeh2gist(fig_str, name, created = NULL, description = "", view = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
 <dl class="rd-dl">
 <dt>
-fig
+fig_str
 </dt>
 <dd class="rd-dd">
 a string containing R code to create an rbokeh figure
@@ -8203,6 +8203,12 @@ description
 <dd class="rd-dd">
 text to go in README.md
 </dd>
+<dt>
+view
+</dt>
+<dd class="rd-dd">
+should the resulting gist be opened in the browser on bl.ocks.org?
+</dd>
 </dl>
 <h4>
 Note
@@ -8213,6 +8219,10 @@ This requires that you have a github personal access token stored as an environm
 <p class="rd-p">
 Also note that this currently cant handle thumbnails but will find a way to do that soon.
 </p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>rbokeh2gist("figure() %>% ly_points(1:10)", name = "test")</code></pre>
 </div>
 <div id="rbokeh2html" class="section level2">
 <h2>rbokeh2html</h2>
@@ -8222,7 +8232,7 @@ Get the HTML content required to embed a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>rbokeh2html(fig)</code></pre>
+<pre class="r"><code>rbokeh2html(fig, file = tempfile(fileext = ".html"), pretty = FALSE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -8233,7 +8243,24 @@ fig
 <dd class="rd-dd">
 figure
 </dd>
+<dt>
+file
+</dt>
+<dd class="rd-dd">
+html file name to write the figure to
+</dd>
+<dt>
+pretty
+</dt>
+<dd class="rd-dd">
+should the json model be pretty printed to the html file?
+</dd>
 </dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>p <- figure() %>% ly_points(1:10)
+rbokeh2html(p)</code></pre>
 </div>
 <div id="save_figure" class="section level2">
 <h2>save_figure</h2>
