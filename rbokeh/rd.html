@@ -9,7 +9,7 @@
   
   <title>rbokeh</title>
 
-    <script src="assets/jquery-1.11.0/jquery.min.js"></script>
+    <script src="assets/jquery-1.11.3/jquery.min.js"></script>
   <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
   <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
@@ -137,6 +137,9 @@
           <li><a href="#theme_plot">theme_plot</a></li>
           </ul></li>
           <li><a href="#interaction-tools">Interaction Tools</a><ul>
+          <li><a href="#tool_hover">tool_hover</a></li>
+          <li><a href="#tool_selection">tool_selection</a></li>
+          <li><a href="#tool_tap">tool_tap</a></li>
           <li><a href="#tool_box_select">tool_box_select</a></li>
           <li><a href="#tool_box_zoom">tool_box_zoom</a></li>
           <li><a href="#tool_crosshair">tool_crosshair</a></li>
@@ -146,6 +149,12 @@
           <li><a href="#tool_resize">tool_resize</a></li>
           <li><a href="#tool_save">tool_save</a></li>
           <li><a href="#tool_wheel_zoom">tool_wheel_zoom</a></li>
+          </ul></li>
+          <li><a href="#callback-interactivity">Callback Interactivity</a><ul>
+          <li><a href="#console_callback">console_callback</a></li>
+          <li><a href="#custom_callback">custom_callback</a></li>
+          <li><a href="#debug_callback">debug_callback</a></li>
+          <li><a href="#shiny_callback">shiny_callback</a></li>
           </ul></li>
           <li><a href="#output">Output</a><ul>
           <li><a href="#print_model_json">print_model_json</a></li>
@@ -160,6 +169,9 @@
           <li><a href="#flightfreq">flightfreq</a></li>
           <li><a href="#elements">elements</a></li>
           <li><a href="#nyctaxihex">nyctaxihex</a></li>
+          <li><a href="#catjitter">catjitter</a></li>
+          <li><a href="#get_object_refs">get_object_refs</a></li>
+          <li><a href="#phantom_install">phantom_install</a></li>
           <li><a href="#point_types">point_types</a></li>
           <li><a href="#gmap_style">gmap_style</a></li>
           </ul></li>
@@ -173,10 +185,10 @@
 R Interface for Bokeh
 </h1>
 <p>
-<strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],<a href="mailto:schloerke@gmail.com">Schloerke Barret</a> [ctb],Continuum Analytics, Inc. [aut, cph]
+<strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],<a href="mailto:schloerke@gmail.com">Barret Schloerkep</a> [ctb],<a href="mailto:saptarshi.guha@gmail.com">Saptasrhi Guha</a> [ctb],Continuum Analytics, Inc. [aut, cph]
 </p>
 <p>
-<strong>Version:</strong> 0.3.4
+<strong>Version:</strong> 0.4.1
 </p>
 <p>
 <strong>License:</strong> MIT + file LICENSE
@@ -197,7 +209,7 @@ Depends
 Imports
 </h4>
 <p>
-htmlwidgets (&gt;= 0.5), maps, methods, jsonlite, digest, hexbin, lazyeval, magrittr, ggplot2, scales, gistr
+htmlwidgets (&gt;= 0.5), maps, methods, jsonlite, digest, hexbin, lazyeval, pryr, magrittr, ggplot2, scales, gistr
 </p>
 <h4>
 Suggests
@@ -705,7 +717,8 @@ Usage
 <pre class="r"><code>ly_annular_wedge(fig, x, y = NULL, data = figure_data(fig),
   inner_radius = 0.1, outer_radius = 0.3, start_angle = 0, end_angle = 2
   * pi, direction = "anticlock", color = NULL, alpha = 1, hover = NULL,
-  url = NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  url = NULL, legend = NULL, lname = NULL, lgroup = NULL,
+  visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -805,6 +818,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -991,7 +1010,8 @@ Usage
 </h4>
 <pre class="r"><code>ly_annulus(fig, x, y = NULL, data = figure_data(fig), inner_radius = 0.1,
   outer_radius = 0.2, color = NULL, alpha = 1, hover = NULL,
-  url = NULL, legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  url = NULL, legend = NULL, lname = NULL, lgroup = NULL,
+  visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1073,6 +1093,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -1260,7 +1286,7 @@ Usage
 <pre class="r"><code>ly_arc(fig, x, y = NULL, data = figure_data(fig), color = NULL,
   alpha = 1, width = 2, type = 1, radius = 0.2, start_angle = 0,
   end_angle = 2 * pi, direction = "anticlock", legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1354,6 +1380,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -1454,7 +1486,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_bezier(fig, x0, y0, x1, y1, cx0, cy0, cx1, cy1, data = figure_data(fig),
   color = "black", alpha = 1, width = 1, type = 1, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1562,6 +1594,12 @@ lgroup
 layer group
 </dd>
 <dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -1629,7 +1667,7 @@ Usage
 <pre class="r"><code>ly_crect(fig, x, y = NULL, data = figure_data(fig), width = 1,
   height = 1, angle = 0, dilate = FALSE, color = NULL, alpha = 1,
   hover = NULL, url = NULL, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+  lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1723,6 +1761,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -1934,7 +1978,8 @@ Draws a grid of rectangles with colors corresponding to the values in <code>z</c
 Usage
 </h4>
 <pre class="r"><code>ly_image(fig, z, rows, cols, x = 0, y = 0, dw = 1, dh = 1,
-  palette = "Spectral10", dilate = FALSE, lname = NULL, lgroup = NULL)</code></pre>
+  palette = "Spectral10", dilate = FALSE, lname = NULL, lgroup = NULL,
+  visible = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2011,6 +2056,12 @@ lgroup
 <dd class="rd-dd">
 layer group
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
 </dl>
 <h4>
 Examples
@@ -2037,7 +2088,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_image_url(fig, x = 0, y = 0, data = figure_data(fig), w = 10,
   h = 10, image_url, dilate = TRUE, anchor = "top_left", angle = 0,
-  lname = NULL, lgroup = NULL)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2108,6 +2159,12 @@ lgroup
 <dd class="rd-dd">
 layer group
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
 </dl>
 <h4>
 Examples
@@ -2145,7 +2202,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_lines(fig, x, y = NULL, data = figure_data(fig), group = NULL,
   color = "black", type = 1, width = 1, alpha = 1, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2221,6 +2278,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -2300,7 +2363,7 @@ Draws multiple lines with the given lists of coordinates.
 Usage
 </h4>
 <pre class="r"><code>ly_multi_line(fig, xs, ys, color = "black", alpha = 1, width = 1,
-  type = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+  type = 1, lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2358,6 +2421,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -2420,7 +2489,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_oval(fig, x, y = NULL, data = figure_data(fig), width = 0.1,
   height = 0.1, angle = 0, color = NULL, alpha = 1, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2496,6 +2565,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -2653,7 +2728,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_patch(fig, x, y, data = figure_data(fig), color = NULL, alpha = 1,
   hover = NULL, url = NULL, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+  lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2723,6 +2798,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -2886,7 +2967,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_points(fig, x, y = NULL, data = figure_data(fig), glyph = 21,
   color = NULL, alpha = 1, size = 10, hover = NULL, url = NULL,
-  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  legend = NULL, lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2968,6 +3049,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -3146,7 +3233,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_polygons(fig, xs, ys, group = NULL, data = figure_data(fig),
   color = NULL, alpha = 1, hover = NULL, url = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+  lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3216,6 +3303,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -3376,7 +3469,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_quadratic(fig, x0, y0, x1, y1, cx, cy, data = figure_data(fig),
   color = "black", alpha = 1, width = 1, type = 1, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3470,6 +3563,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -3591,7 +3690,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_ray(fig, x, y = NULL, data = figure_data(fig), length = NULL,
   angle = 0, color = "black", type = 1, width = 1, alpha = NULL,
-  legend = NULL, lname = NULL, lgroup = NULL, ...)</code></pre>
+  legend = NULL, lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3675,6 +3774,12 @@ lgroup
 layer group
 </dd>
 <dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -3741,7 +3846,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_rect(fig, xleft, ybottom, xright, ytop, data = figure_data(fig),
   color = NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3823,6 +3928,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -3983,7 +4094,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_segments(fig, x0, y0, x1, y1, data = figure_data(fig), color = "black",
   alpha = 1, width = 1, type = 1, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+  lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4067,6 +4178,12 @@ lgroup
 layer group
 </dd>
 <dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -4135,7 +4252,7 @@ Usage
   color = "black", alpha = 1, angle = 0, align = NULL,
   baseline = NULL, font = NULL, font_size = NULL, font_style = NULL,
   x_offset = NULL, y_offset = NULL, legend = NULL, lname = NULL,
-  lgroup = NULL)</code></pre>
+  lgroup = NULL, visible = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4248,6 +4365,12 @@ lgroup
 <dd class="rd-dd">
 layer group
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
 </dl>
 <h4>
 Mapped plot attributes and legends
@@ -4323,7 +4446,7 @@ Usage
 <pre class="r"><code>ly_wedge(fig, x, y = NULL, data = figure_data(fig), radius = 0.3,
   start_angle = 0, end_angle = 2 * pi, direction = "anticlock",
   color = NULL, alpha = 1, hover = NULL, url = NULL, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4417,6 +4540,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -4609,7 +4738,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_quantile(fig, x, group = NULL, data = figure_data(fig), probs = NULL,
   distn = qunif, ncutoff = 200, color = NULL, alpha = 1,
-  legend = TRUE, lname = NULL, lgroup = NULL, ...)</code></pre>
+  legend = TRUE, lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4685,6 +4814,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -4848,7 +4983,7 @@ Usage
   "biweight", "cosine", "optcosine"), weights = NULL, window = kernel,
   n = 512, cut = 3, na.rm = FALSE, color = "black", alpha = 1,
   width = 1, type = 1, legend = NULL, lname = NULL, lgroup = NULL,
-  ...)</code></pre>
+  visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4914,6 +5049,12 @@ lgroup
 layer group
 </dd>
 <dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
+<dt>
 …
 </dt>
 <dd class="rd-dd">
@@ -4977,7 +5118,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_hist(fig, x, data = figure_data(fig), breaks = "Sturges", freq = TRUE,
   include.lowest = TRUE, right = TRUE, color = NULL, alpha = 1,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5029,6 +5170,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -5179,8 +5326,9 @@ Add a “hexbin” layer to a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>ly_hexbin(fig, x, y = NULL, data = figure_data(fig), xbins = 30,
-  shape = 1, style = "colorscale", trans = NULL, inv = NULL,
-  palette = "RdYlGn11", line = FALSE, alpha = 1, hover = TRUE)</code></pre>
+  shape = 1, xbnds = NULL, ybnds = NULL, style = "colorscale",
+  trans = NULL, inv = NULL, lname = NULL, palette = "RdYlGn11",
+  line = FALSE, alpha = 1, hover = TRUE, visible = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5210,7 +5358,7 @@ data
 an optional data frame, providing the source for x and y
 </dd>
 <dt>
-xbins, shape
+xbins, shape, xbnds, ybnds
 </dt>
 <dd class="rd-dd">
 parameters passed to <code><a href=http://www.inside-r.org/packages/cran/hexbin/docs/hexbin>hexbin</a></code>
@@ -5226,6 +5374,12 @@ trans, inv
 </dt>
 <dd class="rd-dd">
 transformation and inverse transformation function for the bin counts
+</dd>
+<dt>
+lname
+</dt>
+<dd class="rd-dd">
+layer name
 </dd>
 <dt>
 palette
@@ -5251,6 +5405,12 @@ hover
 <dd class="rd-dd">
 logical - should a hover tool be added to show the count in each hexagon?
 </dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
+</dd>
 </dl>
 <h4>
 Examples
@@ -5265,8 +5425,9 @@ Add a “boxplot” layer to a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>ly_boxplot(fig, x, y = NULL, data = figure_data(fig), coef = 1.5,
-  color = "blue", alpha = 1, lname = NULL, lgroup = NULL, ...)</code></pre>
+<pre class="r"><code>ly_boxplot(fig, x, y = NULL, data = figure_data(fig), width = 0.9,
+  coef = 1.5, color = "blue", alpha = 1, lname = NULL, lgroup = NULL,
+  visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5294,6 +5455,12 @@ data
 </dt>
 <dd class="rd-dd">
 an optional data frame, providing the source for x and y
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+with of each box, a value between 0 (no width) and 1 (full width)
 </dd>
 <dt>
 coef
@@ -5324,6 +5491,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -5478,7 +5651,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_abline(fig, a = NULL, b = NULL, v = NULL, h = NULL, coef = NULL,
   color = "black", alpha = NULL, width = 1, type = 1, legend = NULL,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5554,6 +5727,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -5635,7 +5814,7 @@ Usage
 <pre class="r"><code>ly_contour(fig, z, x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1,
   length.out = ncol(z)), nlevels = 10, levels = pretty(range(z, na.rm =
   TRUE), nlevels), color = "black", alpha = 1, width = 1, type = 1,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5699,6 +5878,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -5771,7 +5956,7 @@ Usage
 </h4>
 <pre class="r"><code>ly_curve(fig, expr, from = NULL, to = NULL, n = 101, color = "black",
   alpha = 1, width = 1, type = 1, legend = NULL, lname = NULL,
-  lgroup = NULL, ...)</code></pre>
+  lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5829,6 +6014,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -5905,7 +6096,7 @@ Draws lines and polygons as specified by a map database
 Usage
 </h4>
 <pre class="r"><code>ly_map(fig, database = "world", regions = ".", color = NULL, alpha = 1,
-  lname = NULL, lgroup = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -5945,6 +6136,12 @@ lgroup
 </dt>
 <dd class="rd-dd">
 layer group
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -6100,7 +6297,7 @@ Usage
 <pre class="r"><code>ly_bar(fig, x, y = NULL, data = figure_data(fig), color = NULL,
   alpha = 1, position = c("stack", "fill", "dodge"), width = 0.9,
   origin = NULL, breaks = NULL, right = FALSE, binwidth = NULL,
-  lname = NULL, lgroup = NULL, legend = NULL, ...)</code></pre>
+  lname = NULL, lgroup = NULL, legend = NULL, visible = TRUE, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6176,6 +6373,12 @@ legend
 </dt>
 <dd class="rd-dd">
 either a logical specifying not to plot a legend for this layer (FALSE) or a string indicating the name of the legend entry for this layer (note that when mapping plot attributes to variables in <code>data</code>, a legend is automatically created and does not need to be specified - see “Mapped plot attributes and legends” below)
+</dd>
+<dt>
+visible
+</dt>
+<dd class="rd-dd">
+should the layer be visible?
 </dd>
 <dt>
 …
@@ -6370,9 +6573,10 @@ Customize x axis of a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>x_axis(fig, label, position = "below", log = FALSE, grid = TRUE,
-  num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
-  "numeral", "printf"), power_limit_high = 5, power_limit_low = -3,
-  precision = NULL, use_scientific = TRUE, format = NULL)</code></pre>
+  desired_num_ticks = NULL, num_minor_ticks = 5, visible = TRUE,
+  number_formatter = c("basic", "numeral", "printf"), power_limit_high = 5,
+  power_limit_low = -3, precision = NULL, use_scientific = TRUE,
+  format = NULL)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6406,6 +6610,12 @@ grid
 </dt>
 <dd class="rd-dd">
 logical - should a reference grid be shown for this axis?
+</dd>
+<dt>
+desired_num_ticks
+</dt>
+<dd class="rd-dd">
+desired target number of major tick positions to generate across the plot range
 </dd>
 <dt>
 num_minor_ticks
@@ -6513,7 +6723,7 @@ Update x axis range in a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>x_range(fig, dat)</code></pre>
+<pre class="r"><code>x_range(fig, dat = NULL, callback = NULL)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6529,6 +6739,12 @@ dat
 </dt>
 <dd class="rd-dd">
 either a vector (min, max) if the axis is numeric, or a vector of values if the axis is categorical. In the latter case, the order in which the values are supplied is how they will be arranged on the axis.
+</dd>
+<dt>
+callback
+</dt>
+<dd class="rd-dd">
+TODO
 </dd>
 </dl>
 <h4>
@@ -6561,9 +6777,10 @@ Customize x axis of a Bokeh figure
 Usage
 </h4>
 <pre class="r"><code>y_axis(fig, label, position = "left", log = FALSE, grid = TRUE,
-  num_minor_ticks = 5, visible = TRUE, number_formatter = c("basic",
-  "numeral", "printf"), power_limit_high = 5, power_limit_low = -3,
-  precision = NULL, use_scientific = TRUE, format = NULL)</code></pre>
+  desired_num_ticks = NULL, num_minor_ticks = 5, visible = TRUE,
+  number_formatter = c("basic", "numeral", "printf"), power_limit_high = 5,
+  power_limit_low = -3, precision = NULL, use_scientific = TRUE,
+  format = NULL)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6597,6 +6814,12 @@ grid
 </dt>
 <dd class="rd-dd">
 logical - should a reference grid be shown for this axis?
+</dd>
+<dt>
+desired_num_ticks
+</dt>
+<dd class="rd-dd">
+desired target number of major tick positions to generate across the plot range
 </dd>
 <dt>
 num_minor_ticks
@@ -6698,7 +6921,7 @@ Update y axis range in a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>y_range(fig, dat)</code></pre>
+<pre class="r"><code>y_range(fig, dat = NULL, callback = NULL)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -6714,6 +6937,12 @@ dat
 </dt>
 <dd class="rd-dd">
 either a vector (min, max) if the axis is numeric, or a vector of values if the axis is categorical. In the latter case, the order in which the values are supplied is how they will be arranged on the axis.
+</dd>
+<dt>
+callback
+</dt>
+<dd class="rd-dd">
+TODO
 </dd>
 </dl>
 <h4>
@@ -7635,15 +7864,15 @@ figure() %>%
 </div>
 <div id="interaction-tools" class="section level1">
 <h1>Interaction Tools</h1>
-<div id="tool_box_select" class="section level2">
-<h2>tool_box_select</h2>
+<div id="tool_hover" class="section level2">
+<h2>tool_hover</h2>
 <h3>
-Add “box_select” tool to a Bokeh figure
+Add “hover” tool to a Bokeh figure
 </h3>
 <h4>
 Usage
 </h4>
-<pre class="r"><code>tool_box_select(fig, select_every_mousemove = TRUE)</code></pre>
+<pre class="r"><code>tool_hover(fig, callback, ref_layer)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -7655,10 +7884,164 @@ fig
 figure to modify
 </dd>
 <dt>
-select_every_mousemove
+callback
 </dt>
 <dd class="rd-dd">
-logical - should the tools callback be triggered on every mouse move?
+a callback to be applied to this tool - either a character string of javascript code or any one of <code><a href=#debug_callback>debug_callback</a></code>, <code><a href=#shiny_callback>shiny_callback</a></code>, <code><a href=#console_callback>console_callback</a></code>, <code><a href=#custom_callback>custom_callback</a></code>
+</dd>
+<dt>
+ref_layer
+</dt>
+<dd class="rd-dd">
+name of the layer that the callback should be applied to
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href=#figure>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># hover over the blue points and make the orange points move
+figure(title = "hover a blue point") %>%
+  ly_points(1:10, lname = "blue", lgroup = "g1") %>%
+  ly_points(2:12, lname = "orange", lgroup = "g1") %>%
+  tool_hover(custom_callback(
+    code = "debugger;if(cb_data.index['1d'].indices.length > 0)
+    orange_data.get('data').x[cb_data.index['1d'].indices] += 0.1
+    orange_data.trigger('change')", "orange"), "blue")</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_selection" class="section level2">
+<h2>tool_selection</h2>
+<h3>
+Add “selection” tool callback to a Bokeh figure
+</h3>
+<p class="rd-p">
+This adds a selection callback to be used with the box select or lasso select tools.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_selection(fig, callback, ref_layer)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+callback
+</dt>
+<dd class="rd-dd">
+a callback to be applied to this tool - either a character string of javascript code or any one of <code><a href=#debug_callback>debug_callback</a></code>, <code><a href=#shiny_callback>shiny_callback</a></code>, <code><a href=#console_callback>console_callback</a></code>, <code><a href=#custom_callback>custom_callback</a></code>
+</dd>
+<dt>
+ref_layer
+</dt>
+<dd class="rd-dd">
+name of the layer that the callback should be applied to
+</dd>
+</dl>
+</div>
+<div id="tool_tap" class="section level2">
+<h2>tool_tap</h2>
+<h3>
+Add “tap” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_tap(fig, callback, ref_layer)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+callback
+</dt>
+<dd class="rd-dd">
+a callback to be applied to this tool - either a character string of javascript code or any one of <code><a href=#debug_callback>debug_callback</a></code>, <code><a href=#shiny_callback>shiny_callback</a></code>, <code><a href=#console_callback>console_callback</a></code>, <code><a href=#custom_callback>custom_callback</a></code>
+</dd>
+<dt>
+ref_layer
+</dt>
+<dd class="rd-dd">
+name of the layer that the callback should be applied to
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Tools can be easily specified as a vector of tool names in the <code>tools</code> argument when instantiating a <code><a href=#figure>figure</a></code>. In this case, they are added with defaults. Explicitly calling these <code>tool_</code> functions will manually add the tool to a figure and allow additional specification of parameters.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>figure() %>%
+  ly_points(1:10, lname = "points") %>%
+  tool_tap(debug_callback("points"), "points")</code></pre>
+<h4>
+See also
+</h4>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+</div>
+<div id="tool_box_select" class="section level2">
+<h2>tool_box_select</h2>
+<h3>
+Add “box_select” tool to a Bokeh figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>tool_box_select(fig, callback = NULL, ref_layer = NULL,
+  line_color = "black", line_alpha = 1, fill_color = "lightgrey",
+  fill_alpha = 0.5, line_width = 2, line_dash = c(4, 4),
+  level = "overlay")</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+figure to modify
+</dd>
+<dt>
+callback
+</dt>
+<dd class="rd-dd">
+a callback to be applied to this tool - either a character string of javascript code or any one of <code><a href=#debug_callback>debug_callback</a></code>, <code><a href=#shiny_callback>shiny_callback</a></code>, <code><a href=#console_callback>console_callback</a></code>, <code><a href=#custom_callback>custom_callback</a></code>
+</dd>
+<dt>
+ref_layer
+</dt>
+<dd class="rd-dd">
+name of the layer that the callback should be applied to
+</dd>
+<dt>
+line_color, line_alpha, fill_color, fill_alpha, line_width, line_dash, level
+</dt>
+<dd class="rd-dd">
+parameters to control the look of the selection bounding region
 </dd>
 </dl>
 <h4>
@@ -7675,7 +8058,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_box_zoom" class="section level2">
 <h2>tool_box_zoom</h2>
@@ -7685,7 +8068,9 @@ Add “box_zoom” tool to a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>tool_box_zoom(fig)</code></pre>
+<pre class="r"><code>tool_box_zoom(fig, line_color = "black", line_alpha = 1,
+  fill_color = "lightgrey", fill_alpha = 0.5, line_width = 2,
+  line_dash = c(4, 4), level = "overlay")</code></pre>
 <h4>
 Arguments
 </h4>
@@ -7695,6 +8080,12 @@ fig
 </dt>
 <dd class="rd-dd">
 figure to modify
+</dd>
+<dt>
+line_color, line_alpha, fill_color, fill_alpha, line_width, line_dash, level
+</dt>
+<dd class="rd-dd">
+parameters to control the look of the selection bounding region
 </dd>
 </dl>
 <h4>
@@ -7711,7 +8102,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_crosshair" class="section level2">
 <h2>tool_crosshair</h2>
@@ -7747,7 +8138,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_lasso_select" class="section level2">
 <h2>tool_lasso_select</h2>
@@ -7757,7 +8148,10 @@ Add “lasso_select” tool to a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>tool_lasso_select(fig, select_every_mousemove = TRUE)</code></pre>
+<pre class="r"><code>tool_lasso_select(fig, callback = NULL, ref_layer = NULL,
+  line_color = "black", line_alpha = 1, fill_color = "lightgrey",
+  fill_alpha = 0.5, line_width = 2, line_dash = c(4, 4),
+  level = "overlay")</code></pre>
 <h4>
 Arguments
 </h4>
@@ -7769,10 +8163,22 @@ fig
 figure to modify
 </dd>
 <dt>
-select_every_mousemove
+callback
 </dt>
 <dd class="rd-dd">
-logical - should the tools callback be triggered on every mouse move?
+a callback to be applied to this tool - either a character string of javascript code or any one of <code><a href=#debug_callback>debug_callback</a></code>, <code><a href=#shiny_callback>shiny_callback</a></code>, <code><a href=#console_callback>console_callback</a></code>, <code><a href=#custom_callback>custom_callback</a></code>
+</dd>
+<dt>
+ref_layer
+</dt>
+<dd class="rd-dd">
+name of the layer that the callback should be applied to
+</dd>
+<dt>
+line_color, line_alpha, fill_color, fill_alpha, line_width, line_dash, level
+</dt>
+<dd class="rd-dd">
+parameters to control the look of the selection bounding region
 </dd>
 </dl>
 <h4>
@@ -7789,7 +8195,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_pan" class="section level2">
 <h2>tool_pan</h2>
@@ -7832,7 +8238,7 @@ figure() %>% ly_points(1:10) %>%
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_reset" class="section level2">
 <h2>tool_reset</h2>
@@ -7868,7 +8274,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_resize" class="section level2">
 <h2>tool_resize</h2>
@@ -7904,7 +8310,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_save" class="section level2">
 <h2>tool_save</h2>
@@ -7940,7 +8346,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_tap>tool_tap</a></code>, <code><a href=#tool_wheel_zoom>tool_wheel_zoom</a></code></p>
 </div>
 <div id="tool_wheel_zoom" class="section level2">
 <h2>tool_wheel_zoom</h2>
@@ -7983,7 +8389,146 @@ figure() %>% ly_points(1:10) %>%
 <h4>
 See also
 </h4>
-<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code></p>
+<p>Other tools: <code><a href=#tool_box_select>tool_box_select</a></code>, <code><a href=#tool_box_zoom>tool_box_zoom</a></code>, <code><a href=#tool_crosshair>tool_crosshair</a></code>, <code><a href=#tool_hover>tool_hover</a></code>, <code><a href=#tool_lasso_select>tool_lasso_select</a></code>, <code><a href=#tool_pan>tool_pan</a></code>, <code><a href=#tool_reset>tool_reset</a></code>, <code><a href=#tool_resize>tool_resize</a></code>, <code><a href=#tool_save>tool_save</a></code>, <code><a href=#tool_tap>tool_tap</a></code></p>
+</div>
+</div>
+<div id="callback-interactivity" class="section level1">
+<h1>Callback Interactivity</h1>
+<div id="console_callback" class="section level2">
+<h2>console_callback</h2>
+<h3>
+Specify a console callback
+</h3>
+<p class="rd-p">
+This registers a callback that simply prints the callback objects in the javascript console of your web browser. A probalby more useful callback is the <code><a href='debug_callback.html'>debug_callback</a></code> which will place you inside a debugger in your web browser allowing you to inspect the callback objects.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>console_callback()</code></pre>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>figure() %>%
+  ly_points(1:10) %>%
+  x_range(callback = console_callback()) %>%
+  y_range(callback = console_callback())</code></pre>
+</div>
+<div id="custom_callback" class="section level2">
+<h2>custom_callback</h2>
+<h3>
+Specify a custom callback
+</h3>
+<p class="rd-p">
+This registers a callback that allows you to specify your own custom callback javascript code. A probalby more useful callback to use in conjunction with this for working on the javascript code is the <code><a href='debug_callback.html'>debug_callback</a></code> which will place you inside a debugger in your web browser allowing you to inspect the callback objects.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>custom_callback(code, lnames = NULL, args = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+code
+</dt>
+<dd class="rd-dd">
+a string of javascript callback code
+</dd>
+<dt>
+lnames
+</dt>
+<dd class="rd-dd">
+vector of layer names to be made available inside the callback in addition to the default callback objects (see details)
+</dd>
+<dt>
+args
+</dt>
+<dd class="rd-dd">
+named list of additional references to objects to be addressable in the callback
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If we add a layer and provide it, for example the <code>lname</code> “points”, then if we refer to it using the <code>lnames</code> parameter to the callback, several objects will be made available inside the callback for you to access, given the names “points_data”, “points_glyph”, “points_glyph_rend”, “points_hov_glyph”, “points_ns_glyph”, all pointers to different objects associated with the “points” layer that your callback can manipulate.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># hover over the blue points and make the orange points move
+figure(title = "hover a blue point") %>%
+  ly_points(1:10, lname = "blue", lgroup = "g1") %>%
+  ly_points(2:12, lname = "orange", lgroup = "g1") %>%
+  tool_hover(custom_callback(
+    code = "debugger;if(cb_data.index['1d'].indices.length > 0)
+    orange_data.get('data').x[cb_data.index['1d'].indices] += 0.1
+    orange_data.trigger('change')", "orange"), "blue")</code></pre>
+</div>
+<div id="debug_callback" class="section level2">
+<h2>debug_callback</h2>
+<h3>
+Specify a “debug” callback
+</h3>
+<p class="rd-p">
+This registers a callback that simply places you inside a debugger in your web browser allowing you to inspect the callback objects.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>debug_callback(lnames = NULL, args = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+lnames
+</dt>
+<dd class="rd-dd">
+vector of layer names to be made available inside the callback in addition to the default callback objects (see <code><a href=#custom_callback>custom_callback</a></code> for details)
+</dd>
+<dt>
+args
+</dt>
+<dd class="rd-dd">
+named list of additional references to objects to be addressable in the callback
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>figure() %>%
+  ly_points(1:10, lname = "points") %>%
+  tool_tap(debug_callback("points"), "points")</code></pre>
+</div>
+<div id="shiny_callback" class="section level2">
+<h2>shiny_callback</h2>
+<h3>
+Specify a Shiny callback
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>shiny_callback(id)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+id
+</dt>
+<dd class="rd-dd">
+a name that will be made available in your Shiny app as <code>input$id</code>
+</dd>
+</dl>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Depending on the type of callback you are using (selection, range, hover, tap), the value of <code>input$id</code> will change. The best way to get familiar with what to expect as these values is to debug inside your Shiny app and inspect the contents. You can also use <code><a href=#custom_callback>custom_callback</a></code> to write your own custom callbacks that can register other data in your Shiny app. To see what the callbacks look like for each callback type, see, for example, the contents of <code>rbokeh:::handle_range_callback.shinyCallback</code>
+</p>
 </div>
 </div>
 <div id="output" class="section level1">
@@ -8109,10 +8654,8 @@ a valid CSS unit for the height or a number, which will be coerced to a string a
 <h4>
 Examples
 </h4>
-<pre class="r"><code># courtesy of Joe Cheng from RStudio
-library("shiny")
+<pre class="r"><code>library("shiny")
 library("rbokeh")
-library("htmlwidgets")
 
 ui <- fluidPage(
   rbokehOutput("rbokeh")
@@ -8124,6 +8667,34 @@ server <- function(input, output, session) {
     invalidateLater(1000, session)
     figure() %>%
       ly_points(jitter(cars$speed), jitter(cars$dist))
+  })
+}
+
+shinyApp(ui, server)
+
+
+library("shiny")
+library("rbokeh")
+
+ui <- fluidPage(
+  rbokehOutput("rbokeh", width = 500, height = 540),
+  textOutput("x_range_text")
+)
+
+server <- function(input, output, session) {
+  output$rbokeh <- renderRbokeh({
+    figure() %>% ly_points(1:10) %>%
+      x_range(callback = shiny_callback("x_range"))
+  })
+
+  output$x_range_text <- reactive({
+    xrng <- input$x_range
+    if(!is.null(xrng)) {
+      paste0("factors: ", xrng$factors, ", start: ", xrng$start,
+        ", end: ", xrng$end)
+    } else {
+      "waiting for axis event..."
+    }
   })
 }
 
@@ -8174,7 +8745,8 @@ Export rbokeh plot to a gist
 <h4>
 Usage
 </h4>
-<pre class="r"><code>rbokeh2gist(fig_str, name, created = NULL, description = "", view = TRUE)</code></pre>
+<pre class="r"><code>rbokeh2gist(fig_str, name, created = NULL, description = "",
+  secure = TRUE, view = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -8202,6 +8774,12 @@ description
 </dt>
 <dd class="rd-dd">
 text to go in README.md
+</dd>
+<dt>
+secure
+</dt>
+<dd class="rd-dd">
+should https be used for cdn links?
 </dd>
 <dt>
 view
@@ -8232,7 +8810,8 @@ Get the HTML content required to embed a Bokeh figure
 <h4>
 Usage
 </h4>
-<pre class="r"><code>rbokeh2html(fig, file = tempfile(fileext = ".html"), pretty = FALSE)</code></pre>
+<pre class="r"><code>rbokeh2html(fig, file = tempfile(fileext = ".html"), pretty = FALSE,
+  secure = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -8254,6 +8833,12 @@ pretty
 </dt>
 <dd class="rd-dd">
 should the json model be pretty printed to the html file?
+</dd>
+<dt>
+secure
+</dt>
+<dd class="rd-dd">
+should https be used for cdn links?
 </dd>
 </dl>
 <h4>
@@ -8421,6 +9006,64 @@ Examples
 gmap(lat = 40.74, lng = -73.95, zoom = 11,
   width = 600, height = 600,
   map_style = gmap_style("blue_water"))</code></pre>
+</div>
+<div id="catjitter" class="section level2">
+<h2>catjitter</h2>
+<h3>
+Add a small amount of (rbokeh-compatible) noise to a character vector
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>catjitter(x, factor = 0.8)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+numeric vector to which jitter should be added
+</dd>
+<dt>
+factor
+</dt>
+<dd class="rd-dd">
+a factor between 0 and 1 that
+</dd>
+</dl>
+</div>
+<div id="get_object_refs" class="section level2">
+<h2>get_object_refs</h2>
+<h3>
+Get object ids and types from a figure
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>get_object_refs(fig)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fig
+</dt>
+<dd class="rd-dd">
+a figure object
+</dd>
+</dl>
+</div>
+<div id="phantom_install" class="section level2">
+<h2>phantom_install</h2>
+<h3>
+Instructions for installing phantomjs
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>phantom_install()</code></pre>
 </div>
 <div id="point_types" class="section level2">
 <h2>point_types</h2>

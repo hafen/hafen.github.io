@@ -17,7 +17,7 @@ navpills: |
 
 The Bokeh library is written and maintained by the [Bokeh Core Team](http://bokeh.pydata.org/en/latest/docs/contributing.html) consisting of several members of [Continuum Analytics](http://continuum.io) and other members of the open source community.  The rbokeh package is written and maintained by Ryan Hafen ([\@hafenstats](https://twitter.com/hafenstats)) with several [contributions from others](https://github.com/bokeh/rbokeh/graphs/contributors).  [Contributions are welcome](https://github.com/bokeh/rbokeh/blob/master/CONTRIBUTING.md).
 
-<span class="label label-success">Note:</span> This is the initial release of this package.  If you find bugs or have issues, please file them on the [github issue tracker](https://github.com/bokeh/rbokeh/issues) or hop on the [Bokeh mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh) and be sure tag your subject with [R].
+If you find bugs or have issues, please file them on the [github issue tracker](https://github.com/bokeh/rbokeh/issues) or hop on the [Bokeh mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh) and be sure tag your subject with [R].
 
 # Installation #
 
