@@ -105,8 +105,8 @@
     - bokeh_render_json
     - rbokehOutput
     - renderRbokeh
-    - rbokeh2gist
-    - rbokeh2html
+    - widget2gist
+    - widget2html
     - save_figure
 -
   section_name: Misc

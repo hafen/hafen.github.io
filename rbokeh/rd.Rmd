@@ -16,7 +16,7 @@ navpills: |
 <h1>R Interface for Bokeh</h1>
 
 <p><strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre],<a href="mailto:kent.russell@timelyportfolio.com">Kenton Russell</a> [ctb],<a href="mailto:jonathanro@gmail.com">Jonathan Owen</a> [ctb],<a href="mailto:schloerke@gmail.com">Barret Schloerkep</a> [ctb],<a href="mailto:saptarshi.guha@gmail.com">Saptasrhi Guha</a> [ctb],Continuum Analytics, Inc. [aut, cph]</p>
-<p><strong>Version:</strong> 0.4.1</p>
+<p><strong>Version:</strong> 0.4.2</p>
 <p><strong>License:</strong> MIT + file LICENSE</p>
 
 <h4>Description</h4>
@@ -187,9 +187,9 @@ Other figure types: <code><a href=#grid_plot>grid_plot</a></code>; <code><a href
   <dt>lng</dt>
   <dd class="rd-dd">longitude where the map should be centered</dd>
   <dt>zoom</dt>
-  <dd class="rd-dd">initial <a href = https://developers.google.com/maps/documentation/staticmaps/\#Zoomlevels>zoom level</a> to use when displaying the map</dd>
+  <dd class="rd-dd">initial <a href = https://developers.google.com/maps/documentation/staticmaps/#Zoomlevels>zoom level</a> to use when displaying the map</dd>
   <dt>map_type</dt>
-  <dd class="rd-dd"><a href = https://developers.google.com/maps/documentation/staticmaps/\#MapTypes>map type</a> to use for the plot - one of "hybrid", "satellite", "roadmap", "terrain"</dd>
+  <dd class="rd-dd"><a href = https://developers.google.com/maps/documentation/staticmaps/#MapTypes>map type</a> to use for the plot - one of "hybrid", "satellite", "roadmap", "terrain"</dd>
   <dt>map_style</dt>
   <dd class="rd-dd">a json string of a Google Maps style - see <code><a href=#gmap_style>gmap_style</a></code></dd>
   <dt>width</dt>
@@ -256,8 +256,9 @@ gmap(lat = 40.74, lng = -73.95, zoom = 11,
 
 <h4>Usage</h4>
 <pre class="r"><code>grid_plot(figs, width = NULL, height = NULL, nrow = 1, ncol = 1,
-  byrow = TRUE, same_axes = FALSE, simplify_axes = TRUE,
-  y_margin = NULL, x_margin = NULL, link_data = FALSE)</code></pre>
+  byrow = TRUE, xlim = NULL, ylim = NULL, same_axes = FALSE,
+  simplify_axes = TRUE, y_margin = NULL, x_margin = NULL,
+  link_data = FALSE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -273,6 +274,10 @@ gmap(lat = 40.74, lng = -73.95, zoom = 11,
   <dd class="rd-dd">number of columns in the grid</dd>
   <dt>byrow</dt>
   <dd class="rd-dd">populate the grid by row according to the order of figure elements supplied in <code>params</code></dd>
+  <dt>xlim</dt>
+  <dd class="rd-dd">the extent of the plotting area in the x-dimension to be applied to every panel (original individual panel limits will be honored if not specified).</dd>
+  <dt>ylim</dt>
+  <dd class="rd-dd">the extent of the plotting area in the y-dimension to be applied to every panel (original individual panel limits will be honored if not specified).</dd>
   <dt>same_axes</dt>
   <dd class="rd-dd">logical or vector of two logicals specifying whether the x and/or y axis limits should be the same for each plot in the grid</dd>
   <dt>simplify_axes</dt>
@@ -301,6 +306,8 @@ figs <- lapply(idx, function(x) {
 
 # 1 row, 3 columns
 grid_plot(figs)
+# specify xlim and ylim to be applied to all panels
+grid_plot(figs, xlim = c(4, 8), ylim = c(1.5, 4.5))
 # unnamed list will remove labels
 grid_plot(unname(figs))
 # 2 rows, 2 columns
@@ -309,6 +316,8 @@ grid_plot(figs, nrow = 2)
 grid_plot(figs, same_axes = TRUE)
 # x axis with same (and linked) limits
 grid_plot(figs, same_axes = c(TRUE, FALSE))
+# x axis with same (and linked) limits and custom xlim
+grid_plot(figs, same_axes = c(TRUE, FALSE), xlim = c(5, 7))
 # send lists instead of specifying nrow and ncol
 grid_plot(list(
   c(list(figs[[1]]), list(figs[[2]])),
@@ -2637,7 +2646,7 @@ Other layer functions: <code><a href=#ly_abline>ly_abline</a></code>,
 
 <h4>Usage</h4>
 <pre class="r"><code>ly_quantile(fig, x, group = NULL, data = figure_data(fig), probs = NULL,
-  distn = qunif, ncutoff = 200, color = NULL, alpha = 1,
+  distn = stats::qunif, ncutoff = 200, color = NULL, alpha = 1,
   legend = TRUE, lname = NULL, lgroup = NULL, visible = TRUE, ...)</code></pre>
 
 <h4>Arguments</h4>
@@ -5107,25 +5116,35 @@ shinyApp(ui, server)</code></pre>
 
 
 
-## rbokeh2gist
+## widget2gist
 
-<h3>Export rbokeh plot to a gist</h3>
+<h3>Export htmlwidget plot to a gist</h3>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>rbokeh2gist(fig_str, name, created = NULL, description = "",
-  secure = TRUE, view = TRUE)</code></pre>
+<pre class="r"><code>widget2gist(widget_string, name, created = NULL, description = "",
+  license = c("none", "apache-2.0", "bsd-2-clause", "bsd-3-clause",
+  "cc-by-4.0", "cc-by-nc-4.0", "cc-by-nc-nd-4.0", "cc-by-nc-sa-4.0",
+  "cc-by-nd-4.0", "cc-by-sa-4.0", "cddl-1.0", "epl-1.0", "gpl-2.0", "gpl-3.0",
+  "lgpl-2.1", "lgpl-3.0", "mit", "mpl-2.0"), border = TRUE,
+  scrolling = FALSE, secure = TRUE, view = TRUE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
-  <dt>fig_str</dt>
-  <dd class="rd-dd">a string containing R code to create an rbokeh figure</dd>
+  <dt>widget_string</dt>
+  <dd class="rd-dd">a string containing R code to create an htmlwidget</dd>
   <dt>name</dt>
   <dd class="rd-dd">name of the gist</dd>
   <dt>created</dt>
   <dd class="rd-dd">optional string for a "Created by" to preceed the README</dd>
   <dt>description</dt>
-  <dd class="rd-dd">text to go in README.md</dd>
+  <dd class="rd-dd">optional text to go in README.md to describe the gist</dd>
+  <dt>license</dt>
+  <dd class="rd-dd">license under which gist is released - one of those accepted here: <a href = http://bl.ocks.org/licenses.txt>http://bl.ocks.org/licenses.txt</a></dd>
+  <dt>border</dt>
+  <dd class="rd-dd">should the bl.ocks.org iframe have a border?</dd>
+  <dt>scrolling</dt>
+  <dd class="rd-dd">should the bl.ocks.org iframe scroll?</dd>
   <dt>secure</dt>
   <dd class="rd-dd">should https be used for cdn links?</dd>
   <dt>view</dt>
@@ -5136,71 +5155,12 @@ shinyApp(ui, server)</code></pre>
 
   <p class="rd-p">This requires that you have a github personal access token stored as an environment variable <code>GITHUB_PAT</code>.  See <code><a href=http://www.inside-r.org/packages/cran/gistr/docs/gist_create>gist_create</a></code> for more information.</p>
 
-  <p class="rd-p">Also note that this currently cant handle thumbnails but will find a way to do that soon.</p>
+  <p class="rd-p">Also note that this currently cant handle thumbnails but we are looking into ways to do that.</p>
 
 
 
 <h4>Examples</h4>
-<pre class="r"><code>rbokeh2gist("figure() %>% ly_points(1:10)", name = "test")</code></pre>
-
-
-
-## rbokeh2html
-
-<h3>Get the HTML content required to embed a Bokeh figure</h3>
-
-
-<h4>Usage</h4>
-<pre class="r"><code>rbokeh2html(fig, file = tempfile(fileext = ".html"), pretty = FALSE,
-  secure = TRUE)</code></pre>
-
-<h4>Arguments</h4>
-<dl class="rd-dl">
-  <dt>fig</dt>
-  <dd class="rd-dd">figure</dd>
-  <dt>file</dt>
-  <dd class="rd-dd">html file name to write the figure to</dd>
-  <dt>pretty</dt>
-  <dd class="rd-dd">should the json model be pretty printed to the html file?</dd>
-  <dt>secure</dt>
-  <dd class="rd-dd">should https be used for cdn links?</dd>
-</dl>
-
-
-<h4>Examples</h4>
-<pre class="r"><code>p <- figure() %>% ly_points(1:10)
-rbokeh2html(p)</code></pre>
-
-
-
-## save_figure
-
-<h3>Make a static png file for an rbokeh figure</h3>
-
-
-<h4>Usage</h4>
-<pre class="r"><code>save_figure(p, file, timeout = 500)</code></pre>
-
-<h4>Arguments</h4>
-<dl class="rd-dl">
-  <dt>p</dt>
-  <dd class="rd-dd">Bokeh figure object</dd>
-  <dt>file</dt>
-  <dd class="rd-dd">where to save png file</dd>
-  <dt>timeout</dt>
-  <dd class="rd-dd">plot render timeout in milliseconds (see details)</dd>
-</dl>
-
-  <h4>Details</h4>
-
-  <p class="rd-p">This uses phantomjs (<a href = http://phantomjs.org>http://phantomjs.org</a>) to render your rbokeh figure in a headless browser and take a screenshot of it, creating a static output.  This assumes that phantomjs has been installed on your machine and is available as a system call.  For plots that take longer to load and render, you may need to increase the value of <code>timeout</code>.  Note that this function is experimental.</p>
-
-
-
-<h4>Examples</h4>
-<pre class="r"><code>figure(tools = NULL) %>%
-  ly_points(1:10) %>%
-  save_figure("/tmp/test.png")</code></pre>
+<pre class="r"><code>widget2gist("figure() %>% ly_points(1:10)", name = "test")</code></pre>
 
 # Misc
 

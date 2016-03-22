@@ -21,11 +21,10 @@ If you find bugs or have issues, please file them on the [github issue tracker](
 
 # Installation #
 
-To try it out, install the package and dependencies.  This assumes you have the `devtools` package installed from CRAN (`install.packages("devtools")`).
+The rbokeh package can be installed from CRAN:
 
 ```r
-devtools::install_github("ramnathv/htmlwidgets")
-devtools::install_github("bokeh/rbokeh")
+install.packages("rbokeh")
 ```
 
 ```{r}
@@ -36,7 +35,7 @@ Plots are constructed by initializing a `figure()` and then adding layers on top
 
 # Preview #
 
-Before providing a tutorial, we first show several examples of plots created with rbokeh.  This will hopefully both give a feel for what the syntax looks like and provide some motivation to go through the more procedural tutorial.  We thought this would be a more enjoyable way to begin than looking at 50 different versions of a plot of the iris data with different parameter settings.
+Before providing a tutorial, we first show several examples of plots created with rbokeh.  This will both give a feel for what the syntax looks like and provide some motivation to go through the more procedural tutorial.  We thought this would be a more enjoyable way to begin than looking at 50 different versions of a plot of the iris data with different parameter settings.
 
 Speaking of the iris data, our first plot:
 
