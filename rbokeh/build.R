@@ -3,6 +3,8 @@
 #   getOption("repos")))
 # install.packages("packagedocs")
 
+library(lazyrmd)
+
 knitr::opts_knit$set(root.dir = normalizePath("."))
 
 packagedocs::render_docs(

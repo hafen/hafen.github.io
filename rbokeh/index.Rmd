@@ -39,7 +39,7 @@ Before providing a tutorial, we first show several examples of plots created wit
 
 Speaking of the iris data, our first plot:
 
-```{r iris1, message=FALSE}
+```{r iris1, lazy=TRUE, message=FALSE}
 p <- figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species,
@@ -51,7 +51,7 @@ Here since we are specifying color and glyph by `Species`, a legend is automatic
 
 We can also specify legend entries manually:
 
-```{r cars1, message=FALSE}
+```{r cars1, lazy=TRUE, message=FALSE}
 z <- lm(dist ~ speed, data = cars)
 p <- figure(width = 600, height = 600) %>%
   ly_points(cars, hover = cars) %>%
@@ -62,7 +62,7 @@ p
 
 Histogram of old faithful geyser data with density overplotted:
 
-```{r eruptions1, message=FALSE}
+```{r eruptions1, lazy=TRUE, message=FALSE}
 h <- figure(width = 600, height = 400) %>%
   ly_hist(eruptions, data = faithful, breaks = 40, freq = FALSE) %>%
   ly_density(eruptions, data = faithful)
@@ -71,7 +71,7 @@ h
 
 Periodic table of the elements with additional info on hover:
 
-```{r elements, message=FALSE}
+```{r elements, lazy=TRUE, message=FALSE}
 # prepare data
 elements <- subset(elements, !is.na(group))
 elements$group <- as.character(elements$group)
@@ -126,7 +126,7 @@ p
 
 Crude map of the world with capital cities:
 
-```{r worldmap, message=FALSE}
+```{r worldmap, lazy=TRUE, message=FALSE}
 library(maps)
 data(world.cities)
 caps <- subset(world.cities, capital == 1)
@@ -141,7 +141,7 @@ Hover for population info, etc.
 
 Google map plot:
 
-```{r gmap1, message=FALSE}
+```{r gmap1, lazy=TRUE, message=FALSE}
 orstationc <- read.csv("http://geog.uoregon.edu/bartlein/old_courses/geog414s05/data/orstationc.csv")
 
 gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
@@ -151,7 +151,7 @@ gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
 
 Time series plot of daily airline flights with hover and vertical line:
 
-```{r flights1, message=FALSE}
+```{r flights1, lazy=TRUE, message=FALSE}
 p <- figure(width = 800, height = 400) %>%
   ly_lines(date, Freq, data = flightfreq, alpha = 0.3) %>%
   ly_points(date, Freq, data = flightfreq,
@@ -164,7 +164,7 @@ Note that using your scroll wheel over the x or y axis activates a zoom in the d
 
 Scatterplot matrix of iris data with linked panning, zooming, and brushing (try the pan, zoom, and box_select tools in the figure below):
 
-```{r splom, message=FALSE}
+```{r splom, lazy=TRUE, message=FALSE}
 tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "reset")
 nms <- expand.grid(names(iris)[1:4], rev(names(iris)[1:4]), stringsAsFactors = FALSE)
 splom_list <- vector("list", 16)
@@ -179,7 +179,7 @@ grid_plot(splom_list, ncol = 4, same_axes = TRUE, link_data = TRUE)
 
 A hexbin plot:
 
-```{r hexbin1, message=FALSE}
+```{r hexbin1, lazy=TRUE, message=FALSE}
 figure() %>% ly_hexbin(rnorm(10000), rnorm(10000))
 ```
 
@@ -197,7 +197,7 @@ download.file("https://gist.githubusercontent.com/hafen/77f25b556725b3d0066b/raw
 doubles <- read.csv(f)
 ```
 
-```{r baseball, message=FALSE}
+```{r baseball, lazy=TRUE, message=FALSE}
 ly_baseball <- function(x) {
   base_x <- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
   base_y <- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
@@ -228,7 +228,7 @@ figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 540,
 
 Image plot of Maunga Whau volcano topography with contour line:
 
-```{r volcano, message=FALSE, warning=FALSE}
+```{r volcano, lazy=TRUE, message=FALSE, warning=FALSE}
 p <- figure(title = "Volcano", padding_factor = 0) %>%
   ly_image(volcano) %>%
   ly_contour(volcano)
@@ -237,7 +237,7 @@ p
 
 Log axes:
 
-```{r cranpkgs, message=FALSE}
+```{r cranpkgs, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(Date, Packages, Ecdat::CRANpackages) %>%
   y_axis(log = TRUE)
@@ -245,7 +245,7 @@ figure() %>%
 
 Embedding images in a figure:
 
-```{r images, message=FALSE}
+```{r images, lazy=TRUE, message=FALSE}
 url <- c("http://bokeh.pydata.org/en/latest/_static/images/logo.png",
   "http://developer.r-project.org/Logo/Rlogo-4.png")
 
@@ -268,19 +268,19 @@ p
 
 Boxplot of voice data:
 
-```{r singer, message=FALSE}
+```{r singer, lazy=TRUE, message=FALSE}
 figure(ylab = "Height (inches)", width = 600) %>%
   ly_boxplot(voice.part, height, data = lattice::singer)
 ```
 
 Quantile plot with iris data:
 
-```{r iris2, message=FALSE}
+```{r iris2, lazy=TRUE, message=FALSE}
 figure(legend_location = "top_left") %>%
   ly_quantile(Sepal.Length, group = Species, data = iris)
 ```
 
-```{r singer2, eval=FALSE, echo=FALSE}
+```{r singer2, lazy=TRUE, eval=FALSE, echo=FALSE}
 # make this work with tableau20 theme (same shades for each part group)
 figure(xlim = c(-0.1, 1.35), width = 550) %>%
   ly_quantile(height, group = voice.part, data = lattice::singer)
@@ -288,7 +288,7 @@ figure(xlim = c(-0.1, 1.35), width = 550) %>%
 
 Washington cancer rates:
 
-```{r cancer, message=FALSE}
+```{r cancer, lazy=TRUE, message=FALSE}
 wa_cancer <- droplevels(subset(latticeExtra::USCancerRates, state == "Washington"))
 ## y axis sorted by male rate
 ylim <- levels(with(wa_cancer, reorder(county, rate.male)))
@@ -323,7 +323,7 @@ p <- ly_points(p, cars$speed, cars$dist)
 
 We can now view the figure by simply typing `p`:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 p
 ```
 
@@ -346,7 +346,7 @@ p <- p %>% ly_abline(-17.6, 3.9)
 
 Or if we were to have built it up in one step, it would look like this:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 p <- figure() %>%
   ly_points(cars$speed, cars$dist) %>%
   ly_abline(-17.6, 3.9)
@@ -395,13 +395,13 @@ p <- figure() %>%
 
 Now is a good time to introduce hover capabilities in rbokeh.  Most layer functions (those that render shapes and not lines), have a `hover` argument.  This argument can be a data frame with the same number of rows as the length of `x` and `y`, or a vector of names in the `data` argument.  When specified, the hover tool will be activated and when a point is hovered over in the plot, a list of the specified variable values for that point will be shown.  For example, with the cars data, suppose we would like to see the actual data point values:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(speed, dist, data = cars, hover = c(speed, dist))
 ```
 
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(speed, dist, data = cars, hover = "This car was going @speed mph!")
 ```
@@ -413,14 +413,14 @@ Now that we can get data in and add layers, we want to control the aesthetic att
 
 We can also explicitly specify attributes such as size, color, etc. for each layer.  For example, suppose we want to color the glyphs in our `cars` plot red and have them 20 pixels in size:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(cars, color = "red", size = 20)
 ```
 
 We can pass vectors of attributes as well:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 n <- nrow(cars)
 ramp <- colorRampPalette(c("red", "blue"))(n)
 figure() %>%
@@ -448,7 +448,7 @@ In the example above, the points in our plot have both line attributes (the outl
 
 For example, suppose we want the fill to be blue and the line to be black:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(cars, fill_color = "blue", line_color = "black")
 ```
@@ -465,7 +465,7 @@ When dealing with glyphs that have both line and color attributes (like the plot
 
 When using a glyph that only has line properties, `color` maps directly to `line_color` and is simply a convenience as the `line_` prefix is redundant, and similarly `alpha` maps directly to `line_alpha`Any attribute that starts with `line_` or `fill_` always overrides `color` and `alpha`.
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(cars) %>%
   ly_lines(lowess(cars), color = "red", width = 2)
@@ -477,7 +477,7 @@ Most of the attributes for different layer functions are self-explanatory from l
 
 To see the avaialable possible values for `glyph`:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 point_types()
 ```
 
@@ -485,7 +485,7 @@ The named glyphs on rows 4 and 5 are called "markers" in Bokeh and are shown wit
 
 For example, let's plot the cars data with `glyph = 12`:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(cars, glyph = 12)
 ```
@@ -496,7 +496,7 @@ Similar to the `glyph` argument in `ly_points()`, there is a `type` argument in 
 
 For example:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_lines(lowess(cars), type = 2)
 ```
@@ -509,7 +509,7 @@ Often we want to control the behavior of glyph attributes based on other propert
 
 For example, turning to the famous `iris` data set, suppose we want to plot sepal width vs. sepal length and color the points by species:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris, color = Species)
 ```
@@ -518,7 +518,7 @@ We see that points get colored according to species (based on the current theme,
 
 We can map other attributes, and more than one attribute at once.  For example, to vary both color and glyph type by species:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species)
@@ -528,7 +528,7 @@ rbokeh knows to map a variable when the variable it is given does not conform to
 
 We can also map continuous variables, and in this case it it sliced up and values are mapped across a scale for the attribute.  For example, coloring by petal width:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Petal.Width)
@@ -536,7 +536,7 @@ figure() %>%
 
 We can do this with other glyphs as well.  Some glyphs have a `group` parameter where we would like to split the data up by a grouping variable but not vary an aesthetic attribute.  For example, with `ly_lines()`, we may want to break the data up by a variable and get a different line for each, all of the same color:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 co2dat <- data.frame(
   y = co2,
   x = floor(time(co2)),
@@ -548,7 +548,7 @@ figure() %>%
 
 We can of course vary the color as well:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure(xlim = c(1958, 2010)) %>%
   ly_lines(x, y, color = m, data = co2dat)
 ```
@@ -559,7 +559,7 @@ We saw that when mapping attributes to variables in our data, we get legends for
 
 An example we saw before made use of explicit specification of legend entries:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 z <- lm(dist ~ speed, data = cars)
 figure(width = 600, height = 600) %>%
   ly_points(cars, hover = cars, legend = "data") %>%
@@ -577,7 +577,7 @@ Axis labels formats can be controlled by specifying various tick format paramete
 
 For example, the default Date axis monthly format of '%b%y' can instead be specified as '%b' using
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_lines(seq(as.Date("2012-01-01"),
     as.Date("2012-12-31"), by="days"), rnorm(366)) %>%
@@ -586,7 +586,7 @@ figure() %>%
 
 or commas could be added to long numeric labels using
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(rnorm(10), rnorm(10) * 10000) %>%
   y_axis(number_formatter = "numeral", format = "0,000")
@@ -600,7 +600,7 @@ Bokeh has many tools available for different types of interaction.  Tools can be
 
 For example, suppose I want to add the `box_select` and `lasso_select` tools to my figure:
 
-```{r, message=FALSE}
+```{r, lazy=TRUE, message=FALSE}
 figure() %>%
   ly_points(Sepal.Length, Sepal.Width, data = iris, color = Species) %>%
   tool_box_select() %>%
