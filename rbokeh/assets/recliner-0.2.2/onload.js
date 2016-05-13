@@ -8,5 +8,5 @@ $(function() {
 });
 
 $(document).on('lazyload', '.widget-lazyload', function() {
-  $(this).prev().addClass('reveal-hidden');
+  $(this).prev().fadeOut(800, function() { $(this).remove(); });
 });
