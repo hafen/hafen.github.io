@@ -1,4 +1,4 @@
-$(function() {
+$(window).load(function() {
   $('.widget-lazyload').recliner({
     attrib: 'data-src', // selector for attribute containing the media src
     throttle: 300,      // millisecond interval at which to process events
@@ -7,6 +7,6 @@ $(function() {
   });
 });
 
-$(document).on('lazyload', '.widget-lazyload', function() {
-  $(this).prev().fadeOut(800, function() { $(this).remove(); });
-});
+// $(document).on('lazyload', '.widget-lazyload', function() {
+//   $(this).prev().fadeOut(800, function() { $(this).remove(); });
+// });

@@ -24,7 +24,7 @@
   <script src="assets/recliner-0.2.2/onload.js"></script>
   <link href="assets/packagedocs-0.0.1/pd.css" rel="stylesheet" />
   <script src="assets/packagedocs-0.0.1/pd.js"></script>
-  <script src="assets/packagedocs-0.0.1/pd-sticky-toc.js"></script>
+  <script src="assets/packagedocs-0.0.1/pd-collapse-toc.js"></script>
   
   
   
@@ -46,7 +46,7 @@
           <span class="icon-bar"></span>
         </button>
                 <a href="index.html" class="navbar-brand page-scroll">
-        rbokeh - R Interface to Bokeh
+        rbokeh - R Interface for Bokeh
         </a>
       </div>
             <nav class="collapse navbar-collapse" role="navigation">
@@ -116,9 +116,8 @@
     color = Species, glyph = Species,
     hover = list(Sepal.Length, Sepal.Width))
 p</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/677ac060485151dae814b8d0d67e247c.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/ce02a116f0dbaa2931a6c978e09d5e7b.html"></iframe>
 </div>
 <p>Here since we are specifying color and glyph by <code>Species</code>, a legend is automatically created and the points are colored according to the default color scheme. You can hover over points to see the tooltips we added with the <code>hover</code> argument. You can also play around with the other interactive components such as panning and zooming.</p>
 <p>We can also specify legend entries manually:</p>
@@ -129,8 +128,7 @@ p &lt;- figure(width = 600, height = 600) %&gt;%
   ly_abline(z, type = 2, legend = &quot;lm&quot;)
 p</code></pre>
 <div style="display: flex; width: 620px; height: 620px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 620px; height: 620px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="620" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a04a1a81b643c619bcdf8af1b497a12c.html"></iframe>
+<iframe class="widget-lazyload" width="620" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/582d59cf412a6498fa384e0fe9a8b0fc.html"></iframe>
 </div>
 <p>Histogram of old faithful geyser data with density overplotted:</p>
 <pre class="r"><code>h &lt;- figure(width = 600, height = 400) %&gt;%
@@ -138,8 +136,7 @@ p</code></pre>
   ly_density(eruptions, data = faithful)
 h</code></pre>
 <div style="display: flex; width: 620px; height: 420px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 620px; height: 420px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="620" height="420" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/0d5f0a4255abc68806d6956168b7858c.html"></iframe>
+<iframe class="widget-lazyload" width="620" height="420" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/64a8f9c6ace493a55d11014a573d17ff.html"></iframe>
 </div>
 <p>Periodic table of the elements with additional info on hover:</p>
 <pre class="r"><code># prepare data
@@ -192,21 +189,19 @@ ly_text(symx, massy, text = atomic.mass, data = elements,
 
 p</code></pre>
 <div style="display: flex; width: 820px; height: 465px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 820px; height: 465px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="820" height="465" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/d811b91de224b51be342a1736e74b0d6.html"></iframe>
+<iframe class="widget-lazyload" width="820" height="465" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/7f74b99acc1f878a5468dcaa2a261708.html"></iframe>
 </div>
 <p>Crude map of the world with capital cities:</p>
 <pre class="r"><code>library(maps)
 data(world.cities)
 caps &lt;- subset(world.cities, capital == 1)
 caps$population &lt;- prettyNum(caps$pop, big.mark = &quot;,&quot;)
-figure(width = 800, padding_factor = 0) %&gt;%
+figure(width = 800, height = 450, padding_factor = 0) %&gt;%
   ly_map(&quot;world&quot;, col = &quot;gray&quot;) %&gt;%
   ly_points(long, lat, data = caps, size = 5,
     hover = c(name, country.etc, population))</code></pre>
-<div style="display: flex; width: 820px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 820px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="820" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/b9b4970b2098a5523e98171dbf1e5029.html"></iframe>
+<div style="display: flex; width: 820px; height: 470px; overflow: hidden">
+<iframe class="widget-lazyload" width="820" height="470" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/4fc1fc9760f784d3c8f39f1ec9b80b9b.html"></iframe>
 </div>
 <p>Hover for population info, etc.</p>
 <p>Google map plot:</p>
@@ -216,9 +211,9 @@ gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %&gt;%
   ly_points(lon, lat, data = orstationc, alpha = 0.8, col = &quot;red&quot;,
     hover = c(station, Name, elev, tann))</code></pre>
 <div style="display: flex; width: 720px; height: 620px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 720px; height: 620px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="720" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/bc816e22aa830f14e844bff21d4f273f.html"></iframe>
+<iframe class="widget-lazyload" width="720" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/7198ae7d943ab8eb188aedf491763902.html"></iframe>
 </div>
+<p>Note: for this to work you need to get a Google Maps API key and either provide it as an argument to <code>gmap()</code> or set it as an option in your R session <code>options(GMAP_API_KEY=xxx)</code> or set it as a system environment variable, <code>GMAP_API_KEY</code>.</p>
 <p>Time series plot of daily airline flights with hover and vertical line:</p>
 <pre class="r"><code>p &lt;- figure(width = 800, height = 400) %&gt;%
   ly_lines(date, Freq, data = flightfreq, alpha = 0.3) %&gt;%
@@ -227,8 +222,7 @@ gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %&gt;%
   ly_abline(v = as.Date(&quot;2001-09-11&quot;))
 p</code></pre>
 <div style="display: flex; width: 820px; height: 420px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 820px; height: 420px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="820" height="420" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/4d6ea91c988e22cdc69bed94e5d18f1c.html"></iframe>
+<iframe class="widget-lazyload" width="820" height="420" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/7de043495ad0a7a0e88e0c4e14cbb637.html"></iframe>
 </div>
 <p>Note that using your scroll wheel over the x or y axis activates a zoom in the dimension of the axis you are hovered over.</p>
 <p>Scatterplot matrix of iris data with linked panning, zooming, and brushing (try the pan, zoom, and box_select tools in the figure below):</p>
@@ -242,22 +236,19 @@ for(ii in seq_len(nrow(nms))) {
       color = Species, size = 5, legend = FALSE)
 }
 grid_plot(splom_list, ncol = 4, same_axes = TRUE, link_data = TRUE)</code></pre>
-<div style="display: flex; width: 866px; height: 820px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 866px; height: 820px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="866" height="820" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e5380ff27576924d514e34447906afe2.html"></iframe>
+<div style="display: flex; width: 820px; height: 820px; overflow: hidden">
+<iframe class="widget-lazyload" width="820" height="820" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/8de9c37537b2317a0502cbc403377505.html"></iframe>
 </div>
 <p>A hexbin plot:</p>
 <pre class="r"><code>figure() %&gt;% ly_hexbin(rnorm(10000), rnorm(10000))</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/d2d678081935e7591fdc9ab6d0cf3433.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/22ccce82e776c307330ebbff863b3a44.html"></iframe>
 </div>
 <p>Hovering will show the counts in the hexagon bin.</p>
 <p>Here’s a combination of many layers using hexbins to show the density of the fielding location of all doubles in the 2014 MLB season, inspired by <a href="https://baseballwithr.wordpress.com/2014/06/06/creating-hexbin-plots/">this</a>:</p>
-<pre class="r"><code>f &lt;- tempfile()
-download.file(&quot;https://gist.githubusercontent.com/hafen/77f25b556725b3d0066b/raw/10f0e811f09f2b9f0f9ccfb542e296dfac2761d4/doubles.csv&quot;, method=&quot;curl&quot;, f)
-doubles &lt;- read.csv(f)</code></pre>
-<pre class="r"><code>ly_baseball &lt;- function(x) {
+<pre class="r"><code>doubles &lt;- read.csv(&quot;https://gist.githubusercontent.com/hafen/77f25b556725b3d0066b/raw/10f0e811f09f2b9f0f9ccfb542e296dfac2761d4/doubles.csv&quot;)
+
+ly_baseball &lt;- function(x) {
   base_x &lt;- c(90 * cos(pi/4), 0, 90 * cos(3 * pi/4), 0)
   base_y &lt;- c(90 * cos(pi/4), sqrt(90^2 + 90^2), 90 * sin(pi/4), 0)
   distarc_x &lt;- lapply(c(2:4) * 100, function(a)
@@ -284,25 +275,26 @@ figure(xgrid = FALSE, ygrid = FALSE, width = 630, height = 540,
   ly_baseball() %&gt;%
   ly_hexbin(doubles, xbins = 50, shape = 0.77, alpha = 0.75, palette = &quot;Spectral10&quot;)</code></pre>
 <div style="display: flex; width: 650px; height: 560px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 650px; height: 560px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="650" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e4adbb4a939ac551c45149dc0019f892.html"></iframe>
+<iframe class="widget-lazyload" width="650" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/7d8c0ab66320f4d57a776a3f1b78d85b.html"></iframe>
 </div>
 <p>Image plot of Maunga Whau volcano topography with contour line:</p>
 <pre class="r"><code>p &lt;- figure(title = &quot;Volcano&quot;, padding_factor = 0) %&gt;%
   ly_image(volcano) %&gt;%
   ly_contour(volcano)
 p</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/b3ebc4b2cdc8056f10c33ae8487ee8f7.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/3dbe45cd77e8e8db0ea090978570940e.html"></iframe>
 </div>
 <p>Log axes:</p>
-<pre class="r"><code>figure() %&gt;%
-  ly_points(Date, Packages, Ecdat::CRANpackages) %&gt;%
+<pre class="r"><code># get data on number of CRAN packages over time (from Ecdat)
+packages &lt;- read.csv(&quot;https://gist.githubusercontent.com/hafen/117d731ad93c03bd5ec0079cbb38ab94/raw/04e7dc3aed1c6f5d82b1bb21460c0b589ef09d96/rpackages.csv&quot;,
+  colClasses = c(&quot;numeric&quot;, &quot;Date&quot;, &quot;integer&quot;, &quot;character&quot;))
+
+figure(data = packages) %&gt;%
+  ly_points(Date, Packages, hover = c(Version, Date, Packages)) %&gt;%
   y_axis(log = TRUE)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/c8b605f1cc1a07cbc133e230625fb16f.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/f998848cb1f678399db9f57d06974586.html"></iframe>
 </div>
 <p>Embedding images in a figure:</p>
 <pre class="r"><code>url &lt;- c(&quot;http://bokeh.pydata.org/en/latest/_static/images/logo.png&quot;,
@@ -317,29 +309,26 @@ imgdat &lt;- data.frame(
   url = rep(url, 6)
 )
 
-p &lt;- figure(xlab = &quot;x&quot;, ylab = &quot;y&quot;) %&gt;%
+p &lt;- figure(xlab = &quot;x&quot;, ylab = &quot;y&quot;, height = 450) %&gt;%
   ly_image_url(x, y, w = w, h = h, image_url = url, data = imgdat,
     anchor = &quot;center&quot;) %&gt;%
   ly_lines(sin(c(ss, ss[1])) * 10, cos(c(ss, ss[1])) * 10,
     width = 15, alpha = 0.1)
 p</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/fb917a52fd37110cb108855ce7604900.html"></iframe>
+<div style="display: flex; width: 520px; height: 470px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="470" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/d493cd77b280a0ab1dcf2163cc3fac4f.html"></iframe>
 </div>
 <p>Boxplot of voice data:</p>
 <pre class="r"><code>figure(ylab = &quot;Height (inches)&quot;, width = 600) %&gt;%
   ly_boxplot(voice.part, height, data = lattice::singer)</code></pre>
-<div style="display: flex; width: 620px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 620px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="620" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a2920a6c33ed6ee3acd17c8f5a663481.html"></iframe>
+<div style="display: flex; width: 620px; height: 520px; overflow: hidden">
+<iframe class="widget-lazyload" width="620" height="520" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/334d80b9ace947299f152ca972c1b2cb.html"></iframe>
 </div>
 <p>Quantile plot with iris data:</p>
 <pre class="r"><code>figure(legend_location = &quot;top_left&quot;) %&gt;%
   ly_quantile(Sepal.Length, group = Species, data = iris)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/40ef8b65f5af39745c1045f6c4261a61.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/d76dbf26d5beef2381bb3248c75f2e96.html"></iframe>
 </div>
 <p>Washington cancer rates:</p>
 <pre class="r"><code>wa_cancer &lt;- droplevels(subset(latticeExtra::USCancerRates, state == &quot;Washington&quot;))
@@ -351,8 +340,7 @@ figure(ylim = ylim, width = 700, height = 600, tools = &quot;&quot;) %&gt;%
     county, data = wa_cancer, color = NULL, width = 2) %&gt;%
   ly_points(rate.male, county, glyph = 16, data = wa_cancer)</code></pre>
 <div style="display: flex; width: 720px; height: 620px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 720px; height: 620px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="720" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/fc6bd980ab85e700c9c96d0e7674d69e.html"></iframe>
+<iframe class="widget-lazyload" width="720" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a836b430d5c7b833b8c820f880894541.html"></iframe>
 </div>
 </div>
 <div id="tutorial" class="section level1">
@@ -367,9 +355,8 @@ figure(ylim = ylim, width = 700, height = 600, tools = &quot;&quot;) %&gt;%
 <pre class="r"><code>p &lt;- ly_points(p, cars$speed, cars$dist)</code></pre>
 <p>We can now view the figure by simply typing <code>p</code>:</p>
 <pre class="r"><code>p</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/988e2a90cd91f363cb3d8c215db9d043.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/3343e8f37b57d33884dffe94e44fea2b.html"></iframe>
 </div>
 <p>Note that since we didn’t specify x and y axis labels (which can be done with <code>xlab</code> and <code>ylab</code> in <code>figure()</code>), they were chosen for us based on the inputs.</p>
 <p>Also note that when we print the figure it tells us that we did not specify the <code>xlim</code> and <code>ylim</code> arguments and that it is computing limits for us. By default, the limits are chosen so that all glyphs can be seen in the plot.</p>
@@ -383,9 +370,8 @@ figure(ylim = ylim, width = 700, height = 600, tools = &quot;&quot;) %&gt;%
   ly_points(cars$speed, cars$dist) %&gt;%
   ly_abline(-17.6, 3.9)
 p</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/45f5b99443a2d4241f360d82c0e93586.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/035154977f1bbb880756725b9baee776.html"></iframe>
 </div>
 <p>We can continue to add layers as we wish.</p>
 </div>
@@ -412,15 +398,13 @@ p</code></pre>
 <p>Now is a good time to introduce hover capabilities in rbokeh. Most layer functions (those that render shapes and not lines), have a <code>hover</code> argument. This argument can be a data frame with the same number of rows as the length of <code>x</code> and <code>y</code>, or a vector of names in the <code>data</code> argument. When specified, the hover tool will be activated and when a point is hovered over in the plot, a list of the specified variable values for that point will be shown. For example, with the cars data, suppose we would like to see the actual data point values:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(speed, dist, data = cars, hover = c(speed, dist))</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a6c313813b6296ea7b685e9c77b1d6b7.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a7545825049c570fb7547b43beda9172.html"></iframe>
 </div>
 <pre class="r"><code>figure() %&gt;%
   ly_points(speed, dist, data = cars, hover = &quot;This car was going @speed mph!&quot;)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e9d5aff4027c9bfceea3fbede9f1855c.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/8775920633475cdbf8de1428d721c670.html"></iframe>
 </div>
 </div>
 <div id="plot-attributes" class="section level2">
@@ -429,18 +413,16 @@ p</code></pre>
 <p>We can also explicitly specify attributes such as size, color, etc. for each layer. For example, suppose we want to color the glyphs in our <code>cars</code> plot red and have them 20 pixels in size:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(cars, color = &quot;red&quot;, size = 20)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/82b854dae54731e9efcd06f3f56a1a01.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/eaaf1986d2a656e506f7a23042e294f3.html"></iframe>
 </div>
 <p>We can pass vectors of attributes as well:</p>
 <pre class="r"><code>n &lt;- nrow(cars)
 ramp &lt;- colorRampPalette(c(&quot;red&quot;, &quot;blue&quot;))(n)
 figure() %&gt;%
   ly_points(cars, color = ramp, size = seq_len(n))</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/443b22170b1c81e49f123e0ccaf7a3fe.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/01c506260896665399f5f97b66731eb3.html"></iframe>
 </div>
 <p>In the following section, “Mapped attributes”, we will see how we can specify attributes to be applied automatically based on different variables in our data.</p>
 <div id="line-and-fill-attributes" class="section level3">
@@ -492,9 +474,8 @@ figure() %&gt;%
 <p>For example, suppose we want the fill to be blue and the line to be black:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(cars, fill_color = &quot;blue&quot;, line_color = &quot;black&quot;)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e4cbc7ef05b5916c94afb99feb7d3263.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/16ebbbcefd9f06aa2b44aaaa9cb02705.html"></iframe>
 </div>
 </div>
 <div id="convenience-line-and-fill-attributes" class="section level3">
@@ -510,9 +491,8 @@ figure() %&gt;%
 <pre class="r"><code>figure() %&gt;%
   ly_points(cars) %&gt;%
   ly_lines(lowess(cars), color = &quot;red&quot;, width = 2)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/49c03d3f2f190b034a38a67e4473b096.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/ca3a69b2a4ca7ea2e1616674b9fd2a74.html"></iframe>
 </div>
 </div>
 </div>
@@ -522,16 +502,14 @@ figure() %&gt;%
 <p>To see the avaialable possible values for <code>glyph</code>:</p>
 <pre class="r"><code>point_types()</code></pre>
 <div style="display: flex; width: 820px; height: 470px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 820px; height: 470px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="820" height="470" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/faf2b698317e511dd0f5920e9916e37b.html"></iframe>
+<iframe class="widget-lazyload" width="820" height="470" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/5786e9673a0622fd1b049c8654a382a2.html"></iframe>
 </div>
 <p>The named glyphs on rows 4 and 5 are called “markers” in Bokeh and are shown with their default rendering when <code>color</code> is “blue”. The numbered glyphs map closely to the possible values for <code>pch</code> in R’s <code>points()</code> function. When a numbered glyph is specified, fill and line attributes will be handled accordingly to get the desired effect.</p>
 <p>For example, let’s plot the cars data with <code>glyph = 12</code>:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(cars, glyph = 12)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/237aca9aab47350c85ff10d51ec35758.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/aac6491c5f6de4659e3459387f7d4536.html"></iframe>
 </div>
 </div>
 <div id="the-type-attribute-in-ly_lines-and-friends" class="section level3">
@@ -540,9 +518,8 @@ figure() %&gt;%
 <p>For example:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_lines(lowess(cars), type = 2)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/0fa3cc6b3a7fe4d1bca9866a6224a22c.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/5d71f8c976a08cc98c9d00749fa735da.html"></iframe>
 </div>
 <p>We encourage you to explore all the different layer functions and the available attributes. They are well-documented in the function reference and most have examples.</p>
 </div>
@@ -553,27 +530,24 @@ figure() %&gt;%
 <p>For example, turning to the famous <code>iris</code> data set, suppose we want to plot sepal width vs. sepal length and color the points by species:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(Sepal.Length, Sepal.Width, data = iris, color = Species)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/23aa9527bd4ffc4f46dccd916981b1d3.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/6683f422576f30233ac5a077772218ae.html"></iframe>
 </div>
 <p>We see that points get colored according to species (based on the current theme, which is Tableau10) and a legend is added.</p>
 <p>We can map other attributes, and more than one attribute at once. For example, to vary both color and glyph type by species:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Species, glyph = Species)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/32869e9a6cb66ac2a0c079b146f5ffd2.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/ad85e320254bfd4b812be4d2a3094e33.html"></iframe>
 </div>
 <p>rbokeh knows to map a variable when the variable it is given does not conform to what is expected for that attribute. For example, the species values of “setosa”, etc., are not hex codes or color names. In the future we could allow this specification to be more explicit through using <code>I()</code>.</p>
 <p>We can also map continuous variables, and in this case it it sliced up and values are mapped across a scale for the attribute. For example, coloring by petal width:</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(Sepal.Length, Sepal.Width, data = iris,
     color = Petal.Width)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/9fb3d8ed59eb4a5fb602a8d9f1c809e3.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/fa6988dec4c663ec8552d06ffeb9545a.html"></iframe>
 </div>
 <p>We can do this with other glyphs as well. Some glyphs have a <code>group</code> parameter where we would like to split the data up by a grouping variable but not vary an aesthetic attribute. For example, with <code>ly_lines()</code>, we may want to break the data up by a variable and get a different line for each, all of the same color:</p>
 <pre class="r"><code>co2dat &lt;- data.frame(
@@ -583,16 +557,14 @@ figure() %&gt;%
 
 figure() %&gt;%
   ly_lines(x, y, group = m, data = co2dat)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/5d5b07aa5fb542038ae9b4457f74977a.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/ff88644f3fc8a6e23fe7cf3db45d3ec1.html"></iframe>
 </div>
 <p>We can of course vary the color as well:</p>
 <pre class="r"><code>figure(xlim = c(1958, 2010)) %&gt;%
   ly_lines(x, y, color = m, data = co2dat)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/3c60a693e275ec025fb143e079cbafa7.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/85f0671833e9d009e3c50f7f8ba7f247.html"></iframe>
 </div>
 </div>
 <div id="legends" class="section level2">
@@ -605,8 +577,7 @@ figure(width = 600, height = 600) %&gt;%
   ly_lines(lowess(cars), legend = &quot;lowess&quot;) %&gt;%
   ly_abline(z, type = 2, legend = &quot;lm&quot;)</code></pre>
 <div style="display: flex; width: 620px; height: 620px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 620px; height: 620px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="620" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/56e97196e48e9cab0bb0ab4bef82faae.html"></iframe>
+<iframe class="widget-lazyload" width="620" height="620" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/a7acfe885adc301e42e18139bd9aaa54.html"></iframe>
 </div>
 <p>Bokeh provides finer control of parameters for legend appearance (such as where to put it) and we will expose these soon in rbokeh.</p>
 </div>
@@ -619,17 +590,15 @@ figure(width = 600, height = 600) %&gt;%
   ly_lines(seq(as.Date(&quot;2012-01-01&quot;),
     as.Date(&quot;2012-12-31&quot;), by=&quot;days&quot;), rnorm(366)) %&gt;%
   x_axis(label = &quot;Date&quot;, format = list(months = &quot;%b&quot;))</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/9cd32f01270309a7b581cc7cc0db80f0.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/8f99c79665378fb645a6d6fb7d5888b2.html"></iframe>
 </div>
 <p>or commas could be added to long numeric labels using</p>
 <pre class="r"><code>figure() %&gt;%
   ly_points(rnorm(10), rnorm(10) * 10000) %&gt;%
   y_axis(number_formatter = &quot;numeral&quot;, format = &quot;0,000&quot;)</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e744709e143fa1e0654d5fdda33ccf07.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/cafd165e95c83f1a1c88ecde86341c8d.html"></iframe>
 </div>
 <p>A complete list of supported axis tick parameters can be found in the function reference under <a href="rd.html#x_axis"><code>x_axis</code></a> and <a href="rd.html#y_axis"><code>y_axis</code></a>.</p>
 </div>
@@ -641,9 +610,8 @@ figure(width = 600, height = 600) %&gt;%
   ly_points(Sepal.Length, Sepal.Width, data = iris, color = Species) %&gt;%
   tool_box_select() %&gt;%
   tool_lasso_select()</code></pre>
-<div style="display: flex; width: 500px; height: 540px; overflow: hidden">
-<div style="background: white; position: absolute; top: 0px, left: 0px; width: 500px; height: 540px;"></div>
-<iframe class="widget-lazyload lazy-loading" width="500" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/6cd03eba3caca84e7efe6c4436c42620.html"></iframe>
+<div style="display: flex; width: 520px; height: 560px; overflow: hidden">
+<iframe class="widget-lazyload" width="520" height="560" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="lazy_widgets/e7222a85e7305299a41cfbe7abadd649.html"></iframe>
 </div>
 <p>Now in the plot in the toolbar at the top I can choose the one of these tools and select points in the figure. This is particularly useful for linked brushing described in the next section.</p>
 <p>For more examples, see the examples in the <a href="rd.html#tool_box_select"><code>tool_</code></a> functions in the function reference.</p>
@@ -683,9 +651,11 @@ figure(width = 600, height = 600) %&gt;%
   <div id="footer">
     <div class="container">
       <div class="col-md-6">
+                <p>&copy; Ryan Hafen, 2016</p>
               </div>
       <div class="col-md-6">
-        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a>
+                  </p>
       </div>
     </div>
   </div>

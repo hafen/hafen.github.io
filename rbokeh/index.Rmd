@@ -131,7 +131,7 @@ library(maps)
 data(world.cities)
 caps <- subset(world.cities, capital == 1)
 caps$population <- prettyNum(caps$pop, big.mark = ",")
-figure(width = 800, padding_factor = 0) %>%
+figure(width = 800, height = 450, padding_factor = 0) %>%
   ly_map("world", col = "gray") %>%
   ly_points(long, lat, data = caps, size = 5,
     hover = c(name, country.etc, population))
@@ -148,6 +148,8 @@ gmap(lat = 44.1, lng = -120.767, zoom = 6, width = 700, height = 600) %>%
   ly_points(lon, lat, data = orstationc, alpha = 0.8, col = "red",
     hover = c(station, Name, elev, tann))
 ```
+
+Note: for this to work you need to get a Google Maps API key and either provide it as an argument to `gmap()` or set it as an option in your R session `options(GMAP_API_KEY=xxx)` or set it as a system environment variable, `GMAP_API_KEY`.
 
 Time series plot of daily airline flights with hover and vertical line:
 
@@ -282,7 +284,7 @@ figure(legend_location = "top_left") %>%
 
 ```{r singer2, lazy=TRUE, eval=FALSE, echo=FALSE}
 # make this work with tableau20 theme (same shades for each part group)
-figure(xlim = c(-0.1, 1.35), width = 550) %>%
+figure(xlim = c(-0.1, 1.35), width = 550, legend_location = "bottom_right") %>%
   ly_quantile(height, group = voice.part, data = lattice::singer)
 ```
 
